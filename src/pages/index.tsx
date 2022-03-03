@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { NextPage } from "next";
+import Head from "next/head";
 import { useRouter } from "next/router";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 import {
   Flex,
@@ -19,16 +23,38 @@ import {
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
-import Head from "next/head";
-
 import Input from "../components/Input";
+
+interface ILoginInputs {
+  email: string;
+  password: string;
+}
+
+const INITIAL_FORM_STATE = {
+  email: "",
+  password: "",
+};
+
+export const FORM_VALIDATION = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().required(),
+});
 
 const LoginPage: NextPage = () => {
   const router = useRouter();
   const toast = useToast();
 
-  const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<ILoginInputs>({
+    resolver: yupResolver(FORM_VALIDATION),
+    defaultValues: INITIAL_FORM_STATE,
+  });
+
+
+
   const [error, setError] = useState(null);
 
   const [loading, setLoading] = useState(false);
@@ -36,22 +62,8 @@ const LoginPage: NextPage = () => {
 
   const handleClick = () => setShow(!show);
 
-  const handleLogin = async (event: any) => {
-    event.preventDefault();
-
-    // const schema = yup.object().shape({
-    //     email: yup.string().required().email(),
-    //     password: yup.string().required()
-    // });
-
-    const data = {
-      email: login,
-      password: password,
-    };
-
-    // const validation = await yupValidator(schema, data);
-    // setError(validation);
-    // if (validation) return;
+  const onSubmit: SubmitHandler<ILoginInputs> = (data) => {
+    console.log(data);
 
     setLoading(true);
 
@@ -71,9 +83,9 @@ const LoginPage: NextPage = () => {
       router.push("/chats");
     } catch (error) {
       setLoading(false);
-      setError(error);
+      // setError(error);
       toast({
-        title: "Crendecias inválidas",
+        title: "Credências inválidas",
         status: "error",
         position: "top-right",
         isClosable: true,
@@ -131,63 +143,75 @@ const LoginPage: NextPage = () => {
               Faça seu login
             </Heading>
 
-            <Box>
-              <FormControl>
-                <FormLabel>Email</FormLabel>
-                <Input
-                  type="email"
-                  placeholder="Digite seu e-mail"
-                  height="80px"
-                  value={login}
-                  onChange={(event) => setLogin(event.target.value)}
-                />
-                <FormErrorMessage fontSize="1.25rem">
-                  {/* {form.errors.name} */}
-                </FormErrorMessage>
-              </FormControl>
-            </Box>
-            <Box mt="1rem">
-              <FormControl isInvalid={true}>
-                <FormLabel htmlFor="password">Senha</FormLabel>
-                <InputGroup>
-                  <Input
-                    type={show ? "text" : "password"}
-                    placeholder="Digite sua senha"
-                    height="80px"
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Box>
+                <FormControl isInvalid={!!errors?.email}>
+                  <FormLabel>Email</FormLabel>
+                  <Controller
+                    name="email"
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        type="email"
+                        placeholder="Digite seu e-mail"
+                        height="80px"
+                        {...field}
+                      />
+                    )}
                   />
+                  <FormErrorMessage fontSize="1.25rem">
+                    {errors?.email?.message}
+                  </FormErrorMessage>
+                </FormControl>
+              </Box>
+              <Box mt="1rem">
+                <FormControl isInvalid={!!errors?.password}>
+                  <FormLabel htmlFor="password">Senha</FormLabel>
+                  <Controller
+                    name="password"
+                    control={control}
+                    render={({ field }) => (
+                      <InputGroup>
+                        <Input
+                          type={show ? "text" : "password"}
+                          placeholder="Digite sua senha"
+                          height="80px"
+                          {...field}
+                        />
 
-                  <InputRightElement
-                    fontSize="1.4em"
-                    height="80px"
-                    onClick={handleClick}
-                    children={
-                      show ? (
-                        <ViewIcon color="purple.500" />
-                      ) : (
-                        <ViewOffIcon color="purple.500" />
-                      )
-                    }
+                        <InputRightElement
+                          fontSize="1.4em"
+                          height="80px"
+                          onClick={handleClick}
+                          children={
+                            show ? (
+                              <ViewIcon color="purple.500" />
+                            ) : (
+                              <ViewOffIcon color="purple.500" />
+                            )
+                          }
+                        />
+                      </InputGroup>
+                    )}
                   />
-                </InputGroup>
-                <FormErrorMessage fontSize="1.25rem">
-                  senha invalida
-                </FormErrorMessage>
-              </FormControl>
-            </Box>
-
-            <Button
-              as="button"
-              isLoading={false}
-              marginTop="1.2rem"
-              type="submit"
-              bg="purple.400"
-              _hover={{ bg: "purple.500" }}
-              height="76px"
-            >
-              <Text fontSize="1.24rem">ENTRAR</Text>
-            </Button>
+                  <FormErrorMessage fontSize="1.25rem">
+                    {errors?.password?.message}
+                  </FormErrorMessage>
+                </FormControl>
+              </Box>
+              <Button
+                as="button"
+                marginTop="1.2rem"
+                type="submit"
+                bg="purple.400"
+                _hover={{ bg: "purple.500" }}
+                height="76px"
+                width="100%"
+                isLoading={loading}
+              >
+                <Text fontSize="1.24rem">ENTRAR</Text>
+              </Button>
+            </form>
           </Flex>
         </Center>
       </SimpleGrid>
