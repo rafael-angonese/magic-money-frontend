@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { NextPage } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -24,6 +23,7 @@ import {
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 import Input from "../components/Input";
+import { AuthContext } from "../contexts/AuthContext";
 
 interface ILoginInputs {
   email: string;
@@ -41,8 +41,7 @@ export const FORM_VALIDATION = yup.object().shape({
 });
 
 const LoginPage: NextPage = () => {
-  const router = useRouter();
-  const toast = useToast();
+  const { signIn } = useContext(AuthContext);
 
   const {
     handleSubmit,
@@ -53,8 +52,6 @@ const LoginPage: NextPage = () => {
     defaultValues: INITIAL_FORM_STATE,
   });
 
-
-
   const [error, setError] = useState(null);
 
   const [loading, setLoading] = useState(false);
@@ -62,35 +59,12 @@ const LoginPage: NextPage = () => {
 
   const handleClick = () => setShow(!show);
 
-  const onSubmit: SubmitHandler<ILoginInputs> = (data) => {
-    console.log(data);
-
+  const onSubmit: SubmitHandler<ILoginInputs> = async (data) => {
     setLoading(true);
 
-    try {
-      // const response = await axios.post('/authenticate', data);
+    await signIn(data);
 
-      // await setAuthToken(response.data.token);
-
-      setLoading(false);
-
-      toast({
-        title: "Login efetuado com sucesso!",
-        status: "success",
-        position: "top-right",
-        isClosable: true,
-      });
-      router.push("/chats");
-    } catch (error) {
-      setLoading(false);
-      // setError(error);
-      toast({
-        title: "Credências inválidas",
-        status: "error",
-        position: "top-right",
-        isClosable: true,
-      });
-    }
+    setLoading(false);
   };
 
   return (
