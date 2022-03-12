@@ -1,34 +1,78 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## 🍄 **Sobre**
 
-## Getting Started
+Este projeto surge na necessidade de possuir um sistema de controle financeiro assim como os milhares que já existem. Entretanto esse projeto visa possuir as funcionalidades adaptadas a minha necessidade, podendo assim ser ajustadas e configuradas da maneira que eu julgar necessária bem como possuir um alto nível de segurança na aplicação, aplicando as boas práticas de desenvolvimento.
 
-First, run the development server:
+Além disso esse projeto é uma forma para eu aprender, aplicar e aprimorar meus conhecimentos técnicos em desenvolvimento, bem como demostrar o mesmo em um projeto razoavelmente grande.
+
+---
+
+## 🧪 **Tecnologias**
+
+Esse projeto foi desenvolvido com as seguintes tecnologias:
+
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [ChakraUI](http://chakra-ui.com/)
+- [React Hook Form](https://react-hook-form.com/)
+- [Yup](https://github.com/jquense/yup)
+- [Nookies](https://github.com/maticzav/nookies)
+- [Axios](https://axios-http.com/)
+- [React Icons](https://react-icons.github.io/react-icons)
+
+---
+
+## 🎮 **Ambiente de desenvolvimento**
+
+Para executar o ambiente de desenvolvimento deste projeto é necessário possuir o node instalado em sua máquina.
 
 ```bash
-npm run dev
-# or
-yarn dev
+node --version
+v16.0.0
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Possuir o yarn instalado.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+node --version
+1.22.17
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Usei variáveis de ambiente, então pode-se renomear o arquivo `.env.example` para `.env` e aproveitar as variáveis de ambiente de lá. Por padrão elas apontam para o localhost.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Crie um arquivo .env com base no arquivo [.env.example](.env.example)
 
-## Learn More
+O próximo passo é instalar as dependências:
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## **🚀 Como executar**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+# Instale as dependências
+$ yarn
 
-## Deploy on Vercel
+# Alternativamente instale as dependências exatas do lock file
+$ yarn install --frozen-lockfile
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Execute a aplicação
+$ yarn dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- O app estará rodando na porta 3000.
+- Acesse [`<http://localhost:3000>`](http://localhost:3000)
+
+---
+
+## **🐦 Backend**
+
+Para utilizar as funcionalidades do projeto é necessário possuir a API: [Dentro De Um Citroen](https://github.com/rafael-angonese/dentro-de-um-citroen) rodando em sua máquina.
+
+---
+
+## ⚖️ **Licença**
+
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
+
+---
+
+Feito com 💜 by Planegazers
