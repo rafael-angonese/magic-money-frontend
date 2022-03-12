@@ -1,29 +1,26 @@
-import { useContext, useState } from "react";
-import { NextPage } from "next";
-import Head from "next/head";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-
 import {
-  Flex,
-  Text,
-  Center,
-  Heading,
-  FormControl,
   Box,
-  FormErrorMessage,
-  SimpleGrid,
   Button,
+  Center,
+  Flex,
+  FormControl,
+  FormErrorMessage,
   FormLabel,
+  Heading,
+  Input,
   InputGroup,
   InputRightElement,
-  useToast,
+  SimpleGrid,
+  Text
 } from "@chakra-ui/react";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-
-import Input from "../components/Input";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { NextPage } from "next";
+import { useContext, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import * as yup from "yup";
 import { AuthContext } from "../contexts/AuthContext";
+
 
 interface ILoginInputs {
   email: string;
@@ -31,8 +28,8 @@ interface ILoginInputs {
 }
 
 const INITIAL_FORM_STATE = {
-  email: "",
-  password: "",
+  email: "rafael@gmail.com",
+  password: "123456",
 };
 
 export const FORM_VALIDATION = yup.object().shape({
@@ -45,14 +42,12 @@ const LoginPage: NextPage = () => {
 
   const {
     handleSubmit,
-    control,
+    register,
     formState: { errors },
   } = useForm<ILoginInputs>({
     resolver: yupResolver(FORM_VALIDATION),
     defaultValues: INITIAL_FORM_STATE,
   });
-
-  const [error, setError] = useState(null);
 
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
@@ -120,18 +115,14 @@ const LoginPage: NextPage = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <Box>
                 <FormControl isInvalid={!!errors?.email}>
-                  <FormLabel>Email</FormLabel>
-                  <Controller
-                    name="email"
-                    control={control}
-                    render={({ field }) => (
-                      <Input
-                        type="email"
-                        placeholder="Digite seu e-mail"
-                        height="80px"
-                        {...field}
-                      />
-                    )}
+                  <FormLabel htmlFor="email">First email</FormLabel>
+                  <Input
+                    {...register("email")}
+                    placeholder="Digite seu e-mail"
+                    height="80px"
+                    backgroundColor="gray.800"
+                    focusBorderColor="purple.500"
+                    borderRadius="sm"
                   />
                   <FormErrorMessage fontSize="1.25rem">
                     {errors?.email?.message}
@@ -141,33 +132,33 @@ const LoginPage: NextPage = () => {
               <Box mt="1rem">
                 <FormControl isInvalid={!!errors?.password}>
                   <FormLabel htmlFor="password">Senha</FormLabel>
-                  <Controller
-                    name="password"
-                    control={control}
-                    render={({ field }) => (
-                      <InputGroup>
-                        <Input
-                          type={show ? "text" : "password"}
-                          placeholder="Digite sua senha"
-                          height="80px"
-                          {...field}
-                        />
 
-                        <InputRightElement
-                          fontSize="1.4em"
-                          height="80px"
-                          onClick={handleClick}
-                          children={
-                            show ? (
-                              <ViewIcon color="purple.500" />
-                            ) : (
-                              <ViewOffIcon color="purple.500" />
-                            )
-                          }
-                        />
-                      </InputGroup>
-                    )}
-                  />
+                  <InputGroup>
+                    <Input
+                      type={show ? "text" : "password"}
+                      placeholder="Digite sua senha"
+                      id="password"
+                      {...register("password")}
+                      height="80px"
+                      backgroundColor="gray.800"
+                      focusBorderColor="purple.500"
+                      borderRadius="sm"
+                    />
+
+                    <InputRightElement
+                      fontSize="1.4em"
+                      height="80px"
+                      onClick={handleClick}
+                      children={
+                        show ? (
+                          <AiFillEyeInvisible color="purple.500" />
+                        ) : (
+                          <AiFillEye color="purple.500" />
+                        )
+                      }
+                    />
+                  </InputGroup>
+
                   <FormErrorMessage fontSize="1.25rem">
                     {errors?.password?.message}
                   </FormErrorMessage>
