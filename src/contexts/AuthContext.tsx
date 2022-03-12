@@ -1,8 +1,8 @@
 import { useToast } from "@chakra-ui/react";
 import Router from "next/router";
 import { createContext, ReactNode, useState } from "react";
+import { removeCookies, setToken } from "../lib/nookies";
 import api from "../services/api";
-import { setToken } from "../services/auth";
 
 interface IAuthProviderProps {
   children: ReactNode;
@@ -23,6 +23,7 @@ interface IAuthContextType {
   isAuthenticated: boolean;
   user: IUser | null;
   signIn: (data: ISignInData) => Promise<void>;
+  logout: () => void;
 }
 export const AuthContext = createContext({} as IAuthContextType);
 
@@ -46,6 +47,10 @@ export function AuthProvider({ children }: IAuthProviderProps) {
   //   }
   // }, []);
 
+  async function logout() {
+    removeCookies();
+  }
+
   async function signIn({ email, password }: ISignInData) {
     try {
       const response = await api.post(
@@ -59,7 +64,7 @@ export function AuthProvider({ children }: IAuthProviderProps) {
         }
       );
       const { token } = response.data;
-      
+
       setToken(token);
 
       toast({
@@ -81,7 +86,7 @@ export function AuthProvider({ children }: IAuthProviderProps) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, signIn }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, signIn, logout }}>
       {children}
     </AuthContext.Provider>
   );

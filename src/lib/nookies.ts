@@ -4,7 +4,7 @@ import { REFRESH_TOKEN_KEY, TOKEN_KEY } from "../config/constants";
 
 const path = '/'
 
-export const logout = () => {
+export const removeCookies = () => {
   destroyCookie(undefined, TOKEN_KEY, {
     path,
   });

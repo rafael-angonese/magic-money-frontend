@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getToken, logout, setToken } from "./auth";
+import { getToken, removeCookies, setToken } from "../lib/nookies";
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL_API,
@@ -30,7 +30,7 @@ api.interceptors.response.use(
     const originalRequest = error.config
 
     if (originalRequest.url === 'auth/refreshToken' && error.response) {
-      logout()
+      removeCookies()
       return Promise.reject(error);
     }
 
