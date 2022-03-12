@@ -1,16 +1,15 @@
+import { Center, Text } from "@chakra-ui/react";
 import { NextPage } from "next";
-
-import { Text, Center } from "@chakra-ui/react";
-
-import api from "../services/api";
 import { useEffect } from "react";
+import api from "../../services/api";
 
 const DashboardPage: NextPage = () => {
   useEffect(() => {
     async function getUsers() {
-      const response = await api.get("/users");
-
-      console.log(response);
+      try {
+        const response = await api.get("/users");
+        console.log(response);
+      } catch (error) {}
     }
 
     getUsers();
