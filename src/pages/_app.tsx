@@ -4,12 +4,20 @@ import ThemeContainer from "../contexts/theme/ThemeContainer";
 import { AuthProvider } from "../contexts/AuthContext";
 
 import "../config/yup.locale.pt-br";
+import Layout from "../components/Layout/Layout";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps, router }: AppProps) {
+  const isAuthenticatedRoutes = router.pathname.startsWith("/app");
+
   return (
     <ThemeContainer>
       <AuthProvider>
-        <Component {...pageProps} />
+        {isAuthenticatedRoutes && (
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        )}
+        {!isAuthenticatedRoutes && <Component {...pageProps} />}
       </AuthProvider>
     </ThemeContainer>
   );
