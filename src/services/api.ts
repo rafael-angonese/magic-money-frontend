@@ -1,6 +1,5 @@
 import axios from "axios";
-import Router from "next/router";
-import { parseCookies, setCookie } from "nookies";
+import { getToken, logout, setToken } from "./auth";
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL_API,
@@ -12,7 +11,7 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    const { token } = parseCookies();
+    const token = getToken();
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -31,7 +30,7 @@ api.interceptors.response.use(
     const originalRequest = error.config
 
     if (originalRequest.url === 'auth/refreshToken' && error.response) {
-      Router.push('/')
+      logout()
       return Promise.reject(error);
     }
 
@@ -45,11 +44,9 @@ api.interceptors.response.use(
 
         const { token } = response.data
 
-        setCookie(undefined, "token", token, {
-          maxAge: 60 * 60 * 1, // 1 hour
-        });
+        setToken(token)
 
-        originalRequest.headers["Authorization"] = `Bearer ${response.data.token}`;
+        originalRequest.headers["Authorization"] = `Bearer ${token}`;
 
         return api(originalRequest)
 

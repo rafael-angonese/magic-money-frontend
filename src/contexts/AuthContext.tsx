@@ -1,9 +1,8 @@
-import { createContext, useEffect, useState, ReactNode } from "react";
-import { setCookie, parseCookies } from "nookies";
-import Router from "next/router";
-
-import api from "../services/api";
 import { useToast } from "@chakra-ui/react";
+import Router from "next/router";
+import { createContext, ReactNode, useState } from "react";
+import api from "../services/api";
+import { setToken } from "../services/auth";
 
 interface IAuthProviderProps {
   children: ReactNode;
@@ -59,12 +58,9 @@ export function AuthProvider({ children }: IAuthProviderProps) {
           withCredentials: true,
         }
       );
-
-      setCookie(undefined, "token", response.data.token, {
-        maxAge: 60 * 60 * 1, // 1 hour
-      });
-
-      // setUser(user);
+      const { token } = response.data;
+      
+      setToken(token);
 
       toast({
         title: "Login efetuado com sucesso!",
