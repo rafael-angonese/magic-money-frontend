@@ -1,4 +1,5 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
+import Router from "next/router";
 import { parseCookies, setCookie } from "nookies";
 
 const api = axios.create({
@@ -28,31 +29,35 @@ api.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config
-    if (originalRequest.url !== '/auth' && error.response) {
 
-      if (error.response.status === 401 && originalRequest && !originalRequest._retry) {
-        originalRequest._retry = true
+    if (originalRequest.url === 'auth/refreshToken' && error.response) {
+      Router.push('/')
+      return Promise.reject(error);
+    }
 
-        try {
-          const response = await api.post('auth/refreshToken', {}, {
-            withCredentials: true
-          })
+    if (error.response.status === 401 && originalRequest && !originalRequest._retry) {
+      originalRequest._retry = true
 
-          const { token } = response.data
+      try {
+        const response = await api.post('auth/refreshToken', {}, {
+          withCredentials: true
+        })
 
-          setCookie(undefined, "token", token, {
-            maxAge: 60 * 60 * 1, // 1 hour
-          });
+        const { token } = response.data
 
-          originalRequest.headers["Authorization"] = `Bearer ${response.data.token}`;
+        setCookie(undefined, "token", token, {
+          maxAge: 60 * 60 * 1, // 1 hour
+        });
 
-          return api(originalRequest)
+        originalRequest.headers["Authorization"] = `Bearer ${response.data.token}`;
 
-        } catch (_error) {
-          return Promise.reject(_error);
-        }
+        return api(originalRequest)
+
+      } catch (_error) {
+        return Promise.reject(_error);
       }
     }
+
     return Promise.reject(error);
   }
 )
