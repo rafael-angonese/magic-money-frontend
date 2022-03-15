@@ -74,7 +74,7 @@ export function AuthProvider({ children }: IAuthProviderProps) {
         isClosable: true,
       });
 
-      Router.push("/app/dashboard");
+      Router.push("/dashboard");
     } catch (error) {
       toast({
         title: "Credências inválidas",

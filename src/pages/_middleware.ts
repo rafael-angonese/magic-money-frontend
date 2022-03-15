@@ -6,9 +6,9 @@ export function middleware(req: NextRequest) {
 
   const url = req.nextUrl.clone()
 
-  if (!req.url.includes("/app")) {
+  if (url.pathname === "/") {
     if (token) {
-      url.pathname = '/app/dashboard'
+      url.pathname = '/dashboard'
       return NextResponse.redirect(url)
     }
     return NextResponse.next()

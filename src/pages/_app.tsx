@@ -7,7 +7,7 @@ import "../config/yup.locale.pt-br";
 import Layout from "../components/Layout/Layout";
 
 function MyApp({ Component, pageProps, router }: AppProps) {
-  const isAuthenticatedRoutes = router.pathname.startsWith("/app");
+  const isAuthenticatedRoutes = router.pathname !== "/";
 
   return (
     <ThemeContainer>

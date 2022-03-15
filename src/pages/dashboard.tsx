@@ -1,7 +1,7 @@
 import { Center, Text } from "@chakra-ui/react";
 import { NextPage } from "next";
 import { useEffect } from "react";
-import api from "../../services/api";
+import api from "../services/api";
 
 const DashboardPage: NextPage = () => {
   useEffect(() => {
