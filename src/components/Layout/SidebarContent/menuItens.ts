@@ -5,18 +5,19 @@ import { MdAttachMoney, MdOutlineCategory, MdOutlineSupervisorAccount } from "re
 import { RiBankLine, RiDashboardFill } from "react-icons/ri";
 
 
-interface LinkItemProps {
+export interface LinkItemProps {
   name: string;
+  path: string;
   icon: IconType;
 }
 
 const menuItens: Array<LinkItemProps> = [
-  { name: "Dashboard", icon: RiDashboardFill },
-  { name: "Financeiro", icon: MdAttachMoney },
-  { name: "Notas de serviço", icon: IoMdDocument },
-  { name: "Contas", icon: MdOutlineSupervisorAccount },
-  { name: "Contas Bancárias", icon: RiBankLine },
-  { name: "Categorias", icon: MdOutlineCategory },
+  { name: "Dashboard", path: 'dashboard', icon: RiDashboardFill },
+  { name: "Financeiro", path: 'dashboard', icon: MdAttachMoney },
+  { name: "Notas de serviço", path: 'lala', icon: IoMdDocument },
+  { name: "Contas", path: 'accounts', icon: MdOutlineSupervisorAccount },
+  { name: "Contas Bancárias", path: 'bank_accounts', icon: RiBankLine },
+  { name: "Categorias", path: 'categories', icon: MdOutlineCategory },
 ];
 
 export default menuItens
