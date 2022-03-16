@@ -1,8 +1,9 @@
-import { useToast } from "@chakra-ui/react";
 import Router from "next/router";
 import { createContext, ReactNode, useState } from "react";
+import { toast } from "react-toastify";
 import { removeCookies, setToken } from "../lib/nookies";
 import api from "../services/api";
+import handlingErrors from "../utils/handllingErrors";
 
 interface IAuthProviderProps {
   children: ReactNode;
@@ -28,7 +29,6 @@ interface IAuthContextType {
 export const AuthContext = createContext({} as IAuthContextType);
 
 export function AuthProvider({ children }: IAuthProviderProps) {
-  const toast = useToast();
   const [user, setUser] = useState<IUser | null>(null);
 
   const isAuthenticated = !!user;
@@ -67,21 +67,14 @@ export function AuthProvider({ children }: IAuthProviderProps) {
 
       setToken(token);
 
-      toast({
-        title: "Login efetuado com sucesso!",
-        status: "success",
-        position: "top-right",
-        isClosable: true,
-      });
+      toast.success("Login efetuado com sucesso!");
 
       Router.push("/dashboard");
     } catch (error) {
-      toast({
-        title: "Credências inválidas",
-        status: "error",
-        position: "top-right",
-        isClosable: true,
-      });
+      const response = handlingErrors(error);
+      if (response) {
+        toast.error("Credências inválidas");
+      }
     }
   }
 
