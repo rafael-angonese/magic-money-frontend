@@ -3,7 +3,7 @@ import { createContext, ReactNode, useState } from "react";
 import { toast } from "react-toastify";
 import { removeCookies, setToken } from "../lib/nookies";
 import api from "../services/api";
-import handlingErrors from "../utils/handllingErrors";
+import handlingErrors from "../utils/handlingErrors";
 
 interface IAuthProviderProps {
   children: ReactNode;
