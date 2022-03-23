@@ -12,12 +12,12 @@ export interface LinkItemProps {
 }
 
 const menuItens: Array<LinkItemProps> = [
-  { name: "Dashboard", path: 'dashboard', icon: RiDashboardFill },
-  { name: "Financeiro", path: 'dashboard', icon: MdAttachMoney },
-  { name: "Notas de serviço", path: 'lala', icon: IoMdDocument },
-  { name: "Contas", path: 'accounts', icon: MdOutlineSupervisorAccount },
-  { name: "Contas Bancárias", path: 'bank_accounts', icon: RiBankLine },
-  { name: "Categorias", path: 'categories', icon: MdOutlineCategory },
+  { name: "Dashboard", path: '/dashboard', icon: RiDashboardFill },
+  { name: "Financeiro", path: '/finances', icon: MdAttachMoney },
+  { name: "Notas de serviço", path: '/lala', icon: IoMdDocument },
+  { name: "Contas", path: '/accounts', icon: MdOutlineSupervisorAccount },
+  { name: "Contas Bancárias", path: '/bank_accounts', icon: RiBankLine },
+  { name: "Categorias", path: '/categories', icon: MdOutlineCategory },
 ];
 
 export default menuItens
