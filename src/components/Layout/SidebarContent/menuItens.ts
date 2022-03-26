@@ -16,7 +16,7 @@ const menuItens: Array<LinkItemProps> = [
   { name: "Financeiro", path: '/finances', icon: MdAttachMoney },
   { name: "Notas de serviço", path: '/lala', icon: IoMdDocument },
   { name: "Contas", path: '/accounts', icon: MdOutlineSupervisorAccount },
-  { name: "Contas Bancárias", path: '/bank_accounts', icon: RiBankLine },
+  { name: "Contas Bancárias", path: '/bank-accounts', icon: RiBankLine },
   { name: "Categorias", path: '/categories', icon: MdOutlineCategory },
 ];
 

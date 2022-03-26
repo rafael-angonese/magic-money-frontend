@@ -80,7 +80,7 @@ const AccountShowPage: NextPage = () => {
           lineHeight="5.75rem"
           wordBreak="break-word"
         >
-          Criar Conta
+          Visualizando Conta
           <span style={{ color: "#04e168" }}>.</span>
         </Text>
       </Center>
