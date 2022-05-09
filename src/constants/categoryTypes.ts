@@ -6,5 +6,5 @@ interface ICategoryType {
 
 export const categoryTypes: ICategoryType[] = [
   { type: 'expense', name: 'Despesa' },
-  { type: 'entry', name: 'Entrada' },
+  { type: 'revenue', name: 'Receita' },
 ]
