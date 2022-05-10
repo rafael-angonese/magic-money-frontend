@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 
 import ThemeContainer from "../contexts/theme/ThemeContainer";
 import { AuthProvider } from "../contexts/AuthContext";
+import { AccountProvider } from "../contexts/AccountContext";
 
 import "react-toastify/dist/ReactToastify.css";
 import "../config/yup.locale.pt-br";
@@ -16,13 +17,15 @@ function MyApp({ Component, pageProps, router }: AppProps) {
     <ThemeContainer>
       <AuthProvider>
         {isAuthenticatedRoutes && (
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <AccountProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </AccountProvider>
         )}
         {!isAuthenticatedRoutes && <Component {...pageProps} />}
       </AuthProvider>
-      <ToastContainer  theme="dark" />
+      <ToastContainer theme="dark" />
     </ThemeContainer>
   );
 }
