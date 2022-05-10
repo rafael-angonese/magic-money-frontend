@@ -10,11 +10,13 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
+  Select,
   Text,
   VStack,
 } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { FiBell, FiChevronDown, FiMenu } from "react-icons/fi";
+import { AccountContext } from "../../contexts/AccountContext";
 import { AuthContext } from "../../contexts/AuthContext";
 
 interface MobileProps extends FlexProps {
@@ -23,6 +25,7 @@ interface MobileProps extends FlexProps {
 
 const Navbar = ({ onOpen, ...rest }: MobileProps) => {
   const { logout } = useContext(AuthContext);
+  const { account, accounts, changeAccount } = useContext(AccountContext);
 
   return (
     <Flex
@@ -63,6 +66,19 @@ const Navbar = ({ onOpen, ...rest }: MobileProps) => {
       </Text>
 
       <HStack spacing={{ base: "0", md: "6" }}>
+        <Select
+          value={account?.id}
+          onChange={(event) => changeAccount(event.target.value)}
+        >
+          {accounts &&
+            accounts.map((item) => {
+              return (
+                <option key={item.id} value={item.id}>
+                  {item.name}
+                </option>
+              );
+            })}
+        </Select>
         <IconButton
           size="lg"
           variant="ghost"

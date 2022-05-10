@@ -13,7 +13,7 @@ export interface LinkItemProps {
 
 const menuItens: Array<LinkItemProps> = [
   { name: "Dashboard", path: '/dashboard', icon: RiDashboardFill },
-  { name: "Financeiro", path: '/finances', icon: MdAttachMoney },
+  { name: "Transações", path: '/transactions', icon: MdAttachMoney },
   { name: "Notas de serviço", path: '/lala', icon: IoMdDocument },
   { name: "Contas", path: '/accounts', icon: MdOutlineSupervisorAccount },
   { name: "Contas Bancárias", path: '/bank-accounts', icon: RiBankLine },
