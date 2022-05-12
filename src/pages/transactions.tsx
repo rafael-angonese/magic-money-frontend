@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { ITransaction } from "../@types/accounts/transactions";
+import NewTransaction from "../components/pages/transactions/NewTransaction";
 import api from "../services/api";
 import handlingErrors from "../utils/handlingErrors";
 
@@ -83,17 +84,7 @@ const CategoriesPage: NextPage = () => {
           <span style={{ color: "#04e168" }}>.</span>
         </Text>
       </Center>
-      <Flex justifyContent="flex-start">
-        <Button marginRight="1rem" colorScheme="red">
-          Criar recebimento
-        </Button>
-        <Button marginRight="1rem" colorScheme="green">
-          Criar pagamento
-        </Button>
-        <Button marginRight="1rem" colorScheme="blue">
-          Criar transferência
-        </Button>
-      </Flex>
+      <NewTransaction />
       <Table variant="simple">
         <Thead>
           <Tr>
