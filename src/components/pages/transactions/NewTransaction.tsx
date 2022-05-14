@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Container,
   Flex,
   FormControl,
   FormErrorMessage,
@@ -38,7 +37,7 @@ const INITIAL_FORM_STATE = {
   date: null,
   category_id: "",
   description: "",
-  amount: 0.0,
+  amount: 0,
   bank_account_id: "",
 };
 
@@ -46,7 +45,7 @@ export const FORM_VALIDATION = yup.object().shape({
   date: yup.date().required(),
   category_id: yup.string().required(),
   description: yup.string().required(),
-  amount: yup.number().min(0).required(),
+  amount: yup.number().min(0.1).required(),
   bank_account_id: yup.string().required(),
 });
 
@@ -141,7 +140,7 @@ const NewTransaction: React.FC = () => {
       </Flex>
 
       {type && (
-        <Box marginY="1.72rem">
+        <Box marginY="1.72rem" padding="2rem" border="0.1rem solid" borderRadius="1rem" borderColor={type === 'credit' ? 'green.400' : 'red.400'}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <SimpleGrid columns={12} spacing={10}>
               <GridItem colSpan={2}>
