@@ -22,8 +22,14 @@ import NewTransaction from "../components/pages/transactions/NewTransaction";
 import api from "../services/api";
 import handlingErrors from "../utils/handlingErrors";
 
+interface ITransactionFormatted extends ITransaction {
+  formattedDate: string;
+  color: string;
+  formattedAmount: string;
+}
+
 const CategoriesPage: NextPage = () => {
-  const [transactions, setTransactions] = useState<ITransaction[]>([]);
+  const [transactions, setTransactions] = useState<ITransactionFormatted[]>([]);
   const [loading, setLoading] = useState(true);
 
   const handlingDeleteAccount = async (id: string) => {
@@ -58,11 +64,23 @@ const CategoriesPage: NextPage = () => {
 
   async function getTransactions() {
     try {
-      setLoading(true)
-      const response = await api.get<ITransaction[]>("/transactions");
+      setLoading(true);
+      const { data } = await api.get<ITransaction[]>("/transactions");
 
-      setTransactions(response.data);
-      setLoading(false)
+      const newData = data.map((transaction: ITransaction) => {
+        return {
+          ...transaction,
+          formattedDate: new Date(transaction.date).toLocaleDateString("pt-BR"),
+          color: transaction.type === "credit" ? "green.400" : "red.400",
+          formattedAmount: transaction.amount.toLocaleString("pt-br", {
+            style: "currency",
+            currency: "BRL",
+          }),
+        };
+      });
+
+      setTransactions(newData);
+      setLoading(false);
     } catch (error) {
       handlingErrors(error);
     }
@@ -136,11 +154,11 @@ const CategoriesPage: NextPage = () => {
                       icon={<AiOutlineDelete />}
                     />
                   </Td>
-                  <Td>{account.date}</Td>
-                  <Td>{account.category_id}</Td>
+                  <Td>{account.formattedDate}</Td>
+                  <Td>{account.category?.name}</Td>
                   <Td>{account.description}</Td>
-                  <Td>{account.amount}</Td>
-                  <Td>{account.account_id}</Td>
+                  <Td color={account.color}>{account.formattedAmount}</Td>
+                  <Td>{account.bankAccount.name}</Td>
                 </Tr>
               );
             })}
@@ -148,7 +166,6 @@ const CategoriesPage: NextPage = () => {
       </Table>
 
       {loading && <Progress my={2} size="xs" isIndeterminate />}
-
     </>
   );
 };

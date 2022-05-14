@@ -1,3 +1,13 @@
+interface Category {
+  id: string
+  name: string
+}
+
+interface BankAccount {
+  id: string
+  name: string
+}
+
 
 export interface ITransaction {
   id: string
@@ -11,4 +21,6 @@ export interface ITransaction {
   bank_account_id: string
   created_at: string
   updatedAt: string
+  category: Category
+  bankAccount: BankAccount
 }
