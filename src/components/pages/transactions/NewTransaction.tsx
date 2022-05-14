@@ -49,7 +49,13 @@ export const FORM_VALIDATION = yup.object().shape({
   bank_account_id: yup.string().required(),
 });
 
-const NewTransaction: React.FC = () => {
+interface INewTransactionProps {
+  refreshGridAction: () => void;
+}
+
+const NewTransaction: React.FC<INewTransactionProps> = ({
+  refreshGridAction,
+}) => {
   const [type, setType] = useState("");
   const [categoryOptions, setCategoryOptions] = useState<ICategory[]>([]);
   const [accountOptions, setAccountOptions] = useState<IAccount[]>([]);
@@ -81,6 +87,7 @@ const NewTransaction: React.FC = () => {
 
       reset();
       setType("");
+      refreshGridAction()
     } catch (error) {
       toast.error("Não foi possível criar esse registro!");
     } finally {
@@ -140,7 +147,13 @@ const NewTransaction: React.FC = () => {
       </Flex>
 
       {type && (
-        <Box marginY="1.72rem" padding="2rem" border="0.1rem solid" borderRadius="1rem" borderColor={type === 'credit' ? 'green.400' : 'red.400'}>
+        <Box
+          marginY="1.72rem"
+          padding="2rem"
+          border="0.1rem solid"
+          borderRadius="1rem"
+          borderColor={type === "credit" ? "green.400" : "red.400"}
+        >
           <form onSubmit={handleSubmit(onSubmit)}>
             <SimpleGrid columns={12} spacing={10}>
               <GridItem colSpan={2}>

@@ -3,6 +3,7 @@ import {
   Center,
   Flex,
   IconButton,
+  Progress,
   Table,
   Tbody,
   Td,
@@ -23,6 +24,7 @@ import handlingErrors from "../utils/handlingErrors";
 
 const CategoriesPage: NextPage = () => {
   const [transactions, setTransactions] = useState<ITransaction[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const handlingDeleteAccount = async (id: string) => {
     const toastId = toast.loading("Excluindo...");
@@ -54,17 +56,19 @@ const CategoriesPage: NextPage = () => {
     }
   };
 
-  useEffect(() => {
-    async function getTransactions() {
-      try {
-        const response = await api.get<ITransaction[]>("/transactions");
+  async function getTransactions() {
+    try {
+      setLoading(true)
+      const response = await api.get<ITransaction[]>("/transactions");
 
-        setTransactions(response.data);
-      } catch (error) {
-        handlingErrors(error);
-      }
+      setTransactions(response.data);
+      setLoading(false)
+    } catch (error) {
+      handlingErrors(error);
     }
+  }
 
+  useEffect(() => {
     getTransactions();
   }, []);
 
@@ -84,7 +88,8 @@ const CategoriesPage: NextPage = () => {
           <span style={{ color: "#04e168" }}>.</span>
         </Text>
       </Center>
-      <NewTransaction />
+      <NewTransaction refreshGridAction={() => getTransactions()} />
+
       <Table variant="simple">
         <Thead>
           <Tr>
@@ -141,6 +146,9 @@ const CategoriesPage: NextPage = () => {
             })}
         </Tbody>
       </Table>
+
+      {loading && <Progress my={2} size="xs" isIndeterminate />}
+
     </>
   );
 };
