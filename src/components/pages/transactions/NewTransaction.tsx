@@ -8,6 +8,11 @@ import {
   FormLabel,
   GridItem,
   Input,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
   Select,
   SimpleGrid,
 } from "@chakra-ui/react";
@@ -181,7 +186,13 @@ const NewTransaction: React.FC = () => {
               <GridItem colSpan={2}>
                 <FormControl isInvalid={!!errors?.amount}>
                   <FormLabel>Valor</FormLabel>
-                  <Input type="number" {...register("amount")} />
+                  <NumberInput precision={2}>
+                    <NumberInputField {...register("amount")} />
+                    <NumberInputStepper>
+                      <NumberIncrementStepper />
+                      <NumberDecrementStepper />
+                    </NumberInputStepper>
+                  </NumberInput>
                   <FormErrorMessage fontSize="1.25rem">
                     {errors?.amount?.message}
                   </FormErrorMessage>
