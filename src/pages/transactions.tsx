@@ -1,7 +1,5 @@
 import {
-  Button,
   Center,
-  Flex,
   IconButton,
   Progress,
   Table,
@@ -32,11 +30,11 @@ const CategoriesPage: NextPage = () => {
   const [transactions, setTransactions] = useState<ITransactionFormatted[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const handlingDeleteAccount = async (id: string) => {
+  const handlingDeleteTransaction = async (id: string) => {
     const toastId = toast.loading("Excluindo...");
 
     try {
-      const response = await api.delete(`/transactions/${id}`);
+      await api.delete(`/transactions/${id}`);
 
       const newTransactions = transactions.filter(
         (transaction) => transaction.id !== id
@@ -121,11 +119,11 @@ const CategoriesPage: NextPage = () => {
         </Thead>
         <Tbody>
           {transactions &&
-            transactions.map((account) => {
+            transactions.map((transaction) => {
               return (
-                <Tr key={account.id}>
+                <Tr key={transaction.id}>
                   <Td>
-                    <Link href={`/categories/show/${account.id}`}>
+                    <Link href={`/categories/show/${transaction.id}`}>
                       <IconButton
                         aria-label="Visualizar"
                         color="green.400"
@@ -135,7 +133,7 @@ const CategoriesPage: NextPage = () => {
                       />
                     </Link>
 
-                    <Link href={`/categories/edit/${account.id}`}>
+                    <Link href={`/categories/edit/${transaction.id}`}>
                       <IconButton
                         aria-label="Editar"
                         color="yellow.400"
@@ -150,15 +148,17 @@ const CategoriesPage: NextPage = () => {
                       color="red.400"
                       variant="ghost"
                       fontSize="20px"
-                      onClick={() => handlingDeleteAccount(account.id)}
+                      onClick={() => handlingDeleteTransaction(transaction.id)}
                       icon={<AiOutlineDelete />}
                     />
                   </Td>
-                  <Td>{account.formattedDate}</Td>
-                  <Td>{account.category?.name}</Td>
-                  <Td>{account.description}</Td>
-                  <Td color={account.color}>{account.formattedAmount}</Td>
-                  <Td>{account.bankAccount.name}</Td>
+                  <Td>{transaction.formattedDate}</Td>
+                  <Td>{transaction.category?.name}</Td>
+                  <Td>{transaction.description}</Td>
+                  <Td color={transaction.color}>
+                    {transaction.formattedAmount}
+                  </Td>
+                  <Td>{transaction.bankAccount.name}</Td>
                 </Tr>
               );
             })}
