@@ -15,6 +15,9 @@ const handlingErrors = (error: unknown) => {
       // console.log(error.response.status);
       // console.log(error.response.headers);
       // console.log(error.response.data);
+      if (status === 500) {
+        toast.error("Não foi possível comunicar com o servidor.");
+      }
       return data;
     } else if (error.request) {
       // The request was made but no response was received
