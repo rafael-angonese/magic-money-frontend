@@ -12,13 +12,15 @@ import {
 } from "@chakra-ui/react";
 import { NextPage } from "next";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { ITransaction } from "../@types/accounts/transactions";
 import NewTransaction from "../components/pages/transactions/NewTransaction";
+import { AccountContext } from "../contexts/AccountContext";
 import api from "../services/api";
 import handlingErrors from "../utils/handlingErrors";
+import toQueryString from "../utils/toQueryString";
 
 interface ITransactionFormatted extends ITransaction {
   formattedDate: string;
@@ -29,6 +31,8 @@ interface ITransactionFormatted extends ITransaction {
 const CategoriesPage: NextPage = () => {
   const [transactions, setTransactions] = useState<ITransactionFormatted[]>([]);
   const [loading, setLoading] = useState(true);
+  const [month, setMonth] = useState<Date>(new Date());
+  const { account } = useContext(AccountContext);
 
   const handlingDeleteTransaction = async (id: string) => {
     const toastId = toast.loading("Excluindo...");
@@ -63,7 +67,15 @@ const CategoriesPage: NextPage = () => {
   async function getTransactions() {
     try {
       setLoading(true);
-      const { data } = await api.get<ITransaction[]>("/transactions");
+
+      const search = {
+        account_id: account?.id,
+        month: month,
+      };
+
+      const query = toQueryString(search);
+
+      const { data } = await api.get<ITransaction[]>(`/transactions/${query}`);
 
       const newData = data.map((transaction: ITransaction) => {
         return {
@@ -81,12 +93,15 @@ const CategoriesPage: NextPage = () => {
       setLoading(false);
     } catch (error) {
       handlingErrors(error);
+      setLoading(false);
     }
   }
 
   useEffect(() => {
-    getTransactions();
-  }, []);
+    if (account) {
+      getTransactions();
+    }
+  }, [account]);
 
   return (
     <>
