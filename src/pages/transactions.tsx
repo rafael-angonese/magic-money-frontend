@@ -1,7 +1,10 @@
 import {
+  Box,
   Center,
+  GridItem,
   IconButton,
   Progress,
+  SimpleGrid,
   Table,
   Tbody,
   Td,
@@ -21,6 +24,7 @@ import { AccountContext } from "../contexts/AccountContext";
 import api from "../services/api";
 import handlingErrors from "../utils/handlingErrors";
 import toQueryString from "../utils/toQueryString";
+import InputMonth from "../components/InputMonth/InputMonth";
 
 interface ITransactionFormatted extends ITransaction {
   formattedDate: string;
@@ -101,7 +105,7 @@ const CategoriesPage: NextPage = () => {
     if (account) {
       getTransactions();
     }
-  }, [account]);
+  }, [account, month]);
 
   return (
     <>
@@ -120,6 +124,12 @@ const CategoriesPage: NextPage = () => {
         </Text>
       </Center>
       <NewTransaction refreshGridAction={() => getTransactions()} />
+
+      <SimpleGrid marginY={6} columns={12} spacing={10}>
+        <GridItem colSpan={2}>
+          <InputMonth value={month} onChange={(date) => setMonth(date)} />
+        </GridItem>
+      </SimpleGrid>
 
       <Table variant="simple">
         <Thead>
