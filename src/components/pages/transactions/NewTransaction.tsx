@@ -137,13 +137,6 @@ const NewTransaction: React.FC<INewTransactionProps> = ({
         >
           Criar pagamento
         </Button>
-        <Button
-          marginRight="1rem"
-          colorScheme="blue"
-          onClick={() => setType("transfer")}
-        >
-          Criar transferência
-        </Button>
       </Flex>
 
       {type && (
