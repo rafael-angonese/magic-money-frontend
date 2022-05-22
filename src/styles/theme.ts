@@ -9,11 +9,6 @@ const theme = extendTheme({
     heading: 'Roboto, system-ui, sans-serif',
     mono: 'Menlo, monospace'
   },
-  colors: {
-    purple: {
-      500: '#8257e5'
-    },
-  }
 });
 
 export default theme;
