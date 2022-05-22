@@ -1,14 +1,15 @@
-import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { ToastContainer } from "react-toastify";
 
-import ThemeContainer from "../contexts/theme/ThemeContainer";
+import "react-toastify/dist/ReactToastify.css";
+
 import { AuthProvider } from "../contexts/AuthContext";
 import { AccountProvider } from "../contexts/AccountContext";
 
-import "react-toastify/dist/ReactToastify.css";
-import "../config/yup.locale.pt-br";
 import Layout from "../components/Layout/Layout";
+import ThemeContainer from "../lib/theme/ThemeContainer";
+
+import "../styles/globals.css";
+import "../config/yup.locale.pt-br";
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   const isAuthenticatedRoutes = router.pathname !== "/";
@@ -25,7 +26,6 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         )}
         {!isAuthenticatedRoutes && <Component {...pageProps} />}
       </AuthProvider>
-      <ToastContainer theme="dark" />
     </ThemeContainer>
   );
 }
