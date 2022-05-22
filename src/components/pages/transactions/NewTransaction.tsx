@@ -22,9 +22,12 @@ import { toast } from "react-toastify";
 import * as yup from "yup";
 import { IAccount } from "../../../@types/accounts/accounts";
 import { ICategory } from "../../../@types/accounts/categories";
+import { IFile } from "../../../@types/file";
 import { AccountContext } from "../../../contexts/AccountContext";
 import api from "../../../services/api";
 import handlingErrors from "../../../utils/handlingErrors";
+import DropZone from "../../DropZone/DropZone";
+import FileList from "../../FileList/FileList";
 interface ICategoryFields {
   date: Date | null;
   category_id: string;
@@ -60,6 +63,7 @@ const NewTransaction: React.FC<INewTransactionProps> = ({
   const [categoryOptions, setCategoryOptions] = useState<ICategory[]>([]);
   const [accountOptions, setAccountOptions] = useState<IAccount[]>([]);
   const { account } = useContext(AccountContext);
+  const [uploadedFiles, setUploadedFiles] = useState<IFile[]>([]);
 
   const {
     handleSubmit,
@@ -76,23 +80,49 @@ const NewTransaction: React.FC<INewTransactionProps> = ({
   const onSubmit = async (data: ICategoryFields) => {
     setLoading(true);
 
+    const formData = new FormData();
+
+    Object.entries(data).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
+    formData.set("date", data!.date!.toISOString());
+    formData.append("type", type);
+    formData.append("account_id", account!.id);
+
+    uploadedFiles.forEach((uploadedFile) => {
+      formData.append("files", uploadedFile.file);
+    });
+
+    console.log(formData);
+
     try {
-      const response = await api.post("/transactions", {
-        ...data,
-        type: type,
-        account_id: account?.id,
-      });
+      const response = await api.post("/transactions", formData);
 
       toast.success("Registro criado com sucesso!");
 
       reset();
       setType("");
-      refreshGridAction()
+      refreshGridAction();
     } catch (error) {
       toast.error("Não foi possível criar esse registro!");
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleUpload = (files: File[]) => {
+    const newFiles = files.map((file) => {
+      return {
+        file,
+        name: file.name,
+        preview: URL.createObjectURL(file),
+        size: file.size,
+        type: file.type,
+      };
+    });
+
+    setUploadedFiles(newFiles);
   };
 
   const getCategories = async () => {
@@ -219,6 +249,11 @@ const NewTransaction: React.FC<INewTransactionProps> = ({
                     {errors?.bank_account_id?.message}
                   </FormErrorMessage>
                 </FormControl>
+              </GridItem>
+
+              <GridItem colSpan={12}>
+                <DropZone onUpload={handleUpload} />
+                {!!uploadedFiles.length && <FileList files={uploadedFiles} />}
               </GridItem>
 
               <GridItem colSpan={12}>
