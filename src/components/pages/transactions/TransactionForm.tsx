@@ -24,12 +24,13 @@ import { IAccount } from "../../../@types/accounts/accounts";
 import { ICategory } from "../../../@types/accounts/categories";
 import { IFile } from "../../../@types/file";
 import { AccountContext } from "../../../contexts/AccountContext";
+import { ITransactionFormatted } from "../../../pages/transactions";
 import api from "../../../services/api";
 import handlingErrors from "../../../utils/handlingErrors";
 import DropZone from "../../DropZone/DropZone";
 import FileList from "../../FileList/FileList";
 interface ICategoryFields {
-  date: Date | null;
+  date: Date | null | string;
   category_id: string;
   description: string;
   amount: string | number;
@@ -52,12 +53,14 @@ export const FORM_VALIDATION = yup.object().shape({
   bank_account_id: yup.string().required(),
 });
 
-interface INewTransactionProps {
-  refreshGridAction: () => void;
+interface ITransactionFormProps {
+  onClose: (refresh: boolean) => void;
+  transaction: ITransactionFormatted | null;
 }
 
-const NewTransaction: React.FC<INewTransactionProps> = ({
-  refreshGridAction,
+const TransactionForm: React.FC<ITransactionFormProps> = ({
+  onClose,
+  transaction,
 }) => {
   const [type, setType] = useState("");
   const [categoryOptions, setCategoryOptions] = useState<ICategory[]>([]);
@@ -69,6 +72,7 @@ const NewTransaction: React.FC<INewTransactionProps> = ({
     handleSubmit,
     register,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<ICategoryFields>({
     resolver: yupResolver(FORM_VALIDATION),
@@ -79,6 +83,8 @@ const NewTransaction: React.FC<INewTransactionProps> = ({
 
   const onSubmit = async (data: ICategoryFields) => {
     setLoading(true);
+
+    console.log(data);
 
     const formData = new FormData();
 
@@ -94,16 +100,21 @@ const NewTransaction: React.FC<INewTransactionProps> = ({
       formData.append("files", uploadedFile.file);
     });
 
-    console.log(formData);
-
     try {
-      const response = await api.post("/transactions", formData);
+      if (transaction) {
+        await api.put(`/transactions/${transaction.id}`, formData);
 
-      toast.success("Registro criado com sucesso!");
+        toast.success("Registro atualizado com sucesso!");
+      } else {
+        await api.post("/transactions", formData);
+
+        toast.success("Registro criado com sucesso!");
+      }
 
       reset();
       setType("");
-      refreshGridAction();
+      setUploadedFiles([]);
+      onClose(true);
     } catch (error) {
       toast.error("Não foi possível criar esse registro!");
     } finally {
@@ -148,7 +159,16 @@ const NewTransaction: React.FC<INewTransactionProps> = ({
   useEffect(() => {
     getCategories();
     getAccounts();
-  }, []);
+
+    if (transaction) {
+      setValue("date", new Date(transaction.date).toISOString().split("T")[0]);
+      setValue("category_id", transaction.category_id);
+      setValue("description", transaction.description);
+      setValue("amount", transaction.amount);
+      setValue("bank_account_id", transaction.bank_account_id);
+      setType(transaction.type);
+    }
+  }, [transaction]);
 
   return (
     <>
@@ -198,7 +218,9 @@ const NewTransaction: React.FC<INewTransactionProps> = ({
                   >
                     {categoryOptions.map((category) => {
                       return (
-                        <option value={category.id}>{category.name}</option>
+                        <option key={category.id} value={category.id}>
+                          {category.name}
+                        </option>
                       );
                     })}
                   </Select>
@@ -242,7 +264,11 @@ const NewTransaction: React.FC<INewTransactionProps> = ({
                     {...register("bank_account_id")}
                   >
                     {accountOptions.map((account) => {
-                      return <option value={account.id}>{account.name}</option>;
+                      return (
+                        <option key={account.id} value={account.id}>
+                          {account.name}
+                        </option>
+                      );
                     })}
                   </Select>
                   <FormErrorMessage fontSize="1.25rem">
@@ -257,10 +283,27 @@ const NewTransaction: React.FC<INewTransactionProps> = ({
               </GridItem>
 
               <GridItem colSpan={12}>
+                Anexos:
+                {transaction &&
+                  transaction.fileOnTransaction.map((fileTransaction) => {
+                    return (
+                      <p key={fileTransaction.id}>
+                        {fileTransaction.file.original_name}
+                      </p>
+                    );
+                  })}
+              </GridItem>
+
+              <GridItem colSpan={12}>
                 <Button
                   isLoading={loading}
                   marginRight="1rem"
-                  onClick={() => setType("")}
+                  onClick={() => {
+                    reset();
+                    setType("");
+                    setUploadedFiles([]);
+                    onClose(false);
+                  }}
                 >
                   Cancelar
                 </Button>
@@ -282,4 +325,4 @@ const NewTransaction: React.FC<INewTransactionProps> = ({
   );
 };
 
-export default NewTransaction;
+export default TransactionForm;

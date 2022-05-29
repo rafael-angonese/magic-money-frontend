@@ -1,5 +1,4 @@
 import {
-  Box,
   Center,
   GridItem,
   IconButton,
@@ -19,14 +18,14 @@ import { useContext, useEffect, useState } from "react";
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { ITransaction } from "../@types/accounts/transactions";
-import NewTransaction from "../components/pages/transactions/NewTransaction";
+import InputMonth from "../components/InputMonth/InputMonth";
+import TransactionForm from "../components/pages/transactions/TransactionForm";
 import { AccountContext } from "../contexts/AccountContext";
 import api from "../services/api";
 import handlingErrors from "../utils/handlingErrors";
 import toQueryString from "../utils/toQueryString";
-import InputMonth from "../components/InputMonth/InputMonth";
 
-interface ITransactionFormatted extends ITransaction {
+export interface ITransactionFormatted extends ITransaction {
   formattedDate: string;
   color: string;
   formattedAmount: string;
@@ -37,6 +36,8 @@ const CategoriesPage: NextPage = () => {
   const [loading, setLoading] = useState(true);
   const [month, setMonth] = useState<Date>(new Date());
   const { account } = useContext(AccountContext);
+  const [editTransaction, setEditTransaction] =
+    useState<ITransactionFormatted | null>(null);
 
   const handlingDeleteTransaction = async (id: string) => {
     const toastId = toast.loading("Excluindo...");
@@ -44,11 +45,11 @@ const CategoriesPage: NextPage = () => {
     try {
       await api.delete(`/transactions/${id}`);
 
-      const newTransactions = transactions.filter(
+      const TransactionForms = transactions.filter(
         (transaction) => transaction.id !== id
       );
 
-      setTransactions(newTransactions);
+      setTransactions(TransactionForms);
 
       toast.update(toastId, {
         render: "Registro excluído com sucesso!",
@@ -123,7 +124,15 @@ const CategoriesPage: NextPage = () => {
           <span style={{ color: "#04e168" }}>.</span>
         </Text>
       </Center>
-      <NewTransaction refreshGridAction={() => getTransactions()} />
+      <TransactionForm
+        transaction={editTransaction}
+        onClose={(refresh: boolean) => {
+          setEditTransaction(null)
+          if (refresh) {
+            getTransactions();
+          }
+        }}
+      />
 
       <SimpleGrid marginY={6} columns={12} spacing={10}>
         <GridItem colSpan={2}>
@@ -158,15 +167,14 @@ const CategoriesPage: NextPage = () => {
                       />
                     </Link>
 
-                    <Link href={`/categories/edit/${transaction.id}`}>
-                      <IconButton
-                        aria-label="Editar"
-                        color="yellow.400"
-                        variant="ghost"
-                        fontSize="20px"
-                        icon={<AiOutlineEdit />}
-                      />
-                    </Link>
+                    <IconButton
+                      aria-label="Editar"
+                      color="yellow.400"
+                      variant="ghost"
+                      fontSize="20px"
+                      icon={<AiOutlineEdit />}
+                      onClick={() => setEditTransaction(transaction)}
+                    />
 
                     <IconButton
                       aria-label="Excluir"
