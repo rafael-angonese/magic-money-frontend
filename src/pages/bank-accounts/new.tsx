@@ -130,7 +130,7 @@ const NewAccountPage: NextPage = () => {
                   {...register("account_id")}
                 >
                   {accounts.map((account) => {
-                    return <option value={account.id}>{account.name}</option>;
+                    return <option key={account.id} value={account.id}>{account.name}</option>;
                   })}
                 </Select>
                 <FormErrorMessage fontSize="1.25rem">

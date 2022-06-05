@@ -82,7 +82,7 @@ const CategoriesPage: NextPage = () => {
         </Text>
       </Center>
       <Flex justifyContent="flex-end">
-        <Link href={"/categories/new"}>
+        <Link href={"/categories/new"} passHref>
           <Button colorScheme="teal">Nova Categoria</Button>
         </Link>
       </Flex>
@@ -100,7 +100,7 @@ const CategoriesPage: NextPage = () => {
               return (
                 <Tr key={account.id}>
                   <Td>
-                    <Link href={`/categories/show/${account.id}`}>
+                    <Link href={`/categories/show/${account.id}`} passHref>
                       <IconButton
                         aria-label="Visualizar"
                         color="green.400"
@@ -110,7 +110,7 @@ const CategoriesPage: NextPage = () => {
                       />
                     </Link>
 
-                    <Link href={`/categories/edit/${account.id}`}>
+                    <Link href={`/categories/edit/${account.id}`} passHref>
                       <IconButton
                         aria-label="Editar"
                         color="yellow.400"

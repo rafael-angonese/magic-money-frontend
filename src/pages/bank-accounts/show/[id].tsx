@@ -88,7 +88,7 @@ const BankAccountShowPage: NextPage = () => {
 
       <Container maxW="container.xl" marginTop="1.72rem">
         <Flex justifyContent="flex-end">
-          <Link href={`/bank-accounts/edit/${id}`}>
+          <Link href={`/bank-accounts/edit/${id}`} passHref>
             <Button leftIcon={<AiOutlineEdit />} color="yellow.400" mr="4">
               Editar
             </Button>

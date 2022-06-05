@@ -87,7 +87,7 @@ const CategoryShowPage: NextPage = () => {
 
       <Container maxW="container.xl" marginTop="1.72rem">
         <Flex justifyContent="flex-end">
-          <Link href={`/categories/edit/${id}`}>
+          <Link href={`/categories/edit/${id}`} passHref>
             <Button leftIcon={<AiOutlineEdit />} color="yellow.400" mr="4">
               Editar
             </Button>

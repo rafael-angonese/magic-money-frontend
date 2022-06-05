@@ -11,23 +11,26 @@ import ThemeContainer from "../lib/theme/ThemeContainer";
 import "../styles/globals.css";
 import "../config/yup.locale.pt-br";
 
-function MyApp({ Component, pageProps, router }: AppProps) {
+const MyApp = ({ Component, pageProps, router }: AppProps) => {
   const isAuthenticatedRoutes = router.pathname !== "/";
-
+  const AnyComponent = Component as any;
+  
   return (
-    <ThemeContainer>
-      <AuthProvider>
-        {isAuthenticatedRoutes && (
-          <AccountProvider>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </AccountProvider>
-        )}
-        {!isAuthenticatedRoutes && <Component {...pageProps} />}
-      </AuthProvider>
-    </ThemeContainer>
+    <>
+      <ThemeContainer>
+        <AuthProvider>
+          {isAuthenticatedRoutes && (
+            <AccountProvider>
+              <Layout>
+                <AnyComponent {...pageProps} />
+              </Layout>
+            </AccountProvider>
+          )}
+          {!isAuthenticatedRoutes && <AnyComponent {...pageProps} />}
+        </AuthProvider>
+      </ThemeContainer>
+    </>
   );
-}
+};
 
 export default MyApp;

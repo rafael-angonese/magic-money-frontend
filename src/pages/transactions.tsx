@@ -106,6 +106,7 @@ const CategoriesPage: NextPage = () => {
     if (account) {
       getTransactions();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account, month]);
 
   return (
@@ -127,7 +128,7 @@ const CategoriesPage: NextPage = () => {
       <TransactionForm
         transaction={editTransaction}
         onClose={(refresh: boolean) => {
-          setEditTransaction(null)
+          setEditTransaction(null);
           if (refresh) {
             getTransactions();
           }
@@ -157,7 +158,7 @@ const CategoriesPage: NextPage = () => {
               return (
                 <Tr key={transaction.id}>
                   <Td>
-                    <Link href={`/categories/show/${transaction.id}`}>
+                    <Link href={`/categories/show/${transaction.id}`} passHref>
                       <IconButton
                         aria-label="Visualizar"
                         color="green.400"

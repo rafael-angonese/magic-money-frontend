@@ -90,7 +90,7 @@ const CategoryEditPage: NextPage = () => {
     if (isPresent(id)) {
       getCategory();
     }
-  }, [id]);
+  }, [id, setValue]);
 
   return (
     <>
@@ -131,7 +131,7 @@ const CategoryEditPage: NextPage = () => {
                   render={({ field, fieldState, formState }) => (
                     <Select placeholder="Selecione o tipo" {...field}>
                       {categoryTypes.map((type) => {
-                        return <option value={type.type}>{type.name}</option>;
+                        return <option key={type.type} value={type.type}>{type.name}</option>;
                       })}
                     </Select>
                   )}

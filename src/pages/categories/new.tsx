@@ -99,7 +99,7 @@ const NewCategoryPage: NextPage = () => {
                 <FormLabel>Tipo</FormLabel>
                 <Select placeholder="Selecione o tipo" {...register("type")}>
                   {categoryTypes.map((type) => {
-                    return <option value={type.type}>{type.name}</option>;
+                    return <option key={type.type} value={type.type}>{type.name}</option>;
                   })}
                 </Select>
                 <FormErrorMessage fontSize="1.25rem">

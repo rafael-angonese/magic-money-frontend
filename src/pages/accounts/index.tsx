@@ -82,7 +82,7 @@ const AccountsPage: NextPage = () => {
         </Text>
       </Center>
       <Flex justifyContent="flex-end">
-        <Link href={"/accounts/new"}>
+        <Link href={"/accounts/new"} passHref>
           <Button colorScheme="teal">Nova Conta</Button>
         </Link>
       </Flex>
@@ -100,7 +100,7 @@ const AccountsPage: NextPage = () => {
               return (
                 <Tr key={account.id}>
                   <Td>
-                    <Link href={`/accounts/show/${account.id}`}>
+                    <Link href={`/accounts/show/${account.id}`} passHref>
                       <IconButton
                         aria-label="Visualizar"
                         color="green.400"
@@ -110,7 +110,7 @@ const AccountsPage: NextPage = () => {
                       />
                     </Link>
 
-                    <Link href={`/accounts/edit/${account.id}`}>
+                    <Link href={`/accounts/edit/${account.id}`} passHref>
                       <IconButton
                         aria-label="Editar"
                         color="yellow.400"

@@ -149,6 +149,7 @@ const LoginPage: NextPage = () => {
                       fontSize="1.4em"
                       height="80px"
                       onClick={handleClick}
+                      // eslint-disable-next-line react/no-children-prop
                       children={
                         show ? (
                           <AiFillEyeInvisible color="purple.500" />

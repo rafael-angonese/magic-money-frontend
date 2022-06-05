@@ -87,7 +87,7 @@ const AccountShowPage: NextPage = () => {
 
       <Container maxW="container.xl" marginTop="1.72rem">
         <Flex justifyContent="flex-end">
-          <Link href={`/accounts/edit/${id}`}>
+          <Link href={`/accounts/edit/${id}`} passHref>
             <Button leftIcon={<AiOutlineEdit />} color="yellow.400" mr="4">
               Editar
             </Button>

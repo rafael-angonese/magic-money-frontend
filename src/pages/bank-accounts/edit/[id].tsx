@@ -87,7 +87,7 @@ const BankAccountEditPage: NextPage = () => {
     if (isPresent(id)) {
       getAccount();
     }
-  }, [id]);
+  }, [id, setValue]);
 
   return (
     <>

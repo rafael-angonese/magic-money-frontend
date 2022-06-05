@@ -92,7 +92,9 @@ const TransactionForm: React.FC<ITransactionFormProps> = ({
       formData.append(key, value);
     });
 
-    formData.set("date", data!.date!.toISOString());
+    if(data.date && typeof data.date !== 'string') {
+      formData.set("date", data!.date!.toISOString());
+    }
     formData.append("type", type);
     formData.append("account_id", account!.id);
 
@@ -168,7 +170,7 @@ const TransactionForm: React.FC<ITransactionFormProps> = ({
       setValue("bank_account_id", transaction.bank_account_id);
       setType(transaction.type);
     }
-  }, [transaction]);
+  }, [transaction, setValue]);
 
   return (
     <>
