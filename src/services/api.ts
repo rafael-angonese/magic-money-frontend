@@ -6,7 +6,7 @@ const api = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  // withCredentials: true
+  withCredentials: false,
 });
 
 api.interceptors.request.use(
@@ -24,32 +24,39 @@ api.interceptors.request.use(
 
 api.interceptors.response.use(
   (response) => {
-    return response
+    return response;
   },
   async (error) => {
-    const originalRequest = error.config
+    const originalRequest = error.config;
 
-    if (originalRequest.url === 'auth/refreshToken' && error.response) {
-      removeCookies()
+    if (originalRequest.url === "auth/refreshToken" && error.response) {
+      removeCookies();
       return Promise.reject(error);
     }
 
-    if (error.response.status === 401 && originalRequest && !originalRequest._retry) {
-      originalRequest._retry = true
+    if (
+      error.response.status === 401 &&
+      originalRequest &&
+      !originalRequest._retry
+    ) {
+      originalRequest._retry = true;
 
       try {
-        const response = await api.post('auth/refreshToken', {}, {
-          withCredentials: true
-        })
+        const response = await api.post(
+          "auth/refreshToken",
+          {},
+          {
+            withCredentials: true,
+          }
+        );
 
-        const { token } = response.data
+        const { token } = response.data;
 
-        setToken(token)
+        setToken(token);
 
         originalRequest.headers["Authorization"] = `Bearer ${token}`;
 
-        return api(originalRequest)
-
+        return api(originalRequest);
       } catch (_error) {
         return Promise.reject(_error);
       }
@@ -57,6 +64,6 @@ api.interceptors.response.use(
 
     return Promise.reject(error);
   }
-)
+);
 
 export default api;
