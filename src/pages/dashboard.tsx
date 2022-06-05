@@ -27,7 +27,7 @@ const DashboardPage: NextPage = () => {
           lineHeight="5.75rem"
           wordBreak="break-word"
         >
-          Dashboard page
+          Dashboard
           <span style={{ color: "#04e168" }}>.</span>
         </Text>
       </Center>
