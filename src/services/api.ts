@@ -4,10 +4,10 @@ import { getToken, removeCookies, setToken } from "../lib/nookies";
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL_API,
   headers: {
+    "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
   },
 });
-
 
 api.interceptors.request.use(
   (config) => {
