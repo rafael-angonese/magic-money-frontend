@@ -53,16 +53,13 @@ export function AuthProvider({ children }: IAuthProviderProps) {
 
   async function signIn({ email, password }: ISignInData) {
     try {
-      const response = await api.post(
-        "/auth",
-        {
-          email,
-          password,
-        },
-      );
-      const { token } = response.data;
+      const response = await api.post("/auth", {
+        email,
+        password,
+      });
+      const { token, refreshToken } = response.data;
 
-      setToken(token);
+      setToken(token, refreshToken);
 
       toast.success("Login efetuado com sucesso!");
 

@@ -1,5 +1,13 @@
 import axios from "axios";
-import { getToken, removeCookies, setToken } from "../lib/nookies";
+import {
+  getRefreshToken,
+  getToken,
+  removeCookies,
+  setToken,
+} from "../lib/nookies";
+
+let isRefreshing = false;
+let refreshSubscribers = [] as any[];
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL_API,
@@ -34,36 +42,43 @@ api.interceptors.response.use(
       return Promise.reject(error);
     }
 
-    if (
-      error.response.status === 401 &&
-      originalRequest &&
-      !originalRequest._retry
-    ) {
-      originalRequest._retry = true;
+    if (error.response.status === 401) {
+      if (!isRefreshing) {
+        isRefreshing = true;
 
-      try {
-        const response = await api.post(
-          "auth/refreshToken",
-          {},
-          {
-            withCredentials: true,
-          }
-        );
-
-        const { token } = response.data;
-
-        setToken(token);
-
-        originalRequest.headers["Authorization"] = `Bearer ${token}`;
-
-        return api(originalRequest);
-      } catch (_error) {
-        return Promise.reject(_error);
+        const refreshTokenCookie = getRefreshToken();
+        api
+          .post("auth/refreshToken", {
+            refreshToken: refreshTokenCookie,
+          })
+          .then((response) => {
+            isRefreshing = false;
+            const { token, refreshToken } = response.data;
+            setToken(token, refreshToken);
+            originalRequest.headers["Authorization"] = `Bearer ${token}`;
+            onRrefreshed(token);
+          });
       }
-    }
 
-    return Promise.reject(error);
+      const retryOrigReq = new Promise((resolve, reject) => {
+        subscribeTokenRefresh((token: string) => {
+          originalRequest.headers["Authorization"] = "Bearer " + token;
+          resolve(axios(originalRequest));
+        });
+      });
+      return retryOrigReq;
+    } else {
+      return Promise.reject(error);
+    }
   }
 );
+
+function subscribeTokenRefresh(cb: any) {
+  refreshSubscribers.push(cb);
+}
+
+function onRrefreshed(token: string) {
+  refreshSubscribers.map((cb) => cb(token));
+}
 
 export default api;

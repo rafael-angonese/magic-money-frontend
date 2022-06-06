@@ -84,15 +84,13 @@ const TransactionForm: React.FC<ITransactionFormProps> = ({
   const onSubmit = async (data: ICategoryFields) => {
     setLoading(true);
 
-    console.log(data);
-
     const formData = new FormData();
 
     Object.entries(data).forEach(([key, value]) => {
       formData.append(key, value);
     });
 
-    if(data.date && typeof data.date !== 'string') {
+    if (data.date && typeof data.date !== "string") {
       formData.set("date", data!.date!.toISOString());
     }
     formData.append("type", type);
