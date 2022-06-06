@@ -59,9 +59,6 @@ export function AuthProvider({ children }: IAuthProviderProps) {
           email,
           password,
         },
-        {
-          withCredentials: true,
-        }
       );
       const { token } = response.data;
 
