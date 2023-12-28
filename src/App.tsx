@@ -1,5 +1,13 @@
+import './index.css'
+
 function App() {
-  return <>Hello World</>
+  return (
+    <>
+      <div className="bg-black flex flex-col h-screen text-white">
+        Hello World
+      </div>
+    </>
+  )
 }
 
 export default App
