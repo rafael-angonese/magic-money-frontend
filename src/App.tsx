@@ -1,11 +1,11 @@
+import React from 'react'
 import './index.css'
+import AppRouter from '@/routes/AppRouter'
 
-function App() {
+const App: React.FC = () => {
   return (
     <>
-      <div className="bg-black flex flex-col h-screen text-white">
-        Hello World
-      </div>
+      <AppRouter />
     </>
   )
 }
