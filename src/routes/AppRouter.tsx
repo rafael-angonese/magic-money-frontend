@@ -1,5 +1,6 @@
-import HomePage from '@/pages/Home/HomePage'
-import LoginPage from '@/pages/Login/LoginPage'
+import RootLayout from '@/layouts/RootLayout/RootLayout'
+import HomePage from '@/pages/home/HomePage'
+import LoginPage from '@/pages/login/LoginPage'
 import PrivateRoute from '@/routes/PrivateRoute'
 import PublicRoute from '@/routes/PublicRoute'
 import React from 'react'
@@ -7,7 +8,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 const AppRouter: React.FC = () => {
   return (
-    <>
+    <RootLayout>
       <BrowserRouter>
         <Routes>
           <Route element={<PublicRoute />}>
@@ -20,7 +21,7 @@ const AppRouter: React.FC = () => {
           </Route>
         </Routes>
       </BrowserRouter>
-    </>
+    </RootLayout>
   )
 }
 
