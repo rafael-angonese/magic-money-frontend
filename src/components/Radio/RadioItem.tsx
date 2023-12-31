@@ -1,5 +1,3 @@
-'use client'
-
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group'
 import { Circle } from 'lucide-react'
 import * as React from 'react'
@@ -103,7 +101,7 @@ export interface RadioItemProps
 export const RadioItem = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
   RadioItemProps
->(({ color, size, className, children, ...props }, ref) => {
+>(({ color, size, className, ...props }, ref) => {
   const { item, indicator, icon } = itemVariants({
     color,
     size,

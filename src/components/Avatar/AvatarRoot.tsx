@@ -1,5 +1,3 @@
-'use client'
-
 import { Root } from '@radix-ui/react-avatar'
 import { forwardRef } from 'react'
 import { VariantProps, tv } from 'tailwind-variants'

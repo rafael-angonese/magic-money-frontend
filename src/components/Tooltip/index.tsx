@@ -1,5 +1,3 @@
-'use client'
-
 import * as TooltipPrimitive from '@radix-ui/react-tooltip'
 import React from 'react'
 import { tv, VariantProps } from 'tailwind-variants'

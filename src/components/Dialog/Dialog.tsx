@@ -1,5 +1,3 @@
-'use client'
-
 import { DialogClose } from './DialogClose'
 import { DialogContent } from './DialogContent'
 import { DialogDescription } from './DialogDescription'

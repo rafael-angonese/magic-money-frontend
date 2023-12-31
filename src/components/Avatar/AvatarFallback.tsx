@@ -1,5 +1,3 @@
-'use client'
-
 import { Fallback } from '@radix-ui/react-avatar'
 
 import { forwardRef } from 'react'

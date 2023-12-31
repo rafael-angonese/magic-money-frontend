@@ -1,4 +1,3 @@
-'use client'
 import * as SeparatorPrimitive from '@radix-ui/react-separator'
 import React, { ElementRef, forwardRef } from 'react'
 import { VariantProps, tv } from 'tailwind-variants'

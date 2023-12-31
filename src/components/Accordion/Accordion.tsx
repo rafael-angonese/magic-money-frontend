@@ -1,4 +1,3 @@
-'use client'
 import { AccordionContent } from './AccordionContent'
 import { AccordionHeader } from './AccordionHeader'
 import { AccordionItem } from './AccordionItem'

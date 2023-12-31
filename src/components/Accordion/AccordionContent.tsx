@@ -1,4 +1,3 @@
-'use client'
 import { Content } from '@radix-ui/react-accordion'
 import React from 'react'
 import { cnBase } from 'tailwind-variants'

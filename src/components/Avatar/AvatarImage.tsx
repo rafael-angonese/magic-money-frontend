@@ -1,4 +1,3 @@
-'use client'
 import { AvatarImage as RadixAvatarImage } from '@radix-ui/react-avatar'
 
 import { forwardRef } from 'react'
