@@ -17,7 +17,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
 
   return (
     <>
-      <div className="flex min-h-screen bg-white text-black dark:text-white dark:bg-black">
+      <div className="flex flex-col min-h-screen bg-white text-black dark:text-white dark:bg-black">
         {children}
       </div>
     </>

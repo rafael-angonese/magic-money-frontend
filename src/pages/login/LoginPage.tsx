@@ -1,7 +1,93 @@
+import { Button } from '@/components/Button/Button'
+import { Form } from '@/components/Form/Form'
+import { Input } from '@/components/Input/Input'
+import { InputGroup } from '@/components/InputGroup/InputGroup'
+import { InputRightElement } from '@/components/InputRightElement/InputRightElement'
+import { Tooltip } from '@/components/Tooltip'
+import { useLogin } from '@/pages/login/use-login'
+import { Eye, EyeOff } from 'lucide-react'
 import React from 'react'
 
 const LoginPage: React.FC = () => {
-  return <>Login page</>
+  const { methods, onSubmit, isLoading, isShowPassword, setIsShowPassword } =
+    useLogin()
+
+  const { handleSubmit } = methods
+
+  return (
+    <>
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <Form.Provider {...methods}>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col gap-4"
+          >
+            <Form.Field
+              control={methods.control}
+              name="email"
+              render={({ field }) => (
+                <Form.Item>
+                  <Form.Label required>E-mail</Form.Label>
+                  <Form.Control>
+                    <Input {...field} placeholder="example@example.com" />
+                  </Form.Control>
+                  <Form.Message />
+                </Form.Item>
+              )}
+            />
+
+            <Form.Field
+              control={methods.control}
+              name="password"
+              render={({ field }) => (
+                <Form.Item>
+                  <Form.Label required>Senha</Form.Label>
+                  <InputGroup>
+                    <Form.Control>
+                      <Input
+                        {...field}
+                        type={isShowPassword ? 'text' : 'password'}
+                        placeholder="*********"
+                        className="pr-8"
+                      />
+                    </Form.Control>
+                    <InputRightElement>
+                      {isShowPassword && (
+                        <Tooltip.Component content="Exibir senha">
+                          <Eye
+                            className="h-5 w-5"
+                            onClick={() => setIsShowPassword(!isShowPassword)}
+                          />
+                        </Tooltip.Component>
+                      )}
+                      {!isShowPassword && (
+                        <Tooltip.Component content="Ocultar senha">
+                          <EyeOff
+                            className="h-5 w-5"
+                            onClick={() => setIsShowPassword(!isShowPassword)}
+                          />
+                        </Tooltip.Component>
+                      )}
+                    </InputRightElement>
+                  </InputGroup>
+                  <Form.Message />
+                </Form.Item>
+              )}
+            />
+
+            <Button
+              isLoading={isLoading}
+              disabled={isLoading}
+              type="submit"
+              fullWidth
+            >
+              Login
+            </Button>
+          </form>
+        </Form.Provider>
+      </div>
+    </>
+  )
 }
 
 export default LoginPage

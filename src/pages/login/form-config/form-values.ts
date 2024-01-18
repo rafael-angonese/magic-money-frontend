@@ -1,4 +1,4 @@
-import zod from '@/lib/zod'
+import z from '@/lib/zod'
 import { formValidation } from './form-validation'
 
-export type FormValues = zod.infer<typeof formValidation>
+export type FormValues = z.infer<typeof formValidation>
