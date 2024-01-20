@@ -9,20 +9,28 @@ interface SignInProps {
 }
 
 export interface AuthStore {
+  isLoadingCheck: boolean
   isAuthenticated: boolean
   token: string | null
   refreshToken: string | null
   setToken: (value: string) => void
   setRefreshToken: (value: string) => void
   signIn: (values: SignInProps) => void
+  checkAuth: () => void
   logout: () => void
   reset: () => void
 }
 
 const INITIAL_STATE = {
+  isLoadingCheck: true,
   isAuthenticated: false,
   token: null,
   refreshToken: null,
+}
+
+const RESET_INITIAL_STATE = {
+  ...INITIAL_STATE,
+  isLoadingCheck: false,
 }
 
 export const useAuthStore = create<AuthStore>((set) => ({
@@ -44,8 +52,22 @@ export const useAuthStore = create<AuthStore>((set) => ({
     Storage.removeItem(StorageKeys.TOKEN)
     Storage.removeItem(StorageKeys.REFRESH_TOKEN)
     set({
-      ...INITIAL_STATE,
+      ...RESET_INITIAL_STATE,
     })
   },
-  reset: () => set({ ...INITIAL_STATE }),
+  checkAuth: () => {
+    const refreshToken = Storage.getItem(StorageKeys.TOKEN)
+    const token = Storage.getItem(StorageKeys.TOKEN)
+    if (token && refreshToken) {
+      set({
+        token,
+        refreshToken,
+        isAuthenticated: true,
+        isLoadingCheck: false,
+      })
+      return
+    }
+    set({ ...RESET_INITIAL_STATE })
+  },
+  reset: () => set({ ...RESET_INITIAL_STATE }),
 }))

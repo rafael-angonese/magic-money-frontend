@@ -1,20 +1,25 @@
 import React from 'react'
 
+import { Button } from '@/components/Button/Button'
 import { Divider } from '@/components/Divider/Divider'
+import { ThemeToggle } from '@/components/Theme/ThemeToggle'
+import { Tooltip } from '@/components/Tooltip'
 import { NavLink } from '@/layouts/Header/NavLink'
+import { useAuthStore } from '@/store/useAuthStore'
 import {
   ArrowLeftRight,
   CircleUserRound,
   Home,
   Landmark,
+  LogOut,
   PiggyBank,
-  Pizza,
   Users,
   Wind,
 } from 'lucide-react'
-import { ThemeToggle } from '@/components/Theme/ThemeToggle'
 
 const Header: React.FC = () => {
+  const { logout } = useAuthStore()
+
   return (
     <div className="border-b">
       <div className="flex h-16 items-center gap-6 px-6">
@@ -54,7 +59,11 @@ const Header: React.FC = () => {
         </nav>
 
         <div className="ml-auto flex items-center gap-2">
-          <Pizza className="h-6 w-6" />
+          <Button onClick={logout} size="icon" variant="ghost">
+            <Tooltip.Component content="Sair">
+              <LogOut className="h-5 w-5" />
+            </Tooltip.Component>
+          </Button>
 
           <ThemeToggle />
         </div>

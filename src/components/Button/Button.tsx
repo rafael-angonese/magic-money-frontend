@@ -4,7 +4,7 @@ import { ComponentPropsWithRef, ReactNode, forwardRef } from 'react'
 import { VariantProps, tv } from 'tailwind-variants'
 
 export const buttonVariants = tv({
-  base: 'flex items-center justify-center text-white rounded-lg w-fit text-center font-medium focus:outline-none focus:ring-2',
+  base: 'flex items-center justify-center text-black dark:text-white rounded-lg w-fit text-center font-medium focus:outline-none focus:ring-2',
   variants: {
     variant: {
       solid: '',
