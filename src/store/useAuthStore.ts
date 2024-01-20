@@ -1,5 +1,5 @@
 import { StorageKeys } from '@/constants/storage-keys'
-import api from '@/services/api'
+import { api } from '@/lib/api'
 import Storage from '@/utils/storage'
 import { create } from 'zustand'
 
