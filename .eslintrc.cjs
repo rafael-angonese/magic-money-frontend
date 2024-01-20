@@ -2,14 +2,17 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    jest: true,
   },
   extends: [
+    'eslint:recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'standard',
+    'plugin:import/recommended',
+    'plugin:jsx-a11y/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
+    'eslint-config-prettier',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -36,13 +39,6 @@ module.exports = {
     ],
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
-    'jsx-a11y/alt-text': [
-      'warn',
-      {
-        elements: ['img'],
-        img: ['Image'],
-      },
-    ],
     'jsx-a11y/aria-props': 'warn',
     'jsx-a11y/aria-proptypes': 'warn',
     'jsx-a11y/aria-unsupported-elements': 'warn',
@@ -54,9 +50,9 @@ module.exports = {
     react: {
       version: 'detect',
     },
-    'import/parsers': {
-      [require.resolve('@typescript-eslint/parser')]: ['.ts', '.tsx', '.d.ts'],
+    'import/resolver': {
+      typescript: {},
     },
   },
-  ignorePatterns: ['node_modules'],
+  ignorePatterns: ['node_modules', 'dist'],
 }
