@@ -1,5 +1,6 @@
 export enum StorageKeys {
-  AUTH_USER = '@authUser',
-  TOKEN = '@token',
-  REFRESH_TOKEN = '@refreshToken',
+  AUTH_USER = 'diero@authUser',
+  TOKEN = 'diero@token',
+  REFRESH_TOKEN = 'diero@refreshToken',
+  THEME = 'diero@theme',
 }

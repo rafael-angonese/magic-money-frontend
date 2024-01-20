@@ -1,3 +1,4 @@
+import AppLayout from '@/layouts/AppLayout/AppLayout'
 import { useAuthStore } from '@/store/useAuthStore'
 import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
@@ -9,7 +10,11 @@ const PrivateRoute: React.FC = () => {
     return <Navigate to="/login" replace state={{ path: location.pathname }} />
   }
 
-  return <Outlet />
+  return (
+    <AppLayout>
+      <Outlet />
+    </AppLayout>
+  )
 }
 
 export default PrivateRoute
