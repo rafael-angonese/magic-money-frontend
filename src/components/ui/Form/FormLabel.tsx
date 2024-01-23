@@ -1,5 +1,5 @@
-import { useFormField } from '@/components/Form/useFormField'
-import { Label, LabelProps } from '@/components/Label/Label'
+import { useFormField } from '@/components/ui/Form/useFormField'
+import { Label, LabelProps } from '@/components/ui/Label/Label'
 import React from 'react'
 
 export const FormLabel = React.forwardRef<

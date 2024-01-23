@@ -1,4 +1,4 @@
-import { ThemeProvider } from '@/components/Theme/ThemeProvider'
+import { ThemeProvider } from '@/components/ui/Theme/ThemeProvider'
 import React, { ReactNode } from 'react'
 
 interface RootLayoutProps {

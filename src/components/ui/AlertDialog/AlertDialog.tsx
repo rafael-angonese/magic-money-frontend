@@ -1,4 +1,4 @@
-import { buttonVariants } from '@/components/Button/Button'
+import { buttonVariants } from '@/components/ui/Button/Button'
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog'
 import * as React from 'react'
 import { cnBase } from 'tailwind-variants'

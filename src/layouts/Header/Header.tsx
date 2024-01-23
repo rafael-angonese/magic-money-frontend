@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { Button } from '@/components/Button/Button'
-import { Divider } from '@/components/Divider/Divider'
-import { ThemeToggle } from '@/components/Theme/ThemeToggle'
-import { Tooltip } from '@/components/Tooltip'
+import { Button } from '@/components/ui/Button/Button'
+import { Divider } from '@/components/ui/Divider/Divider'
+import { ThemeToggle } from '@/components/ui/Theme/ThemeToggle'
+import { Tooltip } from '@/components/ui/Tooltip'
 import { NavLink } from '@/layouts/Header/NavLink'
 import { useAuthStore } from '@/store/useAuthStore'
 import {
