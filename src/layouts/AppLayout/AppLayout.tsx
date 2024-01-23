@@ -1,4 +1,4 @@
-import Header from '@/layouts/Header/Header'
+import Header from '@/components/Header/Header'
 import React, { ReactNode } from 'react'
 
 interface AppLayoutProps {

@@ -1,20 +1,20 @@
 import React from 'react'
 
+import { NavLink } from '@/components/Header/NavLink'
 import { Button } from '@/components/ui/Button/Button'
 import { Divider } from '@/components/ui/Divider/Divider'
 import { ThemeToggle } from '@/components/ui/Theme/ThemeToggle'
 import { Tooltip } from '@/components/ui/Tooltip'
-import { NavLink } from '@/layouts/Header/NavLink'
 import { useAuthStore } from '@/store/useAuthStore'
 import {
-  ArrowLeftRight,
-  CircleUserRound,
-  Home,
-  Landmark,
-  LogOut,
-  PiggyBank,
-  Users,
-  Wind,
+    ArrowLeftRight,
+    CircleUserRound,
+    Home,
+    Landmark,
+    LogOut,
+    PiggyBank,
+    Users,
+    Wind,
 } from 'lucide-react'
 
 const Header: React.FC = () => {
