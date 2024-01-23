@@ -59,6 +59,8 @@ export const useAuthStore = create<AuthStore>((set) => ({
     const refreshToken = Storage.getItem(StorageKeys.TOKEN)
     const token = Storage.getItem(StorageKeys.TOKEN)
     if (token && refreshToken) {
+      api.defaults.headers.common.Authorization = `Bearer ${token}`
+
       set({
         token,
         refreshToken,
@@ -69,5 +71,9 @@ export const useAuthStore = create<AuthStore>((set) => ({
     }
     set({ ...RESET_INITIAL_STATE })
   },
-  reset: () => set({ ...RESET_INITIAL_STATE }),
+  reset: () => {
+    set({ ...RESET_INITIAL_STATE })
+    Storage.removeItem(StorageKeys.TOKEN)
+    Storage.removeItem(StorageKeys.REFRESH_TOKEN)
+  },
 }))
