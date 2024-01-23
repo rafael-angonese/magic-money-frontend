@@ -1,11 +1,15 @@
+import { queryClient } from '@/lib/query-client'
+import AppRouter from '@/routes/AppRouter'
+import { QueryClientProvider } from '@tanstack/react-query'
 import React from 'react'
 import './index.css'
-import AppRouter from '@/routes/AppRouter'
 
 const App: React.FC = () => {
   return (
     <>
-      <AppRouter />
+      <QueryClientProvider client={queryClient}>
+        <AppRouter />
+      </QueryClientProvider>
     </>
   )
 }
