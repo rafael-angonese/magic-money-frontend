@@ -3,7 +3,7 @@ import * as z from 'zod'
 import { zodI18nMap } from 'zod-i18n-map'
 
 // import ptBrTranslation from 'zod-i18n-map/locales/pt/zod.json'
-import ptBrTranslation from '@/i18n/locales/pt-Br/zod.json'
+import ptBrTranslation from '@/i18n/locales/pt-br/zod.json'
 
 i18next.init({
   lng: 'pt-BR',

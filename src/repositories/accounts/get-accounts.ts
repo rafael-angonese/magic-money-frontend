@@ -7,5 +7,5 @@ export interface GetAccountsResponse {
 }
 
 export const getAccounts = (qs?: string, config?: AxiosRequestConfig) => {
-  return api.get<GetAccountsResponse>(`/accounts`, config)
+  return api.get<GetAccountsResponse>(`/accounts${qs}`, config)
 }

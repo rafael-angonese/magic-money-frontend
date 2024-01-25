@@ -1,6 +1,6 @@
-import { LinearProgress } from '@/components/ui/LinearProgress/LinearProgress'
+import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
 import { getAccounts } from '@/repositories/accounts/get-accounts'
-import { useAccountStore } from '@/store/useAccountStore'
+import { useAccountStore } from '@/store/use-account-store'
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 
@@ -8,7 +8,7 @@ export const SelectAccountPage: React.FC = () => {
   const { setAccount } = useAccountStore()
   const { data, isPending } = useQuery({
     queryKey: ['accounts'],
-    queryFn: () => getAccounts(),
+    queryFn: () => getAccounts(''),
   })
 
   return (
