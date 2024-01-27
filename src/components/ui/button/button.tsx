@@ -1,6 +1,5 @@
 import { Slot } from '@radix-ui/react-slot'
-import { Loader2 } from 'lucide-react'
-import { ComponentPropsWithRef, ReactNode, forwardRef } from 'react'
+import { ComponentPropsWithRef, forwardRef } from 'react'
 import { VariantProps, tv } from 'tailwind-variants'
 
 export const buttonVariants = tv({
@@ -141,9 +140,7 @@ export const buttonVariants = tv({
 export interface ButtonProps
   extends Omit<ComponentPropsWithRef<'button'>, 'color' | 'disabled' | 'size'>,
     VariantProps<typeof buttonVariants> {
-  children: ReactNode
   asChild?: boolean
-  isLoading?: boolean
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -158,8 +155,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       shadow,
       className,
       asChild = false,
-      isLoading,
-      children,
       ...props
     },
     ref,
@@ -180,10 +175,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={!!disabled}
         ref={ref}
         {...props}
-      >
-        {isLoading && <Loader2 className="mr-1 h-4 w-4 animate-spin" />}
-        {children}
-      </Comp>
+      />
     )
   },
 )

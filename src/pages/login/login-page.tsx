@@ -1,8 +1,9 @@
 import { Button } from '@/components/ui/button/button'
 import { Form } from '@/components/ui/form/form'
-import { Input } from '@/components/ui/input/input'
 import { InputGroup } from '@/components/ui/input-group/input-group'
 import { InputRightElement } from '@/components/ui/input-right-element/input-right-element'
+import { Input } from '@/components/ui/input/input'
+import { Loader } from '@/components/ui/loader/loader'
 import { Tooltip } from '@/components/ui/tooltip'
 import { useLogin } from '@/pages/login/use-login'
 import { Eye, EyeOff } from 'lucide-react'
@@ -75,12 +76,8 @@ const LoginPage: React.FC = () => {
               )}
             />
 
-            <Button
-              isLoading={isLoading}
-              disabled={isLoading}
-              type="submit"
-              fullWidth
-            >
+            <Button disabled={isLoading} type="submit" fullWidth>
+              <Loader isLoading={isLoading} />
               Login
             </Button>
           </form>
