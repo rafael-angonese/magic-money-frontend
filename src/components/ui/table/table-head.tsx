@@ -2,14 +2,14 @@ import { HTMLAttributes, forwardRef } from 'react'
 import { tv } from 'tailwind-variants'
 
 export const headVariants = tv({
-  base: '[&_tr]:border-b',
+  base: 'h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0',
 })
 
 export const TableHead = forwardRef<
-  HTMLTableSectionElement,
-  HTMLAttributes<HTMLTableSectionElement>
+  HTMLTableCellElement,
+  HTMLAttributes<HTMLTableCellElement>
 >(({ className, ...props }, ref) => (
-  <thead ref={ref} className={headVariants({ className })} {...props} />
+  <th ref={ref} className={headVariants({ className })} {...props} />
 ))
 
 TableHead.displayName = 'TableHead'

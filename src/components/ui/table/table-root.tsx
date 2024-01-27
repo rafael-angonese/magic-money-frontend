@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants'
 
 export const tableVariants = tv({
   slots: {
-    wrapper: 'w-full overflow-auto',
+    wrapper: 'relative w-full overflow-auto',
     base: 'w-full caption-bottom text-sm',
   },
 })
