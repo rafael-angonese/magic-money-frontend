@@ -34,7 +34,7 @@ export const NewBankAccountPage: React.FC = () => {
                       <Form.Control>
                         <Input
                           {...field}
-                          placeholder="digite o nome da conta"
+                          placeholder="Digite o nome da conta"
                         />
                       </Form.Control>
                       <Form.Message />
