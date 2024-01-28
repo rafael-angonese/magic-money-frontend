@@ -5,18 +5,19 @@ import { IconButton } from '@/components/ui/icon-button/icon-button'
 import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
 import { Table } from '@/components/ui/table/table'
 import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
+import { DeleteBankAccount } from '@/pages/bank-accounts/list/delete-bank-account'
 import { getBankAccounts } from '@/repositories/bank-accounts/get-bank-accounts'
 import { useAccountStore } from '@/store/use-account-store'
 import formatCurrency from '@/utils/format-currency'
 import isBlank from '@/utils/is-blank'
 import { useQuery } from '@tanstack/react-query'
-import { Pencil, Trash } from 'lucide-react'
+import { Pencil } from 'lucide-react'
 import React from 'react'
 
 export const ListBankAccountsPage: React.FC = () => {
   const { account } = useAccountStore()
 
-  const { data, isPending } = useQuery({
+  const { data, isLoading, isFetching } = useQuery({
     queryKey: ['bank-accounts', { accountId: account!.id }],
     queryFn: () =>
       getBankAccounts({
@@ -24,7 +25,7 @@ export const ListBankAccountsPage: React.FC = () => {
       }),
   })
 
-  if (isPending) {
+  if (isLoading) {
     return <LinearProgress indeterminate size="xs" />
   }
 
@@ -62,9 +63,7 @@ export const ListBankAccountsPage: React.FC = () => {
                         <Pencil className="text-warning" size={18} />
                       </Link>
                     </IconButton>
-                    <IconButton hoverTitle="Excluir">
-                      <Trash className="text-error" size={18} />
-                    </IconButton>
+                    <DeleteBankAccount bankAccountId={bankAccount.id} />
                   </Table.Cell>
                 </Table.Row>
               ))}
@@ -72,7 +71,7 @@ export const ListBankAccountsPage: React.FC = () => {
           </Table.Root>
         </div>
 
-        {isPending && <LinearProgress indeterminate size="xs" />}
+        {isFetching && <LinearProgress indeterminate size="xs" />}
       </PageContentLayout>
     </>
   )

@@ -21,16 +21,15 @@ export const FormBankAccount: React.FC = () => {
 
   const { handleSubmit } = methods
 
-  const { mutateAsync: updateBankAccountFn, isPending } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationKey: ['update-bank-account'],
-    mutationFn: (values: UpdateBankAccountRequest) => {
-      return updateBankAccount(id!, values)
-    },
+    mutationFn: (values: UpdateBankAccountRequest) =>
+      updateBankAccount(id!, values),
   })
 
   const onSubmit = async (values: FormValues) => {
     try {
-      await updateBankAccountFn({
+      await mutateAsync({
         name: values.name,
         balance: values.balance,
       })
