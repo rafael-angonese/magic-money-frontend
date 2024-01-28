@@ -3,9 +3,10 @@ import { VariantProps, tv } from 'tailwind-variants'
 
 export const inputVariants = tv({
   base: [
-    'w-full border-2 text-sm rounded-lg focus:outline-1 block p-2.5 placeholder:text-gray-400',
-    'bg-white border-gray-300 hover:border-gray-400 text-black focus:outline-gray-500',
-    'dark:bg-black dark:text-white dark:border-gray-500 dark:hover:border-gray-400 focus:dark:border-gray-300 dark:focus:outline-0',
+    'block w-full border border-muted text-sm rounded-lg',
+    'px-3 py-1',
+    'bg-transparent placeholder:text-muted-foreground',
+    'focus:outline-muted focus:outline-1',
     'disabled:opacity-50 disabled:cursor-not-allowed',
   ],
   variants: {
@@ -18,9 +19,9 @@ export const inputVariants = tv({
     },
     isInvalid: {
       true: [
-        'placeholder:text-red-500',
-        'border-red-500 hover:border-red-500 text-red-500 focus:outline-red-500',
-        'dark:text-red-500 dark:border-red-500 dark:hover:border-red-500 focus:dark:border-red-500 dark:focus:outline-0',
+        'placeholder:text-error',
+        'border-error hover:border-error text-error focus:outline-error',
+        'dark:text-error dark:border-error dark:hover:border-error focus:dark:border-error dark:focus:outline-0',
       ],
     },
   },

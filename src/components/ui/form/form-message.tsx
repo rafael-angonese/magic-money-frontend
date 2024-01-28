@@ -17,7 +17,7 @@ export const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={cnBase('text-sm font-medium text-red-400', className)}
+      className={cnBase('text-sm font-medium text-error', className)}
       {...props}
     >
       {body}
