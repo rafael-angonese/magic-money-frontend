@@ -1,4 +1,5 @@
 import RootLayout from '@/layouts/root-layout/root-layout'
+import { EditBankAccountPage } from '@/pages/bank-accounts/edit/edit-bank-account-page'
 import { ListBankAccountsPage } from '@/pages/bank-accounts/list/list-bank-accounts-page'
 import { NewBankAccountPage } from '@/pages/bank-accounts/new/new-bank-account-page'
 import HomePage from '@/pages/home/home-page'
@@ -28,6 +29,10 @@ const AppRouter: React.FC = () => {
               <Route
                 path="/bank-accounts/new"
                 element={<NewBankAccountPage />}
+              />
+              <Route
+                path="/bank-accounts/edit/:id"
+                element={<EditBankAccountPage />}
               />
             </Route>
           </Route>

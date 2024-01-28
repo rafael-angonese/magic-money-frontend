@@ -2,7 +2,7 @@ import React, { ComponentProps } from 'react'
 import { VariantProps, tv } from 'tailwind-variants'
 
 export const skeletonVariants = tv({
-  base: 'animate-pulse rounded-md bg-slate-100 dark:bg-slate-800',
+  base: 'animate-pulse rounded-md bg-foreground',
 })
 
 export interface SkeletonProps
