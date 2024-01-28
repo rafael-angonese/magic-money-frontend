@@ -25,7 +25,7 @@ export const ListBankAccountsPage: React.FC = () => {
 
   return (
     <>
-      <div className="w-full">
+      <div>
         <div className="flex justify-between mb-12">
           <Heading as="h1">Contas Bancarias</Heading>
 

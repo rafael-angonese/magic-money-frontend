@@ -1,5 +1,6 @@
 import RootLayout from '@/layouts/root-layout/root-layout'
 import { ListBankAccountsPage } from '@/pages/bank-accounts/list/list-bank-accounts-page'
+import { NewBankAccountPage } from '@/pages/bank-accounts/new/new-bank-account-page'
 import HomePage from '@/pages/home/home-page'
 import LoginPage from '@/pages/login/login-page'
 import { TransactionsPage } from '@/pages/transactions/transactions-page'
@@ -24,6 +25,10 @@ const AppRouter: React.FC = () => {
               <Route path="/transactions" element={<TransactionsPage />} />
 
               <Route path="/bank-accounts" element={<ListBankAccountsPage />} />
+              <Route
+                path="/bank-accounts/new"
+                element={<NewBankAccountPage />}
+              />
             </Route>
           </Route>
         </Routes>
