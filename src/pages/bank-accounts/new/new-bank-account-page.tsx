@@ -5,6 +5,7 @@ import { Heading } from '@/components/ui/heading/heading'
 import { InputNumber } from '@/components/ui/input-number/input-number'
 import { Input } from '@/components/ui/input/input'
 import { Loader } from '@/components/ui/loader/loader'
+import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
 import React from 'react'
 import { useNewBankAccount } from './use-new-bank-account'
 
@@ -15,7 +16,7 @@ export const NewBankAccountPage: React.FC = () => {
 
   return (
     <>
-      <div>
+      <PageContentLayout>
         <div className="flex justify-between mb-12">
           <Heading as="h1">Nova Conta Bancaria</Heading>
         </div>
@@ -71,7 +72,7 @@ export const NewBankAccountPage: React.FC = () => {
             </div>
           </form>
         </Form.Provider>
-      </div>
+      </PageContentLayout>
     </>
   )
 }

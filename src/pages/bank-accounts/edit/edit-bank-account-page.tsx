@@ -10,6 +10,7 @@ import { useIsFetching, useIsMutating } from '@tanstack/react-query'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useEditBankAccount } from './use-edit-bank-account'
+import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
 
 export const EditBankAccountPage: React.FC = () => {
   const { methods, onSubmit } = useEditBankAccount()
@@ -32,7 +33,7 @@ export const EditBankAccountPage: React.FC = () => {
 
   return (
     <>
-      <div>
+      <PageContentLayout>
         <div className="flex justify-between mb-12">
           <Heading as="h1">Editando Conta Bancaria</Heading>
         </div>
@@ -88,7 +89,7 @@ export const EditBankAccountPage: React.FC = () => {
             </div>
           </form>
         </Form.Provider>
-      </div>
+      </PageContentLayout>
     </>
   )
 }
