@@ -6,14 +6,6 @@ export interface GetBankAccountByIdResponse {
   data: BankAccount
 }
 
-export const getBankAccountById = async (
-  id: string,
-  config?: AxiosRequestConfig,
-) => {
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(true)
-    }, 1000)
-  })
+export const getBankAccountById = (id: string, config?: AxiosRequestConfig) => {
   return api.get<GetBankAccountByIdResponse>(`/bank-accounts/${id}`, config)
 }

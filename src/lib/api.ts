@@ -1,4 +1,6 @@
 import { env } from '@/env'
+import isDev from '@/utils/is-dev'
+import { sleep } from '@/utils/sleep'
 import axios from 'axios'
 
 export const api = axios.create({
@@ -6,4 +8,11 @@ export const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+})
+
+api.interceptors.response.use(async (response) => {
+  if (isDev()) {
+    await sleep()
+  }
+  return response
 })

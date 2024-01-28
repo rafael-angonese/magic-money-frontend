@@ -11,16 +11,11 @@ export interface UpdateBankAccountResponse {
   data: BankAccount
 }
 
-export const updateBankAccount = async (
+export const updateBankAccount = (
   id: string,
   data: UpdateBankAccountRequest,
   config?: AxiosRequestConfig,
 ) => {
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(true)
-    }, 1000)
-  })
   return api.put<UpdateBankAccountResponse>(
     `/bank-accounts/${id}`,
     data,

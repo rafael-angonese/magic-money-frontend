@@ -4,6 +4,7 @@ import { Heading } from '@/components/ui/heading/heading'
 import { IconButton } from '@/components/ui/icon-button/icon-button'
 import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
 import { Table } from '@/components/ui/table/table'
+import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
 import { getBankAccounts } from '@/repositories/bank-accounts/get-bank-accounts'
 import { useAccountStore } from '@/store/use-account-store'
 import formatCurrency from '@/utils/format-currency'
@@ -23,9 +24,13 @@ export const ListBankAccountsPage: React.FC = () => {
       }),
   })
 
+  if (isPending) {
+    return <LinearProgress indeterminate size="xs" />
+  }
+
   return (
     <>
-      <div>
+      <PageContentLayout>
         <div className="flex justify-between mb-12">
           <Heading as="h1">Contas Bancarias</Heading>
 
@@ -33,8 +38,6 @@ export const ListBankAccountsPage: React.FC = () => {
             <Link to="/bank-accounts/new">Nova Conta</Link>
           </Button>
         </div>
-
-        {isPending && <LinearProgress indeterminate size="xs" />}
 
         <div className="rounded-md border">
           <Table.Root>
@@ -70,7 +73,7 @@ export const ListBankAccountsPage: React.FC = () => {
         </div>
 
         {isPending && <LinearProgress indeterminate size="xs" />}
-      </div>
+      </PageContentLayout>
     </>
   )
 }
