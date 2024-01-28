@@ -1,6 +1,7 @@
 import { TableBody } from './table-body'
 import { TableCell } from './table-cell'
 import { TableColumn } from './table-column'
+import { TableEmpty } from './table-empty'
 import { TableHead } from './table-head'
 import { TableHeader } from './table-header'
 import { TableRoot } from './table-root'
@@ -14,4 +15,5 @@ export const Table = {
   Cell: TableCell,
   Column: TableColumn,
   Row: TableRow,
+  Empty: TableEmpty,
 }
