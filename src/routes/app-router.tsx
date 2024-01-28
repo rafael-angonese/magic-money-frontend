@@ -1,6 +1,8 @@
 import RootLayout from '@/layouts/root-layout/root-layout'
+import { ListBankAccountsPage } from '@/pages/bank-accounts/list/list-bank-accounts-page'
 import HomePage from '@/pages/home/home-page'
 import LoginPage from '@/pages/login/login-page'
+import { TransactionsPage } from '@/pages/transactions/transactions-page'
 import PrivateRoute from '@/routes/private-route'
 import PublicRoute from '@/routes/public-route'
 import SelectAccountGroup from '@/routes/select-account-group'
@@ -19,7 +21,9 @@ const AppRouter: React.FC = () => {
           <Route element={<PrivateRoute />}>
             <Route element={<SelectAccountGroup />}>
               <Route path="/" element={<HomePage />} />
-              <Route path="/teste" element={<HomePage />} />
+              <Route path="/transactions" element={<TransactionsPage />} />
+
+              <Route path="/bank-accounts" element={<ListBankAccountsPage />} />
             </Route>
           </Route>
         </Routes>
