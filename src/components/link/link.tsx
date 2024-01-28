@@ -1,4 +1,4 @@
-import React from 'react'
+import { forwardRef } from 'react'
 import {
   Link as RouterDomLink,
   LinkProps as RouterDomLinkProps,
@@ -6,10 +6,14 @@ import {
 
 export interface LinkProps extends RouterDomLinkProps {}
 
-export const Link: React.FC<LinkProps> = (props) => {
-  return (
-    <>
-      <RouterDomLink {...props} />
-    </>
-  )
-}
+export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
+  ({ ...props }, ref) => {
+    return (
+      <>
+        <RouterDomLink ref={ref} {...props} />
+      </>
+    )
+  },
+)
+
+Link.displayName = 'Link'
