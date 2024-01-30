@@ -6,7 +6,7 @@ import React from 'react'
 
 export const SelectAccountPage: React.FC = () => {
   const { setAccount } = useAccountStore()
-  const { data, isPending } = useQuery({
+  const { data, isLoading, isPending } = useQuery({
     queryKey: ['accounts'],
     queryFn: () => getAccounts(''),
   })
@@ -17,7 +17,7 @@ export const SelectAccountPage: React.FC = () => {
         Selecione a conta:
       </h1>
 
-      {isPending && <LinearProgress indeterminate size="xs" />}
+      {(isLoading || isPending) && <LinearProgress indeterminate size="xs" />}
 
       {data && (
         <div className="flex w-full justify-center gap-8 mt-8">
