@@ -84,10 +84,10 @@ export interface GridItemProps
 
 export const GridItem: React.FC<GridItemProps> = ({
   xs = 12,
-  sm = 12,
-  md = 12,
-  lg = 12,
-  xl = 12,
+  sm = 6,
+  md = 3,
+  lg = 3,
+  xl = 3,
   className,
   ...props
 }) => {

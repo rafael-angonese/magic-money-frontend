@@ -1,3 +1,3 @@
-const DEBOUNCE_DELAY = 700
+const DEBOUNCE_DELAY = 1000
 
 export default DEBOUNCE_DELAY
