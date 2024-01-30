@@ -2,6 +2,7 @@ import RootLayout from '@/layouts/root-layout/root-layout'
 import { EditBankAccountPage } from '@/pages/bank-accounts/edit/edit-bank-account-page'
 import { ListBankAccountsPage } from '@/pages/bank-accounts/list/list-bank-accounts-page'
 import { NewBankAccountPage } from '@/pages/bank-accounts/new/new-bank-account-page'
+import { ListCategoriesPage } from '@/pages/categories/list/list-categories-page'
 import HomePage from '@/pages/home/home-page'
 import LoginPage from '@/pages/login/login-page'
 import { TransactionsPage } from '@/pages/transactions/transactions-page'
@@ -34,6 +35,8 @@ const AppRouter: React.FC = () => {
                 path="/bank-accounts/edit/:id"
                 element={<EditBankAccountPage />}
               />
+
+              <Route path="/categories" element={<ListCategoriesPage />} />
             </Route>
           </Route>
         </Routes>
