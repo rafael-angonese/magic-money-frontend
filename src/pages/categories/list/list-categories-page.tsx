@@ -2,23 +2,29 @@ import { Link } from '@/components/link/link'
 import { Button } from '@/components/ui/button/button'
 import { Heading } from '@/components/ui/heading/heading'
 import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
+import { Pagination } from '@/components/ui/pagination/pagination'
 import { Table } from '@/components/ui/table/table'
 import { categoryTypeTranslations } from '@/constants/category-type'
+import { DEFAULT_META } from '@/constants/default-meta'
 import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
-import { getCategories } from '@/repositories/categories/get-bank-categories'
+import { getCategories } from '@/repositories/categories/get-categories'
 import isBlank from '@/utils/is-blank'
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 export const ListCategoriesPage: React.FC = () => {
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['categories'],
-    queryFn: () => getCategories({}),
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const page = Number(searchParams.get('page')) || 1
+
+  const { data, isPending } = useQuery({
+    queryKey: ['categories', { page }],
+    queryFn: () => getCategories({ page }),
   })
 
-  if (isLoading) {
-    return <LinearProgress indeterminate size="xs" />
-  }
+  const categories = data?.data?.data ?? []
+  const meta = data?.data?.meta ?? DEFAULT_META
 
   return (
     <>
@@ -31,6 +37,7 @@ export const ListCategoriesPage: React.FC = () => {
           </Button>
         </div>
 
+        {isPending && <LinearProgress indeterminate size="xs" />}
         <div className="rounded-md border">
           <Table.Root>
             <Table.Header>
@@ -41,8 +48,8 @@ export const ListCategoriesPage: React.FC = () => {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              <Table.Empty isEmpty={isBlank(data?.data?.data)} />
-              {data?.data?.data.map((category) => (
+              <Table.Empty isEmpty={isBlank(categories)} />
+              {categories.map((category) => (
                 <Table.Row key={category.id}>
                   <Table.Cell className="font-medium">
                     {category.name}
@@ -56,8 +63,20 @@ export const ListCategoriesPage: React.FC = () => {
             </Table.Body>
           </Table.Root>
         </div>
+        {isPending && <LinearProgress indeterminate size="xs" />}
 
-        {isFetching && <LinearProgress indeterminate size="xs" />}
+        <div className="flex justify-end my-6">
+          <Pagination
+            page={page}
+            totalPages={meta.lastPage}
+            onPageChange={(value) =>
+              setSearchParams((state) => {
+                state.set('page', String(value))
+                return state
+              })
+            }
+          />
+        </div>
       </PageContentLayout>
     </>
   )
