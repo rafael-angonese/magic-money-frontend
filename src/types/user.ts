@@ -1,8 +1,7 @@
-export interface Account {
+export interface User {
   id: string
-  user_id: string
   name: string
-  description: string
+  email: string
   createdAt: string
   updatedAt: string
 }

@@ -7,6 +7,6 @@ export interface Category {
   id: string
   type: keyof typeof CategoryType
   name: string
-  created_at: string
+  createdAt: string
   updatedAt: string
 }

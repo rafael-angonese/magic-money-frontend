@@ -4,6 +4,6 @@ export interface BankAccount {
   account_id: string
   name: string
   balance: number
-  created_at: string
+  createdAt: string
   updatedAt: string
 }
