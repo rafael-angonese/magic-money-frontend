@@ -7,10 +7,12 @@ import React from 'react'
 
 export const SelectAccountPage: React.FC = () => {
   const { setAccount } = useAccountStore()
-  const { data, isLoading, isPending } = useQuery({
+  const { data, isPending } = useQuery({
     queryKey: [queryKeys.accounts],
-    queryFn: () => getAccounts(''),
+    queryFn: () => getAccounts({}),
   })
+
+  const accounts = data?.data?.data ?? []
 
   return (
     <div className="flex flex-col items-center">
@@ -18,11 +20,11 @@ export const SelectAccountPage: React.FC = () => {
         Selecione a conta:
       </h1>
 
-      {(isLoading || isPending) && <LinearProgress indeterminate size="xs" />}
+      {isPending && <LinearProgress indeterminate size="xs" />}
 
       {data && (
         <div className="flex w-full justify-center gap-8 mt-8">
-          {data.data.data.map((account) => {
+          {accounts.map((account) => {
             return (
               <button
                 key={account.id}
