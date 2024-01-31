@@ -14,7 +14,7 @@ export const useEditBankAccount = () => {
   const { id } = useParams()
 
   const { data } = useQuery({
-    queryKey: [queryKeys.bankAccounts.show, id],
+    queryKey: [queryKeys.bankAccounts, id],
     queryFn: () => getBankAccountById(id!),
   })
 

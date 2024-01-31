@@ -31,7 +31,7 @@ export const ListCategoriesPage: React.FC = () => {
   const page = Number(searchParams.get('page')) || 1
 
   const { data, isPending } = useQuery({
-    queryKey: [queryKeys.categories.list, { page, ...debouncedFilters }],
+    queryKey: [queryKeys.categories, { page, ...debouncedFilters }],
     queryFn: () => getCategories({ page, ...debouncedFilters }),
   })
 

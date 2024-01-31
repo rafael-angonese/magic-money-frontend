@@ -8,7 +8,7 @@ import React from 'react'
 export const SelectAccountPage: React.FC = () => {
   const { setAccount } = useAccountStore()
   const { data, isLoading, isPending } = useQuery({
-    queryKey: [queryKeys.accounts.list],
+    queryKey: [queryKeys.accounts],
     queryFn: () => getAccounts(''),
   })
 

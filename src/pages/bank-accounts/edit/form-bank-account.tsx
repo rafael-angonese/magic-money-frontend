@@ -4,7 +4,7 @@ import { Grid } from '@/components/ui/grid/grid'
 import { InputNumber } from '@/components/ui/input-number/input-number'
 import { Input } from '@/components/ui/input/input'
 import { Loader } from '@/components/ui/loader/loader'
-import { queryKeys } from '@/constants/react-query-keys'
+import { mutationKeys } from '@/constants/react-query-keys'
 import {
   UpdateBankAccountRequest,
   updateBankAccount,
@@ -23,7 +23,7 @@ export const FormBankAccount: React.FC = () => {
   const { handleSubmit } = methods
 
   const { mutateAsync, isPending } = useMutation({
-    mutationKey: [queryKeys.bankAccounts.update],
+    mutationKey: [mutationKeys.bankAccounts.update],
     mutationFn: (values: UpdateBankAccountRequest) =>
       updateBankAccount(id!, values),
   })

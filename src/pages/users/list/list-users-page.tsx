@@ -29,7 +29,7 @@ export const ListUsersPage: React.FC = () => {
   const page = Number(searchParams.get('page')) || 1
 
   const { data, isPending } = useQuery({
-    queryKey: [queryKeys.users.list, { page, ...debouncedFilters }],
+    queryKey: [queryKeys.users, { page, ...debouncedFilters }],
     queryFn: () => getUsers({ page, ...debouncedFilters }),
   })
 

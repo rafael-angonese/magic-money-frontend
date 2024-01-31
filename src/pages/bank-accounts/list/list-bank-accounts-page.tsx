@@ -36,7 +36,7 @@ export const ListBankAccountsPage: React.FC = () => {
 
   const { data, isPending } = useQuery({
     queryKey: [
-      queryKeys.bankAccounts.list,
+      queryKeys.bankAccounts,
       { accountId: account!.id, page, ...debouncedFilters },
     ],
     queryFn: () =>
