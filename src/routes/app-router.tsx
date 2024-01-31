@@ -7,6 +7,7 @@ import HomePage from '@/pages/home/home-page'
 import LoginPage from '@/pages/login/login-page'
 import { TransactionsPage } from '@/pages/transactions/transactions-page'
 import { ListUsersPage } from '@/pages/users/list/list-users-page'
+import { ListAccountsPage } from '@/repositories/accounts/list/list-accounts-page'
 import PrivateRoute from '@/routes/private-route'
 import PublicRoute from '@/routes/public-route'
 import SelectAccountGroup from '@/routes/select-account-group'
@@ -40,6 +41,8 @@ const AppRouter: React.FC = () => {
               <Route path="/categories" element={<ListCategoriesPage />} />
 
               <Route path="/users" element={<ListUsersPage />} />
+
+              <Route path="/accounts" element={<ListAccountsPage />} />
             </Route>
           </Route>
         </Routes>
