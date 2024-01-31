@@ -1,4 +1,5 @@
 import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
+import { queryKeys } from '@/constants/react-query-keys'
 import { getAccounts } from '@/repositories/accounts/get-accounts'
 import { useAccountStore } from '@/store/use-account-store'
 import { useQuery } from '@tanstack/react-query'
@@ -7,7 +8,7 @@ import React from 'react'
 export const SelectAccountPage: React.FC = () => {
   const { setAccount } = useAccountStore()
   const { data, isLoading, isPending } = useQuery({
-    queryKey: ['accounts'],
+    queryKey: [queryKeys.accounts.list],
     queryFn: () => getAccounts(''),
   })
 

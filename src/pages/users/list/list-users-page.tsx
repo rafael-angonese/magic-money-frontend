@@ -8,6 +8,7 @@ import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
 import { Pagination } from '@/components/ui/pagination/pagination'
 import { Table } from '@/components/ui/table/table'
 import { DEFAULT_META } from '@/constants/default-meta'
+import { queryKeys } from '@/constants/react-query-keys'
 import useDebounce from '@/hooks/use-debounce'
 import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
 import { getUsers } from '@/repositories/users/get-users'
@@ -28,7 +29,7 @@ export const ListUsersPage: React.FC = () => {
   const page = Number(searchParams.get('page')) || 1
 
   const { data, isPending } = useQuery({
-    queryKey: ['users', { page, ...debouncedFilters }],
+    queryKey: [queryKeys.users.list, { page, ...debouncedFilters }],
     queryFn: () => getUsers({ page, ...debouncedFilters }),
   })
 

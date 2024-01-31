@@ -11,6 +11,7 @@ import { Pagination } from '@/components/ui/pagination/pagination'
 import { Table } from '@/components/ui/table/table'
 import { categoryTypeTranslations } from '@/constants/category-type'
 import { DEFAULT_META } from '@/constants/default-meta'
+import { queryKeys } from '@/constants/react-query-keys'
 import useDebounce from '@/hooks/use-debounce'
 import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
 import { getCategories } from '@/repositories/categories/get-categories'
@@ -30,7 +31,7 @@ export const ListCategoriesPage: React.FC = () => {
   const page = Number(searchParams.get('page')) || 1
 
   const { data, isPending } = useQuery({
-    queryKey: ['categories', { page, ...debouncedFilters }],
+    queryKey: [queryKeys.categories.list, { page, ...debouncedFilters }],
     queryFn: () => getCategories({ page, ...debouncedFilters }),
   })
 

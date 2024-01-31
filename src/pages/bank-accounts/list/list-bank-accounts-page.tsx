@@ -11,6 +11,7 @@ import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
 import { Pagination } from '@/components/ui/pagination/pagination'
 import { Table } from '@/components/ui/table/table'
 import { DEFAULT_META } from '@/constants/default-meta'
+import { queryKeys } from '@/constants/react-query-keys'
 import useDebounce from '@/hooks/use-debounce'
 import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
 import { DeleteBankAccount } from '@/pages/bank-accounts/list/delete-bank-account'
@@ -35,7 +36,7 @@ export const ListBankAccountsPage: React.FC = () => {
 
   const { data, isPending } = useQuery({
     queryKey: [
-      'bank-accounts',
+      queryKeys.bankAccounts.list,
       { accountId: account!.id, page, ...debouncedFilters },
     ],
     queryFn: () =>

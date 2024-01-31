@@ -2,6 +2,7 @@ import { AlertDialog } from '@/components/ui/alert-dialog/alert-dialog'
 import { Button } from '@/components/ui/button/button'
 import { IconButton } from '@/components/ui/icon-button/icon-button'
 import { Loader } from '@/components/ui/loader/loader'
+import { queryKeys } from '@/constants/react-query-keys'
 import { deleteBankAccount } from '@/repositories/bank-accounts/delete-bank-account'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Trash } from 'lucide-react'
@@ -18,11 +19,13 @@ export const DeleteBankAccount: React.FC<DeleteBankAccountProps> = ({
   const queryClient = useQueryClient()
 
   const { mutateAsync, isPending } = useMutation({
-    mutationKey: ['delete-bank-account'],
+    mutationKey: [queryKeys.bankAccounts.delete],
     mutationFn: deleteBankAccount,
     onSuccess: () => {
       setIsOpen(false)
-      queryClient.invalidateQueries({ queryKey: ['bank-accounts'] })
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.bankAccounts.list, queryKeys.bankAccounts.show],
+      })
     },
   })
 

@@ -3,6 +3,7 @@ import { formValidation } from './form-config/form-validation'
 import { FormValues } from './form-config/form-values'
 import { initialFormState } from './form-config/initial-form-state'
 
+import { queryKeys } from '@/constants/react-query-keys'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
@@ -13,7 +14,7 @@ export const useEditBankAccount = () => {
   const { id } = useParams()
 
   const { data } = useQuery({
-    queryKey: ['bank-account', id],
+    queryKey: [queryKeys.bankAccounts.show, id],
     queryFn: () => getBankAccountById(id!),
   })
 
