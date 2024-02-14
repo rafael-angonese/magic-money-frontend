@@ -1,4 +1,3 @@
-import AppLayout from '@/layouts/app-layout/app-layout'
 import { useAuthStore } from '@/store/use-auth-store'
 import { Loader2 } from 'lucide-react'
 import React, { useEffect } from 'react'
@@ -23,11 +22,7 @@ const PrivateRoute: React.FC = () => {
     return <Navigate to="/login" replace state={{ path: location.pathname }} />
   }
 
-  return (
-    <AppLayout>
-      <Outlet />
-    </AppLayout>
-  )
+  return <Outlet />
 }
 
 export default PrivateRoute

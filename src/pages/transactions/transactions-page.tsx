@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button/button'
 import { Heading } from '@/components/ui/heading/heading'
 import { Table } from '@/components/ui/table/table'
+import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
 import React from 'react'
 
 const invoices = [
@@ -50,7 +51,7 @@ const invoices = [
 
 export const TransactionsPage: React.FC = () => {
   return (
-    <>
+    <PageContentLayout>
       <div className="w-full">
         <div className="flex justify-between">
           <Heading as="h1">Transações</Heading>
@@ -89,6 +90,6 @@ export const TransactionsPage: React.FC = () => {
           </Table.Root>
         </div>
       </div>
-    </>
+    </PageContentLayout>
   )
 }

@@ -7,5 +7,5 @@ export const PageContentLayout: React.FC<PageContentLayoutProps> = ({
   className,
   ...props
 }) => {
-  return <div className={cnBase('p-4', className)} {...props} />
+  return <div className={cnBase('p-2 sm:p-4', className)} {...props} />
 }

@@ -1,67 +1,30 @@
 import React from 'react'
 
-import { NavLink } from '@/components/header/nav-link'
+import { Logo } from '@/components/logo/logo'
 import { Button } from '@/components/ui/button/button'
-import { Divider } from '@/components/ui/divider/divider'
+import { IconButton } from '@/components/ui/icon-button/icon-button'
 import { ThemeToggle } from '@/components/ui/theme/theme-toggle'
 import { Tooltip } from '@/components/ui/tooltip'
 import { useAccountStore } from '@/store/use-account-store'
 import { useAuthStore } from '@/store/use-auth-store'
-import {
-  ArrowLeftRight,
-  CircleUserRound,
-  Home,
-  Landmark,
-  LogOut,
-  PiggyBank,
-  Users,
-  Wind,
-} from 'lucide-react'
+import { useSidebarStore } from '@/store/use-sidebar'
+import { LogOut, Menu } from 'lucide-react'
 
 const Header: React.FC = () => {
   const { logout } = useAuthStore()
-  const { account, reset } = useAccountStore()
+  const { reset } = useAccountStore()
+  const { isOpen, setIsOpen } = useSidebarStore()
 
   return (
     <div className="border-b">
       <div className="flex h-16 items-center gap-6 px-6">
-        <PiggyBank className="h-8 w-8" />
+        <Logo className="hidden sm:block" />
 
-        {account && (
-          <>
-            <Divider
-              color="secondary"
-              orientation="vertical"
-              className="h-8 w-[2px] bg-gray-500 dark:bg-gray-500"
-            />
-            <nav className="flex items-center space-x-4 lg:space-x-6">
-              <NavLink to="/">
-                <Home className="h-4 w-4" />
-                Início
-              </NavLink>
-              <NavLink to="/transactions">
-                <ArrowLeftRight className="h-4 w-4" />
-                Transações
-              </NavLink>
-              <NavLink to="/users">
-                <Users className="h-4 w-4" />
-                Usuários
-              </NavLink>
-              <NavLink to="/bank-accounts">
-                <Landmark className="h-4 w-4" />
-                Contas Bancarias
-              </NavLink>
-              <NavLink to="/accounts">
-                <CircleUserRound className="h-4 w-4" />
-                Contas
-              </NavLink>
-              <NavLink to="/categories">
-                <Wind className="h-4 w-4" />
-                Categorias
-              </NavLink>
-            </nav>
-          </>
-        )}
+        <div className="block sm:hidden">
+          <IconButton hoverTitle="Menu" onClick={() => setIsOpen(!isOpen)}>
+            <Menu />
+          </IconButton>
+        </div>
 
         <div className="ml-auto flex items-center gap-2">
           <Button

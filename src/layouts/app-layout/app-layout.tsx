@@ -1,15 +1,20 @@
 import Header from '@/components/header/header'
-import React, { ReactNode } from 'react'
+import { Sidebar } from '@/components/sidebar/sidebar'
+import { useAccountStore } from '@/store/use-account-store'
+import React from 'react'
+import { Outlet, RouteProps } from 'react-router-dom'
 
-interface AppLayoutProps {
-  children: ReactNode
-}
-
-const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
+const AppLayout: React.FC<RouteProps> = () => {
+  const { account } = useAccountStore()
   return (
     <>
       <Header />
-      <div className="flex flex-1 flex-col">{children}</div>
+      <div className="flex flex-1 h-[calc(100vh-5rem)]">
+        {account && <Sidebar />}
+        <main className="flex-1 overflow-y-auto text-foreground bg-background">
+          <Outlet />
+        </main>
+      </div>
     </>
   )
 }

@@ -9,7 +9,9 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   return (
     <>
       <ThemeProvider>
-        <div className="flex flex-col min-h-screen">{children}</div>
+        <div className="flex flex-col h-screen w-screen antialiased">
+          {children}
+        </div>
       </ThemeProvider>
     </>
   )
