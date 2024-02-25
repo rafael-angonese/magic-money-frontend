@@ -14,7 +14,7 @@ export const FormDescription = React.forwardRef<
     <p
       ref={ref}
       id={formDescriptionId}
-      className={cnBase('text-sm text-muted-foreground', className)}
+      className={cnBase('text-sm text-muted', className)}
       {...props}
     />
   )

@@ -6,7 +6,7 @@ export const inputVariants = tv({
   base: [
     'block w-full border border-muted text-sm rounded-lg',
     'px-3 py-1',
-    'bg-transparent placeholder:text-muted-foreground',
+    'bg-transparent placeholder:text-muted',
     'focus:outline-muted focus:outline-1',
     'disabled:opacity-50 disabled:cursor-not-allowed',
   ],

@@ -4,57 +4,74 @@
 
 @layer base {
     :root {
-      --background: #f1f5f9;
-      --foreground: #1e293b;
-
-      --default: #f1f5f9;
-      --default-foreground: #1e293b;
+      --background: 210 40% 96%; /* #f1f5f9; */
+      --foreground: 217 33% 17%;  /* #1e293b; */
   
-      --primary: #4338ca;
-      --primary-foreground: #f1f5f9;
-   
-      --secondary: #a21caf;
-      --secondary-foreground: #f1f5f9;
-   
-      --success: #22c55e;
-      --success-foreground: #f1f5f9;
-
-      --warning: #eab308;
-      --warning-foreground: #f1f5f9;
-
-      --error: #ef4444;
-      --error-foreground: #f1f5f9;
-
-      --muted: #94a3b8;
-      --muted-foreground: #f1f5f9;
+      --primary: 216 100% 50%;  /* #0068FF; */
+      --primary-foreground: 210 40% 96%; /* #f1f5f9; */
+  
+      --secondary: 295 72% 40%;  /*  #a21caf; */
+      --secondary-foreground: 210 40% 96%; /* #f1f5f9; */
+  
+      --success: 142 71% 45%;  /*  #22c55e; */
+      --success-foreground: 210 40% 96%; /* #f1f5f9; */
+  
+      --warning: 45 93% 47%;  /* #eab308; */
+      --warning-foreground: 210 40% 96%; /* #f1f5f9; */
+  
+      --error: 0 84% 60%;  /*  #ef4444; */
+      --error-foreground: 210 40% 96%; /* #f1f5f9; */
+  
+      --muted: 210 29% 44%; /* #4F7091; */
+      --muted-foreground: 210 40% 96%; /* #f1f5f9; */
     }
    
     .dark {
-      --background: #1e293b;
-      --foreground: #f1f5f9;
-
-      --default: #f1f5f9;
-      --default-foreground: #1e293b;
+      --background: 222 47% 11%; /* #0f172a; */
+      --foreground: 210 40% 96%; /* #f1f5f9; */
   
-      --primary: #4338ca;
-      --primary-foreground: #f1f5f9;
-   
-      --secondary: #a21caf;
-      --secondary-foreground: #f1f5f9;
-   
-      --success: #22c55e;
-      --success-foreground: #f1f5f9;
-
-      --warning: #eab308;
-      --warning-foreground: #f1f5f9;
-
-      --error: #ef4444;
-      --error-foreground: #f1f5f9;
-
-      --muted: #94a3b8;
-      --muted-foreground: #f1f5f9;
+      --primary: 216 100% 50%;  /* #0068FF; */
+      --primary-foreground: 210 40% 96%; /* #f1f5f9; */
+  
+      --secondary: 295 72% 40%;  /*  #a21caf; */
+      --secondary-foreground: 210 40% 96%; /* #f1f5f9; */
+  
+      --success: 142 71% 45%;  /*  #22c55e; */
+      --success-foreground: 210 40% 96%; /* #f1f5f9; */
+  
+      --warning: 45 93% 47%;  /* #eab308; */
+      --warning-foreground: 210 40% 96%; /* #f1f5f9; */
+  
+      --error: 0 84% 60%;  /*  #ef4444; */
+      --error-foreground: 210 40% 96%; /* #f1f5f9; */
+  
+      --muted: 210 29% 44%; /* #4F7091; */
+      --muted-foreground: 210 40% 96%; /* #f1f5f9; */
     }
   }
+
+  /* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: hsl(var(--foreground)) hsl(var(--background));
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--foreground));
+  border-radius: 10px;
+  border: 10px solid hsl(var(--foreground));
+}
+/* ===== End Scrollbar CSS ===== */
 
   @layer base {
     body {
