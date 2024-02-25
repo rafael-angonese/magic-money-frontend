@@ -11,7 +11,7 @@ import { NewBankAccountPage } from '@/pages/bank-accounts/new/new-bank-account-p
 import { ListCategoriesPage } from '@/pages/categories/list/list-categories-page'
 import HomePage from '@/pages/home/home-page'
 import LoginPage from '@/pages/login/login-page'
-import { TransactionsPage } from '@/pages/transactions/transactions-page'
+import ListTransactionsPage from '@/pages/transactions/list/list-transactions-page'
 import { ListUsersPage } from '@/pages/users/list/list-users-page'
 import PrivateRoute from '@/routes/private-route'
 import PublicRoute from '@/routes/public-route'
@@ -30,7 +30,10 @@ const AppRouter: React.FC = () => {
             <Route element={<AppLayout />}>
               <Route element={<SelectAccountGroup />}>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/transactions" element={<TransactionsPage />} />
+                <Route
+                  path="/transactions"
+                  element={<ListTransactionsPage />}
+                />
 
                 <Route
                   path="/bank-accounts"

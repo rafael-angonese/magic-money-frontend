@@ -50,7 +50,7 @@ const invoices = [
   },
 ]
 
-export const TransactionsPage: React.FC = () => {
+const ListTransactionsPage: React.FC = () => {
   return (
     <PageContentLayout>
       <div className="w-full">
@@ -94,3 +94,5 @@ export const TransactionsPage: React.FC = () => {
     </PageContentLayout>
   )
 }
+
+export default ListTransactionsPage
