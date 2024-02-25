@@ -1,5 +1,10 @@
+import React from 'react'
+
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+
 import AppLayout from '@/layouts/app-layout/app-layout'
 import RootLayout from '@/layouts/root-layout/root-layout'
+import { ListAccountsPage } from '@/pages/accounts/list/list-accounts-page'
 import { EditBankAccountPage } from '@/pages/bank-accounts/edit/edit-bank-account-page'
 import { ListBankAccountsPage } from '@/pages/bank-accounts/list/list-bank-accounts-page'
 import { NewBankAccountPage } from '@/pages/bank-accounts/new/new-bank-account-page'
@@ -8,12 +13,9 @@ import HomePage from '@/pages/home/home-page'
 import LoginPage from '@/pages/login/login-page'
 import { TransactionsPage } from '@/pages/transactions/transactions-page'
 import { ListUsersPage } from '@/pages/users/list/list-users-page'
-import { ListAccountsPage } from '@/pages/accounts/list/list-accounts-page'
 import PrivateRoute from '@/routes/private-route'
 import PublicRoute from '@/routes/public-route'
 import SelectAccountGroup from '@/routes/select-account-group'
-import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 const AppRouter: React.FC = () => {
   return (

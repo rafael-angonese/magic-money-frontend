@@ -1,4 +1,5 @@
 import { ComponentProps, forwardRef } from 'react'
+
 import { cnBase } from 'tailwind-variants'
 
 export interface InputRightElementProps extends ComponentProps<'div'> {}

@@ -1,12 +1,14 @@
+import React from 'react'
+
 import { Button } from '@/components/ui/button/button'
 import { Form } from '@/components/ui/form/form'
 import { Grid } from '@/components/ui/grid/grid'
 import { Heading } from '@/components/ui/heading/heading'
-import { InputNumber } from '@/components/ui/input-number/input-number'
 import { Input } from '@/components/ui/input/input'
+import { InputNumber } from '@/components/ui/input-number/input-number'
 import { Loader } from '@/components/ui/loader/loader'
 import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
-import React from 'react'
+
 import { useNewBankAccount } from './use-new-bank-account'
 
 export const NewBankAccountPage: React.FC = () => {

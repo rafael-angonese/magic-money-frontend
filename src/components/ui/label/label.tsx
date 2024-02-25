@@ -1,7 +1,7 @@
-import * as LabelPrimitive from '@radix-ui/react-label'
 import * as React from 'react'
 
-import { VariantProps, tv } from 'tailwind-variants'
+import * as LabelPrimitive from '@radix-ui/react-label'
+import { tv, VariantProps } from 'tailwind-variants'
 
 export const labelVariants = tv({
   base: [

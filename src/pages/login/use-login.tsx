@@ -1,12 +1,14 @@
+import { useState } from 'react'
+
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { useLocation, useNavigate } from 'react-router-dom'
+
 import { formValidation } from '@/pages/login/form-config/form-validation'
 import { FormValues } from '@/pages/login/form-config/form-values'
 import { initialFormState } from '@/pages/login/form-config/initial-form-state'
 import { authRepository } from '@/repositories/auth/auth-repository'
 import { useAuthStore } from '@/store/use-auth-store'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { useLocation, useNavigate } from 'react-router-dom'
 
 export const useLogin = () => {
   const { state } = useLocation()

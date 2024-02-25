@@ -1,8 +1,8 @@
-import * as CheckboxPrimitive from '@radix-ui/react-checkbox'
-import { Check } from 'lucide-react'
 import * as React from 'react'
 
-import { VariantProps, tv } from 'tailwind-variants'
+import * as CheckboxPrimitive from '@radix-ui/react-checkbox'
+import { Check } from 'lucide-react'
+import { tv, VariantProps } from 'tailwind-variants'
 
 export const checkboxVariants = tv({
   slots: {

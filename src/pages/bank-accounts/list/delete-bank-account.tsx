@@ -1,12 +1,14 @@
+import React, { useState } from 'react'
+
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { Trash } from 'lucide-react'
+
 import { AlertDialog } from '@/components/ui/alert-dialog/alert-dialog'
 import { Button } from '@/components/ui/button/button'
 import { IconButton } from '@/components/ui/icon-button/icon-button'
 import { Loader } from '@/components/ui/loader/loader'
 import { mutationKeys, queryKeys } from '@/constants/react-query-keys'
 import { deleteBankAccount } from '@/repositories/bank-accounts/delete-bank-account'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { Trash } from 'lucide-react'
-import React, { useState } from 'react'
 
 export interface DeleteBankAccountProps {
   bankAccountId: string

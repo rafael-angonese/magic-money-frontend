@@ -1,6 +1,7 @@
+import * as React from 'react'
+
 import * as ContextMenuPrimitive from '@radix-ui/react-context-menu'
 import { Check, ChevronRight, Circle } from 'lucide-react'
-import * as React from 'react'
 import { cnBase } from 'tailwind-variants'
 
 export const ContextMenuRoot = ContextMenuPrimitive.Root

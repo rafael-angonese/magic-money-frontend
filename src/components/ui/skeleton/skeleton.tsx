@@ -1,5 +1,6 @@
 import React, { ComponentProps } from 'react'
-import { VariantProps, tv } from 'tailwind-variants'
+
+import { tv, VariantProps } from 'tailwind-variants'
 
 export const skeletonVariants = tv({
   base: 'animate-pulse rounded-md bg-foreground',

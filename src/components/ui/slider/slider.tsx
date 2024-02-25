@@ -1,5 +1,6 @@
-import * as SliderPrimitive from '@radix-ui/react-slider'
 import * as React from 'react'
+
+import * as SliderPrimitive from '@radix-ui/react-slider'
 import { cnBase } from 'tailwind-variants'
 
 export const Slider = React.forwardRef<

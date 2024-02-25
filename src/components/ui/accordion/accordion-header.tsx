@@ -1,5 +1,6 @@
-import { Header, Trigger } from '@radix-ui/react-accordion'
 import React from 'react'
+
+import { Header, Trigger } from '@radix-ui/react-accordion'
 import { cnBase } from 'tailwind-variants'
 
 export const AccordionHeader = React.forwardRef<

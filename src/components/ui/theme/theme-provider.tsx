@@ -1,6 +1,7 @@
+import { createContext, useContext, useEffect, useState } from 'react'
+
 import { StorageKeys } from '@/constants/storage-keys'
 import Storage from '@/utils/storage'
-import { createContext, useContext, useEffect, useState } from 'react'
 
 type Theme = 'dark' | 'light' | 'system'
 

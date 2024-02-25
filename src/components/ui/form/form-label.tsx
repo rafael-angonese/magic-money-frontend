@@ -1,6 +1,7 @@
+import React from 'react'
+
 import { useFormField } from '@/components/ui/form/use-form-field'
 import { Label, LabelProps } from '@/components/ui/label/label'
-import React from 'react'
 
 export const FormLabel = React.forwardRef<
   React.ElementRef<typeof Label>,

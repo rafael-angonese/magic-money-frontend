@@ -1,10 +1,12 @@
+import React from 'react'
+
+import { X } from 'lucide-react'
+
 import { Logo } from '@/components/logo/logo'
 import { SidebarItems } from '@/components/sidebar/sidebar-items'
 import { Drawer } from '@/components/ui/drawer/drawer'
 import { IconButton } from '@/components/ui/icon-button/icon-button'
 import { useSidebarStore } from '@/store/use-sidebar'
-import { X } from 'lucide-react'
-import React from 'react'
 
 export const Sidebar: React.FC = () => {
   const { isOpen, setIsOpen } = useSidebarStore()

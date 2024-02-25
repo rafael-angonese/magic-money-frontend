@@ -1,6 +1,7 @@
+import React from 'react'
+
 import { Trigger } from '@radix-ui/react-accordion'
 import { ChevronDown } from 'lucide-react'
-import React from 'react'
 import { cnBase } from 'tailwind-variants'
 
 export const AccordionTrigger = React.forwardRef<

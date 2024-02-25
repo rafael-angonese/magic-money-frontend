@@ -1,6 +1,8 @@
-import { TooltipComponent } from '@/components/ui/tooltip'
+import { ComponentPropsWithRef, forwardRef, ReactNode } from 'react'
+
 import { Slot } from '@radix-ui/react-slot'
-import { ComponentPropsWithRef, ReactNode, forwardRef } from 'react'
+
+import { TooltipComponent } from '@/components/ui/tooltip'
 
 export interface IconButtonProps extends ComponentPropsWithRef<'button'> {
   children: ReactNode

@@ -1,10 +1,16 @@
+import React, { useState } from 'react'
+
+import { useQuery } from '@tanstack/react-query'
+import { Search } from 'lucide-react'
+import { useSearchParams } from 'react-router-dom'
+
 import { Link } from '@/components/link/link'
 import { Button } from '@/components/ui/button/button'
 import { Grid } from '@/components/ui/grid/grid'
 import { Heading } from '@/components/ui/heading/heading'
+import { Input } from '@/components/ui/input/input'
 import { InputGroup } from '@/components/ui/input-group/input-group'
 import { InputRightElement } from '@/components/ui/input-right-element/input-right-element'
-import { Input } from '@/components/ui/input/input'
 import { Label } from '@/components/ui/label/label'
 import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
 import { Pagination } from '@/components/ui/pagination/pagination'
@@ -16,10 +22,6 @@ import useDebounce from '@/hooks/use-debounce'
 import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
 import { getCategories } from '@/repositories/categories/get-categories'
 import isBlank from '@/utils/is-blank'
-import { useQuery } from '@tanstack/react-query'
-import { Search } from 'lucide-react'
-import React, { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
 
 export const ListCategoriesPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams()

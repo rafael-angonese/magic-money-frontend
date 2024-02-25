@@ -1,5 +1,6 @@
 import React from 'react'
-import { VariantProps, tv } from 'tailwind-variants'
+
+import { tv, VariantProps } from 'tailwind-variants'
 
 export const paginationVariants = tv({
   slots: {

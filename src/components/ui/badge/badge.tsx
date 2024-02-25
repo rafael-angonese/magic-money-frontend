@@ -1,5 +1,6 @@
 import React, { ComponentProps, ReactNode } from 'react'
-import { VariantProps, tv } from 'tailwind-variants'
+
+import { tv, VariantProps } from 'tailwind-variants'
 
 export const badgeVariants = tv({
   base: 'inline-flex items-center text-white text-xs font-semibold rounded-full max-w-fit',

@@ -1,7 +1,7 @@
-import * as SwitchPrimitives from '@radix-ui/react-switch'
 import * as React from 'react'
 
-import { VariantProps, tv } from 'tailwind-variants'
+import * as SwitchPrimitives from '@radix-ui/react-switch'
+import { tv, VariantProps } from 'tailwind-variants'
 
 export const switchVariants = tv({
   slots: {

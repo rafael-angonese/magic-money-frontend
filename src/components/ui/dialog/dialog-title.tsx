@@ -1,5 +1,6 @@
-import { Title } from '@radix-ui/react-dialog'
 import React from 'react'
+
+import { Title } from '@radix-ui/react-dialog'
 import { cnBase } from 'tailwind-variants'
 
 export const DialogTitle = React.forwardRef<

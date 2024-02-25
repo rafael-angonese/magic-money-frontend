@@ -1,13 +1,15 @@
-import { formValidation } from './form-config/form-validation'
-import { FormValues } from './form-config/form-values'
-import { initialFormState } from './form-config/initial-form-state'
+import { useState } from 'react'
+
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 import { createBankAccount } from '@/repositories/bank-accounts/create-bank-account'
 import { useAccountStore } from '@/store/use-account-store'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+
+import { formValidation } from './form-config/form-validation'
+import { FormValues } from './form-config/form-values'
+import { initialFormState } from './form-config/initial-form-state'
 
 export const useNewBankAccount = () => {
   const { account } = useAccountStore()

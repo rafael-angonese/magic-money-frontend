@@ -1,4 +1,5 @@
 import React, { ComponentProps } from 'react'
+
 import { cnBase } from 'tailwind-variants'
 
 export interface PageContentLayoutProps extends ComponentProps<'div'> {}

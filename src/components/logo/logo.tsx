@@ -1,5 +1,6 @@
-import { PiggyBank } from 'lucide-react'
 import React from 'react'
+
+import { PiggyBank } from 'lucide-react'
 import { cnBase } from 'tailwind-variants'
 
 interface LogoProps {

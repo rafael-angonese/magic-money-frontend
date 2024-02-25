@@ -1,7 +1,7 @@
-import { Slot } from '@radix-ui/react-slot'
-
 import React, { ComponentPropsWithRef } from 'react'
-import { VariantProps, tv } from 'tailwind-variants'
+
+import { Slot } from '@radix-ui/react-slot'
+import { tv, VariantProps } from 'tailwind-variants'
 
 export const headingVariants = tv({
   base: '',

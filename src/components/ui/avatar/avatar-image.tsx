@@ -1,6 +1,6 @@
-import { AvatarImage as RadixAvatarImage } from '@radix-ui/react-avatar'
-
 import { forwardRef } from 'react'
+
+import { AvatarImage as RadixAvatarImage } from '@radix-ui/react-avatar'
 import { tv } from 'tailwind-variants'
 
 export const imageVariants = tv({

@@ -1,5 +1,6 @@
-import { api } from '@/lib/api'
 import { AxiosRequestConfig } from 'axios'
+
+import { api } from '@/lib/api'
 
 interface LoginRequest {
   email: string

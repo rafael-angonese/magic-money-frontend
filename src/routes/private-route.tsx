@@ -1,7 +1,9 @@
-import { useAuthStore } from '@/store/use-auth-store'
-import { Loader2 } from 'lucide-react'
 import React, { useEffect } from 'react'
+
+import { Loader2 } from 'lucide-react'
 import { Navigate, Outlet } from 'react-router-dom'
+
+import { useAuthStore } from '@/store/use-auth-store'
 
 const PrivateRoute: React.FC = () => {
   const { isAuthenticated, isLoadingCheck, checkAuth } = useAuthStore()

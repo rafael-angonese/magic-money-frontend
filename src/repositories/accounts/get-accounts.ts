@@ -1,9 +1,10 @@
+import { AxiosRequestConfig } from 'axios'
+
 import { DEFAULT_PER_PAGE } from '@/constants/default-per-page'
 import { api } from '@/lib/api'
 import { Account } from '@/types/account'
 import { Meta } from '@/types/meta'
 import toQueryString from '@/utils/to-query-string'
-import { AxiosRequestConfig } from 'axios'
 
 export interface GetAccountsRequest {
   qs?: string

@@ -1,6 +1,7 @@
+import { ReactNode } from 'react'
+
 import { TableCell } from '@/components/ui/table/table-cell'
 import { TableRow } from '@/components/ui/table/table-row'
-import { ReactNode } from 'react'
 
 interface TableEmptyProps {
   isEmpty?: boolean

@@ -1,4 +1,5 @@
-import { NavLink } from '@/components/sidebar/nav-link'
+import React from 'react'
+
 import {
   ArrowLeftRight,
   CircleUserRound,
@@ -7,7 +8,8 @@ import {
   Users,
   Wind,
 } from 'lucide-react'
-import React from 'react'
+
+import { NavLink } from '@/components/sidebar/nav-link'
 
 export const SidebarItems: React.FC = () => {
   return (

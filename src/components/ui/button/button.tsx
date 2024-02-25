@@ -1,6 +1,7 @@
-import { Slot } from '@radix-ui/react-slot'
 import { ComponentPropsWithRef, forwardRef } from 'react'
-import { VariantProps, tv } from 'tailwind-variants'
+
+import { Slot } from '@radix-ui/react-slot'
+import { tv, VariantProps } from 'tailwind-variants'
 
 export const buttonVariants = tv({
   base: 'flex items-center justify-center text-black dark:text-white rounded-lg w-fit text-center font-medium focus:outline-none focus:ring-2',

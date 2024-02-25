@@ -1,5 +1,6 @@
-import { Overlay } from '@radix-ui/react-dialog'
 import React from 'react'
+
+import { Overlay } from '@radix-ui/react-dialog'
 import { cnBase } from 'tailwind-variants'
 
 export const DialogOverlay = React.forwardRef<

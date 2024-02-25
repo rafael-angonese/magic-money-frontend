@@ -1,7 +1,8 @@
+import axios from 'axios'
+
 import { env } from '@/env'
 import isDev from '@/utils/is-dev'
 import { sleep } from '@/utils/sleep'
-import axios from 'axios'
 
 export const api = axios.create({
   baseURL: env.VITE_API_BASE_URL,

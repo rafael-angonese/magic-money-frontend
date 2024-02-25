@@ -1,6 +1,6 @@
-import * as RadioGroupPrimitive from '@radix-ui/react-radio-group'
 import * as React from 'react'
 
+import * as RadioGroupPrimitive from '@radix-ui/react-radio-group'
 import { tv, VariantProps } from 'tailwind-variants'
 
 export const groupVariants = tv({

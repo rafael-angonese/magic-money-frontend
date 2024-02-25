@@ -1,6 +1,8 @@
-import { useFormField } from '@/components/ui/form/use-form-field'
-import { Slot } from '@radix-ui/react-slot'
 import React from 'react'
+
+import { Slot } from '@radix-ui/react-slot'
+
+import { useFormField } from '@/components/ui/form/use-form-field'
 
 export interface FormControlProps
   extends React.ComponentPropsWithoutRef<typeof Slot> {

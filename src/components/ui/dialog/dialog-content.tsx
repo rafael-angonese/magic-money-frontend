@@ -1,5 +1,6 @@
-import { Content } from '@radix-ui/react-dialog'
 import React from 'react'
+
+import { Content } from '@radix-ui/react-dialog'
 import { cnBase } from 'tailwind-variants'
 
 export const DialogContent = React.forwardRef<

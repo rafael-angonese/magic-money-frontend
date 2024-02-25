@@ -1,6 +1,7 @@
-import { Root } from '@radix-ui/react-avatar'
 import { forwardRef } from 'react'
-import { VariantProps, tv } from 'tailwind-variants'
+
+import { Root } from '@radix-ui/react-avatar'
+import { tv, VariantProps } from 'tailwind-variants'
 
 export const rootVariants = tv({
   base: 'relative flex shrink-0 overflow-hidden',

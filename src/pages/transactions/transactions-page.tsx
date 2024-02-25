@@ -1,8 +1,9 @@
+import React from 'react'
+
 import { Button } from '@/components/ui/button/button'
 import { Heading } from '@/components/ui/heading/heading'
 import { Table } from '@/components/ui/table/table'
 import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
-import React from 'react'
 
 const invoices = [
   {

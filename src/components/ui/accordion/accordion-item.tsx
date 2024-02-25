@@ -1,5 +1,6 @@
-import { Item } from '@radix-ui/react-accordion'
 import React from 'react'
+
+import { Item } from '@radix-ui/react-accordion'
 import { cnBase } from 'tailwind-variants'
 
 export const AccordionItem = React.forwardRef<

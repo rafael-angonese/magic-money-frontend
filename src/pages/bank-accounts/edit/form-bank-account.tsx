@@ -1,18 +1,21 @@
+import React from 'react'
+
+import { useMutation } from '@tanstack/react-query'
+import { useFormContext } from 'react-hook-form'
+import { useNavigate, useParams } from 'react-router-dom'
+
 import { Button } from '@/components/ui/button/button'
 import { Form } from '@/components/ui/form/form'
 import { Grid } from '@/components/ui/grid/grid'
-import { InputNumber } from '@/components/ui/input-number/input-number'
 import { Input } from '@/components/ui/input/input'
+import { InputNumber } from '@/components/ui/input-number/input-number'
 import { Loader } from '@/components/ui/loader/loader'
 import { mutationKeys } from '@/constants/react-query-keys'
 import {
-  UpdateBankAccountRequest,
   updateBankAccount,
+  UpdateBankAccountRequest,
 } from '@/repositories/bank-accounts/update-bank-account'
-import { useMutation } from '@tanstack/react-query'
-import React from 'react'
-import { useFormContext } from 'react-hook-form'
-import { useNavigate, useParams } from 'react-router-dom'
+
 import { FormValues } from './form-config/form-values'
 
 export const FormBankAccount: React.FC = () => {

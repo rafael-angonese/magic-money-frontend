@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { LogOut, Menu } from 'lucide-react'
+
 import { Logo } from '@/components/logo/logo'
 import { Button } from '@/components/ui/button/button'
 import { IconButton } from '@/components/ui/icon-button/icon-button'
@@ -8,7 +10,6 @@ import { Tooltip } from '@/components/ui/tooltip'
 import { useAccountStore } from '@/store/use-account-store'
 import { useAuthStore } from '@/store/use-auth-store'
 import { useSidebarStore } from '@/store/use-sidebar'
-import { LogOut, Menu } from 'lucide-react'
 
 const Header: React.FC = () => {
   const { logout } = useAuthStore()

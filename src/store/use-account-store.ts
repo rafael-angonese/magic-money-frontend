@@ -1,7 +1,8 @@
+import { create } from 'zustand'
+
 import { StorageKeys } from '@/constants/storage-keys'
 import { Account } from '@/types/account'
 import Storage from '@/utils/storage'
-import { create } from 'zustand'
 
 export interface AccountStore {
   account: Account | null

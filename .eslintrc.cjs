@@ -22,8 +22,38 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', 'jsx-a11y', '@typescript-eslint'],
+  plugins: ['react', 'jsx-a11y', '@typescript-eslint', 'import'],
   rules: {
+    'sort-imports': [
+      'error',
+      { ignoreCase: true, ignoreDeclarationSort: true },
+    ],
+
+    'import/order': [
+      'error',
+      {
+        groups: [['external', 'builtin'], 'internal', ['sibling']],
+        pathGroups: [
+          {
+            pattern: 'react',
+            group: 'external',
+            position: 'before',
+          },
+          {
+            pattern: '@/components/**',
+            group: 'internal',
+          },
+        ],
+        pathGroupsExcludedImportTypes: ['internal', 'react'],
+        'newlines-between': 'always',
+
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true,
+        },
+      },
+    ],
+
     'react/self-closing-comp': 'error',
     'prettier/prettier': [
       'error',
@@ -51,7 +81,7 @@ module.exports = {
       version: 'detect',
     },
     'import/resolver': {
-      typescript: {},
+      typescript: true,
     },
   },
   ignorePatterns: ['node_modules', 'dist'],

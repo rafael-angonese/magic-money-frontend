@@ -1,6 +1,7 @@
-import * as SeparatorPrimitive from '@radix-ui/react-separator'
 import React, { ElementRef, forwardRef } from 'react'
-import { VariantProps, tv } from 'tailwind-variants'
+
+import * as SeparatorPrimitive from '@radix-ui/react-separator'
+import { tv, VariantProps } from 'tailwind-variants'
 
 export const dividerVariants = tv({
   base: 'shrink-0 bg-slate-200 dark:bg-slate-800',

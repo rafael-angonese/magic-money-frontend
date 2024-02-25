@@ -1,5 +1,6 @@
-import * as TooltipPrimitive from '@radix-ui/react-tooltip'
 import React from 'react'
+
+import * as TooltipPrimitive from '@radix-ui/react-tooltip'
 import { tv, VariantProps } from 'tailwind-variants'
 
 export const TooltipProvider = TooltipPrimitive.Provider

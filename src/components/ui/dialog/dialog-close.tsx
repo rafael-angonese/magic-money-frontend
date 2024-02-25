@@ -1,6 +1,7 @@
+import React from 'react'
+
 import { Close } from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
-import React from 'react'
 import { cnBase } from 'tailwind-variants'
 
 export const DialogClose = React.forwardRef<

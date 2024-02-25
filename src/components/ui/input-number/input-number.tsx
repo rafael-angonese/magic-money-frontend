@@ -1,6 +1,8 @@
-import { Input, InputProps } from '@/components/ui/input/input'
 import { forwardRef } from 'react'
+
 import { NumericFormat, NumericFormatProps } from 'react-number-format'
+
+import { Input, InputProps } from '@/components/ui/input/input'
 
 type InputNumberProps = Omit<NumericFormatProps, 'size'> & InputProps
 

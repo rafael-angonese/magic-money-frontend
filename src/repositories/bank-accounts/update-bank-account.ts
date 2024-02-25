@@ -1,6 +1,7 @@
+import { AxiosRequestConfig } from 'axios'
+
 import { api } from '@/lib/api'
 import { BankAccount } from '@/types/bank-acount'
-import { AxiosRequestConfig } from 'axios'
 
 export interface UpdateBankAccountRequest {
   name: string
