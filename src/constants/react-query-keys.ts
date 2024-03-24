@@ -2,6 +2,7 @@ export const queryKeys = {
   users: 'users',
   bankAccounts: 'bank-accounts',
   categories: 'categories',
+  transactions: 'transactions',
   accounts: 'accounts',
 }
 
