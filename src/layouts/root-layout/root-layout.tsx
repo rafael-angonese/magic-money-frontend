@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 
-import { ThemeProvider } from '@/components/ui/theme/theme-provider'
+import { ThemeProvider } from '@/components/theme/theme-provider'
 
 interface RootLayoutProps {
   children: ReactNode
