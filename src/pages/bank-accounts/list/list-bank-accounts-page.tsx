@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import { useQuery } from '@tanstack/react-query'
 import { Pencil, Search } from 'lucide-react'
-import { useSearchParams } from 'react-router-dom'
 
 import { Link } from '@/components/link/link'
 import { Button } from '@/components/ui/button/button'
@@ -17,34 +15,24 @@ import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
 import { Pagination } from '@/components/ui/pagination/pagination'
 import { Table } from '@/components/ui/table/table'
 import { DEFAULT_META } from '@/constants/default-meta'
-import { queryKeys } from '@/constants/react-query-keys'
-import { useDebounce } from '@/hooks/use-debounce'
+import { useDebounceCallback } from '@/hooks/use-debounce-callback'
 import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
 import { DeleteBankAccount } from '@/pages/bank-accounts/list/delete-bank-account'
-import { getBankAccounts } from '@/repositories/bank-accounts/get-bank-accounts'
+import { useListBankAccounts } from '@/pages/bank-accounts/list/use-list-bank-accounts'
+import { useBankAccountFilters } from '@/store/bank-accounts/use-bank-account-filters'
 import formatCurrency from '@/utils/format-currency'
 import isBlank from '@/utils/is-blank'
 
 export const ListBankAccountsPage: React.FC = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const [filters, setFilters] = useState({
-    qs: searchParams.get('qs') || '',
-  })
-  const debouncedFilters = useDebounce(filters)
-
-  const page = Number(searchParams.get('page')) || 1
-
-  const { data, isPending } = useQuery({
-    queryKey: [queryKeys.bankAccounts, { page, ...debouncedFilters }],
-    queryFn: () =>
-      getBankAccounts({
-        page,
-        ...debouncedFilters,
-      }),
-  })
+  const { qs, page, setPage, setQs } = useBankAccountFilters()
+  const { data, isPending } = useListBankAccounts()
 
   const bankAccounts = data?.data?.data ?? []
   const meta = data?.data?.meta ?? DEFAULT_META
+
+  const refresh = useDebounceCallback(() => {
+    setPage(1)
+  })
 
   return (
     <>
@@ -62,17 +50,10 @@ export const ListBankAccountsPage: React.FC = () => {
             <Label>Pesquisar</Label>
             <InputGroup>
               <Input
-                value={filters.qs}
+                value={qs}
                 onChange={(event) => {
-                  setFilters({
-                    qs: event.target.value,
-                  })
-                  setSearchParams((state) => {
-                    state.set('qs', event.target.value)
-                    state.set('page', '1')
-
-                    return state
-                  })
+                  setQs(event.target.value)
+                  refresh()
                 }}
                 placeholder="Digite o nome da conta"
               />
@@ -121,13 +102,7 @@ export const ListBankAccountsPage: React.FC = () => {
           <Pagination
             page={page}
             totalPages={meta.lastPage}
-            onPageChange={(value) => {
-              setSearchParams((state) => {
-                state.set('page', String(value))
-
-                return state
-              })
-            }}
+            onPageChange={(value) => setPage(value)}
           />
         </div>
       </PageContentLayout>
