@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import { useQuery } from '@tanstack/react-query'
 import { Search } from 'lucide-react'
-import { useSearchParams } from 'react-router-dom'
 
 import { Grid } from '@/components/ui/grid/grid'
 import { Heading } from '@/components/ui/heading/heading'
@@ -14,31 +12,25 @@ import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
 import { Pagination } from '@/components/ui/pagination/pagination'
 import { Table } from '@/components/ui/table/table'
 import { DEFAULT_META } from '@/constants/default-meta'
-import { queryKeys } from '@/constants/react-query-keys'
-import { useDebounce } from '@/hooks/use-debounce'
+import { useDebounceCallback } from '@/hooks/use-debounce-callback'
 import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
 import { FormActions } from '@/pages/transactions/list/form/form-actions'
-import { getTransactions } from '@/repositories/transactions/get-transactions'
+import { useListTransactions } from '@/pages/transactions/list/use-list-transactions'
+import { useTransactionFilters } from '@/store/transactions/use-transaction-filters'
 import formatCurrency from '@/utils/format-currency'
 import formatDate from '@/utils/format-date'
 import isBlank from '@/utils/is-blank'
 
 const ListTransactionsPage: React.FC = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const [filters, setFilters] = useState({
-    qs: searchParams.get('qs') || '',
-  })
-  const debouncedFilters = useDebounce(filters)
-
-  const page = Number(searchParams.get('page')) || 1
-
-  const { data, isPending } = useQuery({
-    queryKey: [queryKeys.transactions, { page, ...debouncedFilters }],
-    queryFn: () => getTransactions({ page, ...debouncedFilters }),
-  })
+  const { qs, page, setPage, setQs } = useTransactionFilters()
+  const { data, isPending } = useListTransactions()
 
   const transactions = data?.data?.data ?? []
   const meta = data?.data?.meta ?? DEFAULT_META
+
+  const refresh = useDebounceCallback(() => {
+    setPage(1)
+  })
 
   return (
     <PageContentLayout>
@@ -54,17 +46,10 @@ const ListTransactionsPage: React.FC = () => {
             <Label>Pesquisar</Label>
             <InputGroup>
               <Input
-                value={filters.qs}
+                value={qs}
                 onChange={(event) => {
-                  setFilters({
-                    qs: event.target.value,
-                  })
-                  setSearchParams((state) => {
-                    state.set('qs', event.target.value)
-                    state.set('page', '1')
-
-                    return state
-                  })
+                  setQs(event.target.value)
+                  refresh()
                 }}
                 placeholder="Pesquise a transação"
               />
@@ -109,13 +94,7 @@ const ListTransactionsPage: React.FC = () => {
           <Pagination
             page={page}
             totalPages={meta.lastPage}
-            onPageChange={(value) => {
-              setSearchParams((state) => {
-                state.set('page', String(value))
-
-                return state
-              })
-            }}
+            onPageChange={(value) => setPage(value)}
           />
         </div>
       </div>
