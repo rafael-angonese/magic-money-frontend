@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import DEBOUNCE_DELAY from '@/constants/debounce-delay'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const useDebouncedCallback = <T extends (...args: any) => any>(
+export const useDebounceCallback = <T extends (...args: any) => any>(
   callback: T,
   delay?: number,
 ) => {
@@ -23,5 +23,3 @@ const useDebouncedCallback = <T extends (...args: any) => any>(
 
   return debouncedFn
 }
-
-export default useDebouncedCallback
