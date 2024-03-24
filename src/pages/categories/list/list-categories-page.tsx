@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import { useQuery } from '@tanstack/react-query'
 import { Search } from 'lucide-react'
-import { useSearchParams } from 'react-router-dom'
 
 import { Link } from '@/components/link/link'
 import { Button } from '@/components/ui/button/button'
@@ -17,28 +15,22 @@ import { Pagination } from '@/components/ui/pagination/pagination'
 import { Table } from '@/components/ui/table/table'
 import { categoryTypeTranslations } from '@/constants/category-type'
 import { DEFAULT_META } from '@/constants/default-meta'
-import { queryKeys } from '@/constants/react-query-keys'
-import useDebounce from '@/hooks/use-debounce'
+import { useDebounceCallback } from '@/hooks/use-debounce-callback'
 import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
-import { getCategories } from '@/repositories/categories/get-categories'
+import { useListCategories } from '@/pages/categories/list/use-list-categories'
+import { useCategoryFilters } from '@/store/categories/use-category-filters'
 import isBlank from '@/utils/is-blank'
 
 export const ListCategoriesPage: React.FC = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const [filters, setFilters] = useState({
-    qs: searchParams.get('qs') || '',
-  })
-  const debouncedFilters = useDebounce(filters)
-
-  const page = Number(searchParams.get('page')) || 1
-
-  const { data, isPending } = useQuery({
-    queryKey: [queryKeys.categories, { page, ...debouncedFilters }],
-    queryFn: () => getCategories({ page, ...debouncedFilters }),
-  })
+  const { qs, page, setPage, setQs } = useCategoryFilters()
+  const { data, isPending } = useListCategories()
 
   const categories = data?.data?.data ?? []
   const meta = data?.data?.meta ?? DEFAULT_META
+
+  const refresh = useDebounceCallback(() => {
+    setPage(1)
+  })
 
   return (
     <>
@@ -47,7 +39,7 @@ export const ListCategoriesPage: React.FC = () => {
           <Heading as="h1">Categorias</Heading>
 
           <Button color="success" asChild>
-            <Link to="/bank-accounts/new">Nova Conta</Link>
+            <Link to="/categories/new">Nova Categoria</Link>
           </Button>
         </div>
 
@@ -56,17 +48,10 @@ export const ListCategoriesPage: React.FC = () => {
             <Label>Pesquisar</Label>
             <InputGroup>
               <Input
-                value={filters.qs}
+                value={qs}
                 onChange={(event) => {
-                  setFilters({
-                    qs: event.target.value,
-                  })
-                  setSearchParams((state) => {
-                    state.set('qs', event.target.value)
-                    state.set('page', '1')
-
-                    return state
-                  })
+                  setQs(event.target.value)
+                  refresh()
                 }}
                 placeholder="Digite o nome da categoria"
               />
@@ -109,13 +94,7 @@ export const ListCategoriesPage: React.FC = () => {
           <Pagination
             page={page}
             totalPages={meta.lastPage}
-            onPageChange={(value) => {
-              setSearchParams((state) => {
-                state.set('page', String(value))
-
-                return state
-              })
-            }}
+            onPageChange={(value) => setPage(value)}
           />
         </div>
       </PageContentLayout>
