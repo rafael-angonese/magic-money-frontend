@@ -6,9 +6,9 @@ import { useSearchParams } from 'react-router-dom'
 
 import { Grid } from '@/components/ui/grid/grid'
 import { Heading } from '@/components/ui/heading/heading'
+import { Input } from '@/components/ui/input/input'
 import { InputGroup } from '@/components/ui/input-group/input-group'
 import { InputRightElement } from '@/components/ui/input-right-element/input-right-element'
-import { Input } from '@/components/ui/input/input'
 import { Label } from '@/components/ui/label/label'
 import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
 import { Pagination } from '@/components/ui/pagination/pagination'
@@ -84,7 +84,6 @@ const ListTransactionsPage: React.FC = () => {
                 <Table.Head>Categoria</Table.Head>
                 <Table.Head>Descrição</Table.Head>
                 <Table.Head>Valor</Table.Head>
-                <Table.Head>Conta</Table.Head>
                 <Table.Head>Ações</Table.Head>
               </Table.Row>
             </Table.Header>
@@ -98,7 +97,6 @@ const ListTransactionsPage: React.FC = () => {
                   <Table.Cell>cat</Table.Cell>
                   <Table.Cell>{item.description}</Table.Cell>
                   <Table.Cell>{formatCurrency(item.amount)}</Table.Cell>
-                  <Table.Cell>{item.accountId}</Table.Cell>
                   <Table.Cell className="flex gap-4" />
                 </Table.Row>
               ))}

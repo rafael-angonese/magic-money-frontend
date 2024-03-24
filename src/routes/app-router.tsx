@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import AppLayout from '@/layouts/app-layout/app-layout'
 import RootLayout from '@/layouts/root-layout/root-layout'
-import { ListAccountsPage } from '@/pages/accounts/list/list-accounts-page'
 import { EditBankAccountPage } from '@/pages/bank-accounts/edit/edit-bank-account-page'
 import { ListBankAccountsPage } from '@/pages/bank-accounts/list/list-bank-accounts-page'
 import { NewBankAccountPage } from '@/pages/bank-accounts/new/new-bank-account-page'
@@ -15,7 +14,6 @@ import ListTransactionsPage from '@/pages/transactions/list/list-transactions-pa
 import { ListUsersPage } from '@/pages/users/list/list-users-page'
 import PrivateRoute from '@/routes/private-route'
 import PublicRoute from '@/routes/public-route'
-import SelectAccountGroup from '@/routes/select-account-group'
 
 const AppRouter: React.FC = () => {
   return (
@@ -28,32 +26,22 @@ const AppRouter: React.FC = () => {
 
           <Route element={<PrivateRoute />}>
             <Route element={<AppLayout />}>
-              <Route element={<SelectAccountGroup />}>
-                <Route path="/" element={<HomePage />} />
-                <Route
-                  path="/transactions"
-                  element={<ListTransactionsPage />}
-                />
+              <Route path="/" element={<HomePage />} />
+              <Route path="/transactions" element={<ListTransactionsPage />} />
 
-                <Route
-                  path="/bank-accounts"
-                  element={<ListBankAccountsPage />}
-                />
-                <Route
-                  path="/bank-accounts/new"
-                  element={<NewBankAccountPage />}
-                />
-                <Route
-                  path="/bank-accounts/edit/:id"
-                  element={<EditBankAccountPage />}
-                />
+              <Route path="/bank-accounts" element={<ListBankAccountsPage />} />
+              <Route
+                path="/bank-accounts/new"
+                element={<NewBankAccountPage />}
+              />
+              <Route
+                path="/bank-accounts/edit/:id"
+                element={<EditBankAccountPage />}
+              />
 
-                <Route path="/categories" element={<ListCategoriesPage />} />
+              <Route path="/categories" element={<ListCategoriesPage />} />
 
-                <Route path="/users" element={<ListUsersPage />} />
-
-                <Route path="/accounts" element={<ListAccountsPage />} />
-              </Route>
+              <Route path="/users" element={<ListUsersPage />} />
             </Route>
           </Route>
         </Routes>

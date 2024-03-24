@@ -5,14 +5,12 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import { createBankAccount } from '@/repositories/bank-accounts/create-bank-account'
-import { useAccountStore } from '@/store/use-account-store'
 
 import { formValidation } from './form-config/form-validation'
 import { FormValues } from './form-config/form-values'
 import { initialFormState } from './form-config/initial-form-state'
 
 export const useNewBankAccount = () => {
-  const { account } = useAccountStore()
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
 
@@ -28,7 +26,6 @@ export const useNewBankAccount = () => {
       await createBankAccount({
         name: values.name,
         balance: values.balance,
-        accountId: account!.id,
       })
 
       navigate('/bank-accounts')

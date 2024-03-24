@@ -7,13 +7,11 @@ import { Button } from '@/components/ui/button/button'
 import { IconButton } from '@/components/ui/icon-button/icon-button'
 import { ThemeToggle } from '@/components/ui/theme/theme-toggle'
 import { Tooltip } from '@/components/ui/tooltip'
-import { useAccountStore } from '@/store/use-account-store'
 import { useAuthStore } from '@/store/use-auth-store'
 import { useSidebarStore } from '@/store/use-sidebar'
 
 const Header: React.FC = () => {
   const { logout } = useAuthStore()
-  const { reset } = useAccountStore()
   const { isOpen, setIsOpen } = useSidebarStore()
 
   return (
@@ -31,7 +29,6 @@ const Header: React.FC = () => {
           <Button
             onClick={() => {
               logout()
-              reset()
             }}
             size="icon"
             variant="ghost"

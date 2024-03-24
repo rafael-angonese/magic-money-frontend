@@ -3,5 +3,4 @@ export enum StorageKeys {
   TOKEN = 'diero@token',
   REFRESH_TOKEN = 'diero@refreshToken',
   THEME = 'diero@theme',
-  ACCOUNT = 'diero@account',
 }

@@ -6,7 +6,6 @@ import { BankAccount } from '@/types/bank-acount'
 export interface CreateBankAccountRequest {
   name: string
   balance: number
-  accountId: string
 }
 
 export interface CreateBankAccountResponse {

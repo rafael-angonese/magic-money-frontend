@@ -11,7 +11,6 @@ export interface Transaction {
   type: keyof typeof TransactionType
   categoryId: string
   userId: string
-  accountId: string
   bankAccountId: string
   sourceAccountId: string
   createdAt: string

@@ -10,7 +10,6 @@ export interface GetBankAccountsRequest {
   qs?: string
   page?: number
   perPage?: number
-  accountId: string
 }
 
 export interface GetBankAccountsResponse {
@@ -19,7 +18,7 @@ export interface GetBankAccountsResponse {
 }
 
 export const getBankAccounts = (
-  { page, perPage, qs, accountId }: GetBankAccountsRequest,
+  { page, perPage, qs }: GetBankAccountsRequest,
   config?: AxiosRequestConfig,
 ) => {
   const params = {
@@ -29,9 +28,6 @@ export const getBankAccounts = (
     }),
     ...(qs && {
       qs,
-    }),
-    ...(accountId && {
-      accountId,
     }),
   }
 

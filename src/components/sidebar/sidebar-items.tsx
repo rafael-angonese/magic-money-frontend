@@ -1,13 +1,6 @@
 import React from 'react'
 
-import {
-  ArrowLeftRight,
-  CircleUserRound,
-  Home,
-  Landmark,
-  Users,
-  Wind,
-} from 'lucide-react'
+import { ArrowLeftRight, Home, Landmark, Users, Wind } from 'lucide-react'
 
 import { NavLink } from '@/components/sidebar/nav-link'
 
@@ -30,10 +23,6 @@ export const SidebarItems: React.FC = () => {
         <NavLink to="/bank-accounts">
           <Landmark className="h-4 w-4" />
           Contas Bancarias
-        </NavLink>
-        <NavLink to="/accounts">
-          <CircleUserRound className="h-4 w-4" />
-          Contas
         </NavLink>
         <NavLink to="/categories">
           <Wind className="h-4 w-4" />

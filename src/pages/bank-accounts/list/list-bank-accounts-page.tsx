@@ -22,12 +22,10 @@ import useDebounce from '@/hooks/use-debounce'
 import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
 import { DeleteBankAccount } from '@/pages/bank-accounts/list/delete-bank-account'
 import { getBankAccounts } from '@/repositories/bank-accounts/get-bank-accounts'
-import { useAccountStore } from '@/store/use-account-store'
 import formatCurrency from '@/utils/format-currency'
 import isBlank from '@/utils/is-blank'
 
 export const ListBankAccountsPage: React.FC = () => {
-  const { account } = useAccountStore()
   const [searchParams, setSearchParams] = useSearchParams()
   const [filters, setFilters] = useState({
     qs: searchParams.get('qs') || '',
@@ -37,13 +35,9 @@ export const ListBankAccountsPage: React.FC = () => {
   const page = Number(searchParams.get('page')) || 1
 
   const { data, isPending } = useQuery({
-    queryKey: [
-      queryKeys.bankAccounts,
-      { accountId: account!.id, page, ...debouncedFilters },
-    ],
+    queryKey: [queryKeys.bankAccounts, { page, ...debouncedFilters }],
     queryFn: () =>
       getBankAccounts({
-        accountId: account!.id,
         page,
         ...debouncedFilters,
       }),
