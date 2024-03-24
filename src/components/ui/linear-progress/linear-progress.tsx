@@ -55,7 +55,7 @@ export const linearProgressVariants = tv({
   defaultVariants: {
     color: 'primary',
     indeterminate: false,
-    size: 'md',
+    size: 'xs',
   },
 })
 
@@ -64,14 +64,16 @@ type LinearProgressVariants = VariantProps<typeof linearProgressVariants>
 export interface LinearProgressProps extends LinearProgressVariants {
   children?: React.ReactNode
   percentage?: number
+  isLoading: boolean
 }
 
 export const LinearProgress: React.FC<LinearProgressProps> = ({
   children,
   color,
   size,
-  indeterminate,
+  indeterminate = true,
   percentage = 100,
+  isLoading,
 }) => {
   const { wrapper, container, content } = linearProgressVariants({
     color,
@@ -81,18 +83,20 @@ export const LinearProgress: React.FC<LinearProgressProps> = ({
 
   return (
     <>
-      <div className={wrapper()}>
-        <div
-          className={container()}
-          style={{ width: `${percentage}%` }}
-          role="progressbar"
-          aria-valuenow={percentage}
-          aria-valuemin={0}
-          aria-valuemax={100}
-        >
-          <span className={content()}>{children}</span>
+      {isLoading && (
+        <div className={wrapper()}>
+          <div
+            className={container()}
+            style={{ width: `${percentage}%` }}
+            role="progressbar"
+            aria-valuenow={percentage}
+            aria-valuemin={0}
+            aria-valuemax={100}
+          >
+            <span className={content()}>{children}</span>
+          </div>
         </div>
-      </div>
+      )}
     </>
   )
 }

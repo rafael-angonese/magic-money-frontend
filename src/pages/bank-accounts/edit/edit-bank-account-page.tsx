@@ -20,7 +20,7 @@ export const EditBankAccountPage: React.FC = () => {
   if (isFetching) {
     return (
       <div>
-        <LinearProgress indeterminate size="xs" />
+        <LinearProgress isLoading />
       </div>
     )
   }

@@ -64,7 +64,7 @@ export const ListBankAccountsPage: React.FC = () => {
           </Grid.Item>
         </Grid.Row>
 
-        {isPending && <LinearProgress indeterminate size="xs" />}
+        <LinearProgress isLoading={isPending} />
         <div className="rounded-md border">
           <Table.Root>
             <Table.Header>
@@ -96,7 +96,7 @@ export const ListBankAccountsPage: React.FC = () => {
           </Table.Root>
         </div>
 
-        {isPending && <LinearProgress indeterminate size="xs" />}
+        <LinearProgress isLoading={isPending} />
 
         <div className="flex justify-end my-6">
           <Pagination
