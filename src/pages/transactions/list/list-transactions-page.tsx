@@ -60,13 +60,14 @@ const ListTransactionsPage: React.FC = () => {
           </Grid.Item>
         </Grid.Row>
 
-        {isPending && <LinearProgress indeterminate size="xs" />}
+        <LinearProgress isLoading={isPending} />
         <div className="rounded-md border">
           <Table.Root>
             <Table.Header>
               <Table.Row>
                 <Table.Head>Data</Table.Head>
                 <Table.Head>Categoria</Table.Head>
+                <Table.Head>Banco</Table.Head>
                 <Table.Head>Descrição</Table.Head>
                 <Table.Head>Valor</Table.Head>
                 <Table.Head>Ações</Table.Head>
@@ -79,7 +80,8 @@ const ListTransactionsPage: React.FC = () => {
                   <Table.Cell className="font-medium">
                     {formatDate(item.date)}
                   </Table.Cell>
-                  <Table.Cell>cat</Table.Cell>
+                  <Table.Cell>{item?.category?.name}</Table.Cell>
+                  <Table.Cell>{item?.bankAccount?.name}</Table.Cell>
                   <Table.Cell>{item.description}</Table.Cell>
                   <Table.Cell>{formatCurrency(item.amount)}</Table.Cell>
                   <Table.Cell className="flex gap-4" />
@@ -88,7 +90,7 @@ const ListTransactionsPage: React.FC = () => {
             </Table.Body>
           </Table.Root>
         </div>
-        {isPending && <LinearProgress indeterminate size="xs" />}
+        <LinearProgress isLoading={isPending} />
 
         <div className="flex justify-end my-6">
           <Pagination
