@@ -6,6 +6,9 @@ export const queryKeys = {
 }
 
 export const mutationKeys = {
+  transactions: {
+    create: 'create-transaction',
+  },
   bankAccounts: {
     update: 'update-bank-account',
     delete: 'delete-bank-account',
