@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { useIsFetching } from '@tanstack/react-query'
+import { FormProvider } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
-import { Form } from '@/components/ui/form/form'
 import { Heading } from '@/components/ui/heading/heading'
 import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
 import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
@@ -32,9 +32,9 @@ export const EditBankAccountPage: React.FC = () => {
           <Heading as="h1">Editando Conta Bancaria</Heading>
         </div>
 
-        <Form.Provider {...methods}>
+        <FormProvider {...methods}>
           <FormBankAccount />
-        </Form.Provider>
+        </FormProvider>
       </PageContentLayout>
     </>
   )

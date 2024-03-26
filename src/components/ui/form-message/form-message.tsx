@@ -2,27 +2,17 @@ import React from 'react'
 
 import { cnBase } from 'tailwind-variants'
 
-import { useFormField } from '@/components/ui/form/use-form-field'
-
 export const FormMessage = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, children, ...props }, ref) => {
-  const { error, formMessageId } = useFormField()
-  const body = error ? String(error?.message) : children
-
-  if (!body) {
-    return null
-  }
-
   return (
     <p
       ref={ref}
-      id={formMessageId}
       className={cnBase('text-sm font-medium text-error', className)}
       {...props}
     >
-      {body}
+      {children}
     </p>
   )
 })

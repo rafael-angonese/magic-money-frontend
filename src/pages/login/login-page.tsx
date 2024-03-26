@@ -1,12 +1,13 @@
 import React from 'react'
 
 import { Eye, EyeOff } from 'lucide-react'
+import { Controller, FormProvider } from 'react-hook-form'
 
 import { Button } from '@/components/ui/button/button'
-import { Form } from '@/components/ui/form/form'
+import { FormControl } from '@/components/ui/form-control/form-control'
+import { FormLabel } from '@/components/ui/form-label/form-label'
+import { FormMessage } from '@/components/ui/form-message/form-message'
 import { Input } from '@/components/ui/input/input'
-import { InputGroup } from '@/components/ui/input-group/input-group'
-import { InputRightElement } from '@/components/ui/input-right-element/input-right-element'
 import { Loader } from '@/components/ui/loader/loader'
 import { Tooltip } from '@/components/ui/tooltip'
 import { useLogin } from '@/pages/login/use-login'
@@ -15,66 +16,70 @@ const LoginPage: React.FC = () => {
   const { methods, onSubmit, isLoading, isShowPassword, setIsShowPassword } =
     useLogin()
 
-  const { handleSubmit } = methods
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = methods
 
   return (
     <>
       <div className="flex flex-col items-center justify-center min-h-screen">
-        <Form.Provider {...methods}>
+        <FormProvider {...methods}>
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col gap-4"
           >
-            <Form.Field
+            <Controller
               control={methods.control}
               name="email"
               render={({ field }) => (
-                <Form.Item>
-                  <Form.Label required>E-mail</Form.Label>
-                  <Form.Control>
-                    <Input {...field} placeholder="example@example.com" />
-                  </Form.Control>
-                  <Form.Message />
-                </Form.Item>
+                <FormControl>
+                  <FormLabel required>E-mail</FormLabel>
+
+                  <Input {...field} placeholder="example@example.com" />
+
+                  <FormMessage>{errors?.email?.message}</FormMessage>
+                </FormControl>
               )}
             />
 
-            <Form.Field
+            <Controller
               control={methods.control}
               name="password"
               render={({ field }) => (
-                <Form.Item>
-                  <Form.Label required>Senha</Form.Label>
-                  <InputGroup>
-                    <Form.Control>
-                      <Input
-                        {...field}
-                        type={isShowPassword ? 'text' : 'password'}
-                        placeholder="*********"
-                        className="pr-8"
-                      />
-                    </Form.Control>
-                    <InputRightElement>
-                      {isShowPassword && (
-                        <Tooltip title="Exibir senha">
-                          <Eye
-                            className="h-5 w-5"
-                            onClick={() => setIsShowPassword(!isShowPassword)}
-                          />
-                        </Tooltip>
-                      )}
-                      {!isShowPassword && (
-                        <Tooltip title="Ocultar senha">
-                          <EyeOff
-                            className="h-5 w-5"
-                            onClick={() => setIsShowPassword(!isShowPassword)}
-                          />
-                        </Tooltip>
-                      )}
-                    </InputRightElement>
-                  </InputGroup>
-                  <Form.Message />
-                </Form.Item>
+                <FormControl>
+                  <FormLabel required>Senha</FormLabel>
+
+                  <Input
+                    {...field}
+                    type={isShowPassword ? 'text' : 'password'}
+                    placeholder="*********"
+                    className="pr-8"
+                    endDecorator={
+                      <React.Fragment>
+                        {isShowPassword && (
+                          <Tooltip title="Exibir senha">
+                            <Eye
+                              className="h-5 w-5"
+                              onClick={() => setIsShowPassword(!isShowPassword)}
+                            />
+                          </Tooltip>
+                        )}
+
+                        {!isShowPassword && (
+                          <Tooltip title="Ocultar senha">
+                            <EyeOff
+                              className="h-5 w-5"
+                              onClick={() => setIsShowPassword(!isShowPassword)}
+                            />
+                          </Tooltip>
+                        )}
+                      </React.Fragment>
+                    }
+                  />
+
+                  <FormMessage>{errors?.password?.message}</FormMessage>
+                </FormControl>
               )}
             />
 
@@ -83,7 +88,7 @@ const LoginPage: React.FC = () => {
               Login
             </Button>
           </form>
-        </Form.Provider>
+        </FormProvider>
       </div>
     </>
   )

@@ -1,7 +1,11 @@
 import React from 'react'
 
+import { Controller, FormProvider } from 'react-hook-form'
+
 import { Button } from '@/components/ui/button/button'
-import { Form } from '@/components/ui/form/form'
+import { FormControl } from '@/components/ui/form-control/form-control'
+import { FormLabel } from '@/components/ui/form-label/form-label'
+import { FormMessage } from '@/components/ui/form-message/form-message'
 import { Grid } from '@/components/ui/grid/grid'
 import { Heading } from '@/components/ui/heading/heading'
 import { Input } from '@/components/ui/input/input'
@@ -14,7 +18,10 @@ import { useNewBankAccount } from './use-new-bank-account'
 export const NewBankAccountPage: React.FC = () => {
   const { isLoading, methods, onSubmit } = useNewBankAccount()
 
-  const { handleSubmit } = methods
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = methods
 
   return (
     <>
@@ -23,45 +30,42 @@ export const NewBankAccountPage: React.FC = () => {
           <Heading as="h1">Nova Conta Bancaria</Heading>
         </div>
 
-        <Form.Provider {...methods}>
+        <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Grid.Row>
               <Grid.Item xs={12} sm={12} md={6} lg={3} xl={3}>
-                <Form.Field
+                <Controller
                   control={methods.control}
                   name="name"
                   render={({ field }) => (
-                    <Form.Item>
-                      <Form.Label required>Nome da conta</Form.Label>
-                      <Form.Control>
-                        <Input
-                          {...field}
-                          placeholder="Digite o nome da conta"
-                        />
-                      </Form.Control>
-                      <Form.Message />
-                    </Form.Item>
+                    <FormControl>
+                      <FormLabel required>Nome da conta</FormLabel>
+
+                      <Input {...field} placeholder="Digite o nome da conta" />
+
+                      <FormMessage>{errors?.name?.message}</FormMessage>
+                    </FormControl>
                   )}
                 />
               </Grid.Item>
               <Grid.Item xs={12} sm={12} md={6} lg={3} xl={3}>
-                <Form.Field
+                <Controller
                   control={methods.control}
                   name="balance"
                   render={({ field }) => (
-                    <Form.Item>
-                      <Form.Label required>Saldo</Form.Label>
-                      <Form.Control>
-                        <InputNumber
-                          value={field.value}
-                          onValueChange={(values) =>
-                            field.onChange(values.floatValue)
-                          }
-                          placeholder="Digite o saldo"
-                        />
-                      </Form.Control>
-                      <Form.Message />
-                    </Form.Item>
+                    <FormControl>
+                      <FormLabel required>Saldo</FormLabel>
+
+                      <InputNumber
+                        value={field.value}
+                        onValueChange={(values) =>
+                          field.onChange(values.floatValue)
+                        }
+                        placeholder="Digite o saldo"
+                      />
+
+                      <FormMessage>{errors?.balance?.message}</FormMessage>
+                    </FormControl>
                   )}
                 />
               </Grid.Item>
@@ -73,7 +77,7 @@ export const NewBankAccountPage: React.FC = () => {
               </Button>
             </div>
           </form>
-        </Form.Provider>
+        </FormProvider>
       </PageContentLayout>
     </>
   )

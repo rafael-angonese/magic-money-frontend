@@ -1,7 +1,6 @@
 import React from 'react'
 
-import Button from '@mui/joy/Button'
-
+import { Button } from '@/components/ui/button/button'
 import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
 
 const HomePage: React.FC = () => {

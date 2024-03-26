@@ -1,11 +1,13 @@
 import React from 'react'
 
 import { useMutation } from '@tanstack/react-query'
-import { useFormContext } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button/button'
-import { Form } from '@/components/ui/form/form'
+import { FormControl } from '@/components/ui/form-control/form-control'
+import { FormLabel } from '@/components/ui/form-label/form-label'
+import { FormMessage } from '@/components/ui/form-message/form-message'
 import { Grid } from '@/components/ui/grid/grid'
 import { Input } from '@/components/ui/input/input'
 import { InputNumber } from '@/components/ui/input-number/input-number'
@@ -23,7 +25,10 @@ export const FormBankAccount: React.FC = () => {
   const navigate = useNavigate()
   const { id } = useParams()
 
-  const { handleSubmit } = methods
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = methods
 
   const { mutateAsync, isPending } = useMutation({
     mutationKey: [mutationKeys.bankAccounts.update],
@@ -47,38 +52,36 @@ export const FormBankAccount: React.FC = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid.Row>
           <Grid.Item xs={12} sm={12} md={6} lg={3} xl={3}>
-            <Form.Field
+            <Controller
               control={methods.control}
               name="name"
               render={({ field }) => (
-                <Form.Item>
-                  <Form.Label required>Nome da conta</Form.Label>
-                  <Form.Control>
-                    <Input {...field} placeholder="digite o nome da conta" />
-                  </Form.Control>
-                  <Form.Message />
-                </Form.Item>
+                <FormControl error={!!errors.name}>
+                  <FormLabel htmlFor="name" required>
+                    Nome da conta
+                  </FormLabel>
+                  <Input {...field} placeholder="digite o nome da conta" />
+                  <FormMessage>{errors?.name?.message}</FormMessage>
+                </FormControl>
               )}
             />
           </Grid.Item>
           <Grid.Item xs={12} sm={12} md={6} lg={3} xl={3}>
-            <Form.Field
+            <Controller
               control={methods.control}
               name="balance"
               render={({ field }) => (
-                <Form.Item>
-                  <Form.Label required>Saldo</Form.Label>
-                  <Form.Control>
-                    <InputNumber
-                      value={field.value}
-                      onValueChange={(values) =>
-                        field.onChange(values.floatValue)
-                      }
-                      placeholder="Digite o saldo"
-                    />
-                  </Form.Control>
-                  <Form.Message />
-                </Form.Item>
+                <FormControl>
+                  <FormLabel required>Saldo</FormLabel>
+                  <InputNumber
+                    value={field.value}
+                    onValueChange={(values) =>
+                      field.onChange(values.floatValue)
+                    }
+                    placeholder="Digite o saldo"
+                  />
+                  <FormMessage>{errors?.balance?.message}</FormMessage>
+                </FormControl>
               )}
             />
           </Grid.Item>

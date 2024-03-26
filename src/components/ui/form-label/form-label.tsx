@@ -6,8 +6,6 @@ import {
 } from '@mui/joy'
 import { tv, VariantProps } from 'tailwind-variants'
 
-import { useFormField } from '@/components/ui/form/use-form-field'
-
 export const formLabelVariants = tv({
   base: ['mb-1 text-sm font-medium leading-none'],
   variants: {
@@ -31,15 +29,9 @@ export const FormLabel: React.FC<FormLabelProps> = ({
   className,
   ...props
 }) => {
-  const { error, formItemId } = useFormField()
-
   return (
     <>
-      <MuiFormLabel
-        {...props}
-        htmlFor={formItemId}
-        className={formLabelVariants({ error: !!error, className })}
-      >
+      <MuiFormLabel {...props} className={formLabelVariants({ className })}>
         {children}
         {required && <span className="text-red-500">&nbsp;*</span>}
       </MuiFormLabel>

@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 
+import { Controller, FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button/button'
 import { Dialog } from '@/components/ui/dialog/dialog'
-import { Form } from '@/components/ui/form/form'
+import { FormControl } from '@/components/ui/form-control/form-control'
+import { FormLabel } from '@/components/ui/form-label/form-label'
+import { FormMessage } from '@/components/ui/form-message/form-message'
 import { Grid } from '@/components/ui/grid/grid'
 import { Input } from '@/components/ui/input/input'
 import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
@@ -23,7 +26,10 @@ export const FormActions: React.FC = () => {
   const methods = useTransactionForm()
   const { mutateAsync, isPending } = useCreateTransaction()
 
-  const { handleSubmit } = methods
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = methods
 
   const onNewCreditClick = () => {
     setIsShowForm(true)
@@ -70,7 +76,7 @@ export const FormActions: React.FC = () => {
       <Dialog.Root modal open={isShowForm} onOpenChange={onCloseClick}>
         <Dialog.Overlay />
         <Dialog.Content>
-          <Form.Provider {...methods}>
+          <FormProvider {...methods}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Dialog.Header>
                 <Dialog.Title>
@@ -87,42 +93,41 @@ export const FormActions: React.FC = () => {
                 <LinearProgress isLoading={isPending} />
                 <Grid.Row>
                   <Grid.Item>
-                    <Form.Field
+                    <Controller
                       control={methods.control}
                       name="date"
                       render={({ field }) => (
-                        <Form.Item>
-                          <Form.Label required>{formLabels.date}</Form.Label>
-                          <Form.Control>
-                            <Input
-                              {...field}
-                              type="date"
-                              placeholder="Digite a descrição"
-                            />
-                          </Form.Control>
-                          <Form.Message />
-                        </Form.Item>
+                        <FormControl>
+                          <FormLabel required>{formLabels.date}</FormLabel>
+
+                          <Input
+                            {...field}
+                            type="date"
+                            placeholder="Digite a descrição"
+                          />
+
+                          <FormMessage>{errors?.date?.message}</FormMessage>
+                        </FormControl>
                       )}
                     />
                   </Grid.Item>
 
                   <Grid.Item>
-                    <Form.Field
+                    <Controller
                       control={methods.control}
                       name="description"
                       render={({ field }) => (
-                        <Form.Item>
-                          <Form.Label required>
+                        <FormControl>
+                          <FormLabel required>
                             {formLabels.description}
-                          </Form.Label>
-                          <Form.Control>
-                            <Input
-                              {...field}
-                              placeholder="Digite a descrição"
-                            />
-                          </Form.Control>
-                          <Form.Message />
-                        </Form.Item>
+                          </FormLabel>
+
+                          <Input {...field} placeholder="Digite a descrição" />
+
+                          <FormMessage>
+                            {errors?.description?.message}
+                          </FormMessage>
+                        </FormControl>
                       )}
                     />
                   </Grid.Item>
@@ -141,7 +146,7 @@ export const FormActions: React.FC = () => {
                 </Button>
               </Dialog.Footer>
             </form>
-          </Form.Provider>
+          </FormProvider>
         </Dialog.Content>
       </Dialog.Root>
     </>

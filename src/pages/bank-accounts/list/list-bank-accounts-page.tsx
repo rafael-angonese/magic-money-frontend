@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Pencil, Search } from 'lucide-react'
+import { Pencil } from 'lucide-react'
 
 import { Link } from '@/components/link/link'
 import { Button } from '@/components/ui/button/button'
@@ -8,8 +8,6 @@ import { FormLabel } from '@/components/ui/form-label/form-label'
 import { Grid } from '@/components/ui/grid/grid'
 import { Heading } from '@/components/ui/heading/heading'
 import { IconButton } from '@/components/ui/icon-button/icon-button'
-import { InputGroup } from '@/components/ui/input-group/input-group'
-import { InputRightElement } from '@/components/ui/input-right-element/input-right-element'
 import { Input } from '@/components/ui/input/input'
 import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
 import { Pagination } from '@/components/ui/pagination/pagination'
@@ -48,19 +46,19 @@ export const ListBankAccountsPage: React.FC = () => {
         <Grid.Row className="mb-4">
           <Grid.Item>
             <FormLabel>Pesquisar</FormLabel>
-            <InputGroup>
-              <Input
-                value={qs}
-                onChange={(event) => {
-                  setQs(event.target.value)
-                  refresh()
-                }}
-                placeholder="Digite o nome da conta"
-              />
-              <InputRightElement>
+            {/* <InputGroup> */}
+            <Input
+              value={qs}
+              onChange={(event) => {
+                setQs(event.target.value)
+                refresh()
+              }}
+              placeholder="Digite o nome da conta"
+            />
+            {/* <InputRightElement>
                 <Search />
-              </InputRightElement>
-            </InputGroup>
+              </InputRightElement> */}
+            {/* </InputGroup> */}
           </Grid.Item>
         </Grid.Row>
 
