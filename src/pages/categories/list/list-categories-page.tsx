@@ -4,12 +4,12 @@ import { Search } from 'lucide-react'
 
 import { Link } from '@/components/link/link'
 import { Button } from '@/components/ui/button/button'
+import { FormLabel } from '@/components/ui/form-label/form-label'
 import { Grid } from '@/components/ui/grid/grid'
 import { Heading } from '@/components/ui/heading/heading'
-import { Input } from '@/components/ui/input/input'
 import { InputGroup } from '@/components/ui/input-group/input-group'
 import { InputRightElement } from '@/components/ui/input-right-element/input-right-element'
-import { Label } from '@/components/ui/label/label'
+import { Input } from '@/components/ui/input/input'
 import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
 import { Pagination } from '@/components/ui/pagination/pagination'
 import { Table } from '@/components/ui/table/table'
@@ -45,7 +45,7 @@ export const ListCategoriesPage: React.FC = () => {
 
         <Grid.Row className="mb-4">
           <Grid.Item>
-            <Label>Pesquisar</Label>
+            <FormLabel>Pesquisar</FormLabel>
             <InputGroup>
               <Input
                 value={qs}
