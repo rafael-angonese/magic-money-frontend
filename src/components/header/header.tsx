@@ -33,9 +33,9 @@ const Header: React.FC = () => {
             size="icon"
             variant="ghost"
           >
-            <Tooltip.Component content="Sair">
+            <Tooltip title="Sair">
               <LogOut className="h-5 w-5" />
-            </Tooltip.Component>
+            </Tooltip>
           </Button>
 
           <ThemeToggle />

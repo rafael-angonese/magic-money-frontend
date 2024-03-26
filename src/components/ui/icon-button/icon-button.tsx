@@ -2,7 +2,7 @@ import { ComponentPropsWithRef, forwardRef, ReactNode } from 'react'
 
 import { Slot } from '@radix-ui/react-slot'
 
-import { TooltipComponent } from '@/components/ui/tooltip'
+import { Tooltip } from '@/components/ui/tooltip'
 
 export interface IconButtonProps extends ComponentPropsWithRef<'button'> {
   children: ReactNode
@@ -14,9 +14,9 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ className, hoverTitle, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button'
     return (
-      <TooltipComponent content={hoverTitle}>
+      <Tooltip title={hoverTitle}>
         <Comp className={className} ref={ref} {...props} />
-      </TooltipComponent>
+      </Tooltip>
     )
   },
 )

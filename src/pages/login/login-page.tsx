@@ -56,20 +56,20 @@ const LoginPage: React.FC = () => {
                     </Form.Control>
                     <InputRightElement>
                       {isShowPassword && (
-                        <Tooltip.Component content="Exibir senha">
+                        <Tooltip title="Exibir senha">
                           <Eye
                             className="h-5 w-5"
                             onClick={() => setIsShowPassword(!isShowPassword)}
                           />
-                        </Tooltip.Component>
+                        </Tooltip>
                       )}
                       {!isShowPassword && (
-                        <Tooltip.Component content="Ocultar senha">
+                        <Tooltip title="Ocultar senha">
                           <EyeOff
                             className="h-5 w-5"
                             onClick={() => setIsShowPassword(!isShowPassword)}
                           />
-                        </Tooltip.Component>
+                        </Tooltip>
                       )}
                     </InputRightElement>
                   </InputGroup>
