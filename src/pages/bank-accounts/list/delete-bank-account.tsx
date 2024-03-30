@@ -3,10 +3,14 @@ import React, { useState } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Trash } from 'lucide-react'
 
-import { AlertDialog } from '@/components/ui/alert-dialog/alert-dialog'
 import { Button } from '@/components/ui/button/button'
+import { DialogContent } from '@/components/ui/dialog-content/dialog-content'
+import { DialogTitle } from '@/components/ui/dialog-title/dialog-title'
 import { IconButton } from '@/components/ui/icon-button/icon-button'
 import { Loader } from '@/components/ui/loader/loader'
+import { Modal } from '@/components/ui/modal/modal'
+import { ModalClose } from '@/components/ui/modal-close/modal-close'
+import { ModalDialog } from '@/components/ui/modal-dialog/modal-dialog'
 import { mutationKeys, queryKeys } from '@/constants/react-query-keys'
 import { deleteBankAccount } from '@/repositories/bank-accounts/delete-bank-account'
 
@@ -39,38 +43,40 @@ export const DeleteBankAccount: React.FC<DeleteBankAccountProps> = ({
 
   return (
     <>
-      <AlertDialog.Root open={isOpen}>
-        <AlertDialog.Trigger asChild>
-          <IconButton onClick={() => setIsOpen(true)} hoverTitle="Excluir">
-            <Trash className="text-error" size={18} />
-          </IconButton>
-        </AlertDialog.Trigger>
+      <IconButton onClick={() => setIsOpen(true)} hoverTitle="Excluir">
+        <Trash className="text-error" size={18} />
+      </IconButton>
 
-        <AlertDialog.Content onEscapeKeyDown={() => setIsOpen(false)}>
-          <AlertDialog.Header>
-            <AlertDialog.Title>
-              Realmente deseja excluir esta conta bancaria?
-            </AlertDialog.Title>
-            <AlertDialog.Description>
-              Essa ação não pode ser desfeita.
-            </AlertDialog.Description>
-          </AlertDialog.Header>
-          <AlertDialog.Footer>
-            <AlertDialog.Cancel
+      <Modal
+        aria-labelledby="modal-title"
+        aria-describedby="modal-desc"
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+      >
+        <ModalDialog>
+          <ModalClose />
+
+          <DialogTitle>
+            Realmente deseja excluir esta conta bancaria?
+          </DialogTitle>
+          <DialogContent>Essa ação não pode ser desfeita.</DialogContent>
+
+          <div className="flex justify-end gap-2">
+            <Button
+              color="secondary"
               disabled={isPending}
               onClick={() => setIsOpen(false)}
             >
               Cancelar
-            </AlertDialog.Cancel>
-            <AlertDialog.Action asChild>
-              <Button disabled={isPending} onClick={onSubmit}>
-                <Loader isLoading={isPending} />
-                Confirmar
-              </Button>
-            </AlertDialog.Action>
-          </AlertDialog.Footer>
-        </AlertDialog.Content>
-      </AlertDialog.Root>
+            </Button>
+
+            <Button disabled={isPending} onClick={onSubmit}>
+              <Loader isLoading={isPending} />
+              Confirmar
+            </Button>
+          </div>
+        </ModalDialog>
+      </Modal>
     </>
   )
 }

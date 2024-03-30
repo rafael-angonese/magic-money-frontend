@@ -4,13 +4,17 @@ import { Controller, FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button/button'
-import { Dialog } from '@/components/ui/dialog/dialog'
+import { DialogContent } from '@/components/ui/dialog-content/dialog-content'
+import { DialogTitle } from '@/components/ui/dialog-title/dialog-title'
 import { FormControl } from '@/components/ui/form-control/form-control'
 import { FormLabel } from '@/components/ui/form-label/form-label'
 import { FormMessage } from '@/components/ui/form-message/form-message'
 import { Grid } from '@/components/ui/grid/grid'
 import { Input } from '@/components/ui/input/input'
 import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
+import { Modal } from '@/components/ui/modal/modal'
+import { ModalClose } from '@/components/ui/modal-close/modal-close'
+import { ModalDialog } from '@/components/ui/modal-dialog/modal-dialog'
 import { formLabels } from '@/pages/transactions/list/form/form-config/form-labels'
 import { useCreateTransaction } from '@/pages/transactions/list/form/use-create-transaction'
 import { useTransactionForm } from '@/pages/transactions/list/form/use-transaction-form'
@@ -73,22 +77,25 @@ export const FormActions: React.FC = () => {
         </Button>
       </div>
 
-      <Dialog.Root modal open={isShowForm} onOpenChange={onCloseClick}>
-        <Dialog.Overlay />
-        <Dialog.Content>
+      <Modal
+        aria-labelledby="modal-title"
+        aria-describedby="modal-desc"
+        open={isShowForm}
+        onClose={onCloseClick}
+      >
+        <ModalDialog>
+          <ModalClose />
+
+          <DialogTitle>
+            Novo{' '}
+            {type && type === TransactionType.DEBIT
+              ? 'pagamento'
+              : 'recebimento'}
+          </DialogTitle>
+          <DialogContent>Essa ação não pode ser desfeita.</DialogContent>
+
           <FormProvider {...methods}>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <Dialog.Header>
-                <Dialog.Title>
-                  Novo{' '}
-                  {type && type === TransactionType.DEBIT
-                    ? 'pagamento'
-                    : 'recebimento'}
-                </Dialog.Title>
-                <Dialog.Description>
-                  Make changes to your profile here. Click save when youre done.
-                </Dialog.Description>
-              </Dialog.Header>
               <div>
                 <LinearProgress isLoading={isPending} />
                 <Grid.Row>
@@ -133,7 +140,7 @@ export const FormActions: React.FC = () => {
                   </Grid.Item>
                 </Grid.Row>
               </div>
-              <Dialog.Footer>
+              <div className="flex justify-end gap-2">
                 <Button
                   variant="outlined"
                   disabled={isPending}
@@ -144,11 +151,11 @@ export const FormActions: React.FC = () => {
                 <Button disabled={isPending} type="submit">
                   Salvar
                 </Button>
-              </Dialog.Footer>
+              </div>
             </form>
           </FormProvider>
-        </Dialog.Content>
-      </Dialog.Root>
+        </ModalDialog>
+      </Modal>
     </>
   )
 }
