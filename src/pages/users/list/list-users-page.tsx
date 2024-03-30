@@ -5,8 +5,6 @@ import { Search } from 'lucide-react'
 import { FormLabel } from '@/components/ui/form-label/form-label'
 import { Grid } from '@/components/ui/grid/grid'
 import { Heading } from '@/components/ui/heading/heading'
-import { InputGroup } from '@/components/ui/input-group/input-group'
-import { InputRightElement } from '@/components/ui/input-right-element/input-right-element'
 import { Input } from '@/components/ui/input/input'
 import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
 import { Pagination } from '@/components/ui/pagination/pagination'
@@ -44,19 +42,16 @@ export const ListUsersPage: React.FC = () => {
         <Grid.Row className="mb-4">
           <Grid.Item>
             <FormLabel>Pesquisar</FormLabel>
-            <InputGroup>
-              <Input
-                value={qs}
-                onChange={(event) => {
-                  setQs(event.target.value)
-                  refresh()
-                }}
-                placeholder="Digite o nome do usuário"
-              />
-              <InputRightElement>
-                <Search />
-              </InputRightElement>
-            </InputGroup>
+
+            <Input
+              value={qs}
+              onChange={(event) => {
+                setQs(event.target.value)
+                refresh()
+              }}
+              placeholder="Digite o nome do usuário"
+              endDecorator={<Search />}
+            />
           </Grid.Item>
         </Grid.Row>
 

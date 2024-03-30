@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Pencil } from 'lucide-react'
+import { Pencil, Search } from 'lucide-react'
 
 import { Link } from '@/components/link/link'
 import { Button } from '@/components/ui/button/button'
@@ -46,7 +46,6 @@ export const ListBankAccountsPage: React.FC = () => {
         <Grid.Row className="mb-4">
           <Grid.Item>
             <FormLabel>Pesquisar</FormLabel>
-            {/* <InputGroup> */}
             <Input
               value={qs}
               onChange={(event) => {
@@ -54,11 +53,8 @@ export const ListBankAccountsPage: React.FC = () => {
                 refresh()
               }}
               placeholder="Digite o nome da conta"
+              endDecorator={<Search />}
             />
-            {/* <InputRightElement>
-                <Search />
-              </InputRightElement> */}
-            {/* </InputGroup> */}
           </Grid.Item>
         </Grid.Row>
 
