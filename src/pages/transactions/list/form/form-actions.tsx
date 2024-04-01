@@ -9,7 +9,8 @@ import { DialogTitle } from '@/components/ui/dialog-title/dialog-title'
 import { FormControl } from '@/components/ui/form-control/form-control'
 import { FormLabel } from '@/components/ui/form-label/form-label'
 import { FormMessage } from '@/components/ui/form-message/form-message'
-import { Grid } from '@/components/ui/grid/grid'
+import { GridItem } from '@/components/ui/grid/grid-item'
+import { GridRow } from '@/components/ui/grid/grid-row'
 import { Input } from '@/components/ui/input/input'
 import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
 import { Modal } from '@/components/ui/modal/modal'
@@ -98,8 +99,8 @@ export const FormActions: React.FC = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <LinearProgress isLoading={isPending} />
-                <Grid.Row>
-                  <Grid.Item>
+                <GridRow>
+                  <GridItem>
                     <Controller
                       control={methods.control}
                       name="date"
@@ -117,9 +118,9 @@ export const FormActions: React.FC = () => {
                         </FormControl>
                       )}
                     />
-                  </Grid.Item>
+                  </GridItem>
 
-                  <Grid.Item>
+                  <GridItem>
                     <Controller
                       control={methods.control}
                       name="description"
@@ -137,8 +138,8 @@ export const FormActions: React.FC = () => {
                         </FormControl>
                       )}
                     />
-                  </Grid.Item>
-                </Grid.Row>
+                  </GridItem>
+                </GridRow>
               </div>
               <div className="flex justify-end gap-2">
                 <Button

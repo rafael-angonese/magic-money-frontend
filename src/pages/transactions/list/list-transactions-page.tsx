@@ -3,7 +3,8 @@ import React from 'react'
 import { Search } from 'lucide-react'
 
 import { FormLabel } from '@/components/ui/form-label/form-label'
-import { Grid } from '@/components/ui/grid/grid'
+import { GridItem } from '@/components/ui/grid/grid-item'
+import { GridRow } from '@/components/ui/grid/grid-row'
 import { Heading } from '@/components/ui/heading/heading'
 import { Input } from '@/components/ui/input/input'
 import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
@@ -39,8 +40,8 @@ const ListTransactionsPage: React.FC = () => {
           <FormActions />
         </div>
 
-        <Grid.Row className="mb-4">
-          <Grid.Item>
+        <GridRow className="mb-4">
+          <GridItem>
             <FormLabel>Pesquisar</FormLabel>
 
             <Input
@@ -52,8 +53,8 @@ const ListTransactionsPage: React.FC = () => {
               placeholder="Pesquise a transação"
               endDecorator={<Search />}
             />
-          </Grid.Item>
-        </Grid.Row>
+          </GridItem>
+        </GridRow>
 
         <LinearProgress isLoading={isPending} />
         <div className="rounded-md border">
