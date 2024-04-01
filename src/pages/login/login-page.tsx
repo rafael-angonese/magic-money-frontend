@@ -9,7 +9,7 @@ import { FormLabel } from '@/components/ui/form-label/form-label'
 import { FormMessage } from '@/components/ui/form-message/form-message'
 import { Input } from '@/components/ui/input/input'
 import { Loader } from '@/components/ui/loader/loader'
-import { Tooltip } from '@/components/ui/tooltip'
+import { Tooltip } from '@/components/ui/tooltip/tooltip'
 import { useLogin } from '@/pages/login/use-login'
 
 const LoginPage: React.FC = () => {

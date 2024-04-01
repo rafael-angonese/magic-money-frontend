@@ -6,7 +6,7 @@ import { Logo } from '@/components/logo/logo'
 import { ThemeToggle } from '@/components/theme/theme-toggle'
 import { Button } from '@/components/ui/button/button'
 import { IconButton } from '@/components/ui/icon-button/icon-button'
-import { Tooltip } from '@/components/ui/tooltip'
+import { Tooltip } from '@/components/ui/tooltip/tooltip'
 import { useAuthStore } from '@/store/use-auth-store'
 import { useSidebarStore } from '@/store/use-sidebar'
 
