@@ -13,6 +13,12 @@ import { Input } from '@/components/ui/input/input'
 import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
 import { Pagination } from '@/components/ui/pagination/pagination'
 import { Table } from '@/components/ui/table/table'
+import { TableBody } from '@/components/ui/table/table-body'
+import { TableCell } from '@/components/ui/table/table-cell'
+import { TableEmpty } from '@/components/ui/table/table-empty'
+import { TableHead } from '@/components/ui/table/table-head'
+import { TableHeader } from '@/components/ui/table/table-header'
+import { TableRow } from '@/components/ui/table/table-row'
 import { DEFAULT_META } from '@/constants/default-meta'
 import { useDebounceCallback } from '@/hooks/use-debounce-callback'
 import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
@@ -61,34 +67,34 @@ export const ListBankAccountsPage: React.FC = () => {
 
         <LinearProgress isLoading={isPending} />
         <div className="rounded-md border">
-          <Table.Root>
-            <Table.Header>
-              <Table.Row>
-                <Table.Head>Nome</Table.Head>
-                <Table.Head>Saldo</Table.Head>
-                <Table.Head>Ações</Table.Head>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              <Table.Empty isEmpty={isBlank(bankAccounts)} />
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Nome</TableHead>
+                <TableHead>Saldo</TableHead>
+                <TableHead>Ações</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableEmpty isEmpty={isBlank(bankAccounts)} />
               {bankAccounts.map((bankAccount) => (
-                <Table.Row key={bankAccount.id}>
-                  <Table.Cell className="font-medium">
+                <TableRow key={bankAccount.id}>
+                  <TableCell className="font-medium">
                     {bankAccount.name}
-                  </Table.Cell>
-                  <Table.Cell>{formatCurrency(bankAccount.balance)}</Table.Cell>
-                  <Table.Cell className="flex gap-4">
+                  </TableCell>
+                  <TableCell>{formatCurrency(bankAccount.balance)}</TableCell>
+                  <TableCell className="flex gap-4">
                     <IconButton hoverTitle="Editar" asChild>
                       <Link to={`/bank-accounts/edit/${bankAccount.id}`}>
                         <Pencil className="text-warning" size={18} />
                       </Link>
                     </IconButton>
                     <DeleteBankAccount bankAccountId={bankAccount.id} />
-                  </Table.Cell>
-                </Table.Row>
+                  </TableCell>
+                </TableRow>
               ))}
-            </Table.Body>
-          </Table.Root>
+            </TableBody>
+          </Table>
         </div>
 
         <LinearProgress isLoading={isPending} />

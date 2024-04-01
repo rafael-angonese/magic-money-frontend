@@ -9,7 +9,7 @@ export const tableVariants = tv({
   },
 })
 
-export const TableRoot = forwardRef<
+export const Table = forwardRef<
   HTMLTableElement,
   HTMLAttributes<HTMLTableElement>
 >(({ className, ...props }, ref) => {
@@ -22,4 +22,4 @@ export const TableRoot = forwardRef<
   )
 })
 
-TableRoot.displayName = 'Table'
+Table.displayName = 'Table'

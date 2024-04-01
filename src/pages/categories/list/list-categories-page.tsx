@@ -12,6 +12,12 @@ import { Input } from '@/components/ui/input/input'
 import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
 import { Pagination } from '@/components/ui/pagination/pagination'
 import { Table } from '@/components/ui/table/table'
+import { TableBody } from '@/components/ui/table/table-body'
+import { TableCell } from '@/components/ui/table/table-cell'
+import { TableEmpty } from '@/components/ui/table/table-empty'
+import { TableHead } from '@/components/ui/table/table-head'
+import { TableHeader } from '@/components/ui/table/table-header'
+import { TableRow } from '@/components/ui/table/table-row'
 import { categoryTypeTranslations } from '@/constants/category-type'
 import { DEFAULT_META } from '@/constants/default-meta'
 import { useDebounceCallback } from '@/hooks/use-debounce-callback'
@@ -59,29 +65,27 @@ export const ListCategoriesPage: React.FC = () => {
 
         <LinearProgress isLoading={isPending} />
         <div className="rounded-md border">
-          <Table.Root>
-            <Table.Header>
-              <Table.Row>
-                <Table.Head>Nome</Table.Head>
-                <Table.Head>Tipo</Table.Head>
-                <Table.Head>Ações</Table.Head>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              <Table.Empty isEmpty={isBlank(categories)} />
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Nome</TableHead>
+                <TableHead>Tipo</TableHead>
+                <TableHead>Ações</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableEmpty isEmpty={isBlank(categories)} />
               {categories.map((category) => (
-                <Table.Row key={category.id}>
-                  <Table.Cell className="font-medium">
-                    {category.name}
-                  </Table.Cell>
-                  <Table.Cell>
+                <TableRow key={category.id}>
+                  <TableCell className="font-medium">{category.name}</TableCell>
+                  <TableCell>
                     {categoryTypeTranslations[category.type]}
-                  </Table.Cell>
-                  <Table.Cell className="flex gap-4" />
-                </Table.Row>
+                  </TableCell>
+                  <TableCell className="flex gap-4" />
+                </TableRow>
               ))}
-            </Table.Body>
-          </Table.Root>
+            </TableBody>
+          </Table>
         </div>
         <LinearProgress isLoading={isPending} />
 

@@ -10,6 +10,12 @@ import { Input } from '@/components/ui/input/input'
 import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
 import { Pagination } from '@/components/ui/pagination/pagination'
 import { Table } from '@/components/ui/table/table'
+import { TableBody } from '@/components/ui/table/table-body'
+import { TableCell } from '@/components/ui/table/table-cell'
+import { TableEmpty } from '@/components/ui/table/table-empty'
+import { TableHead } from '@/components/ui/table/table-head'
+import { TableHeader } from '@/components/ui/table/table-header'
+import { TableRow } from '@/components/ui/table/table-row'
 import { DEFAULT_META } from '@/constants/default-meta'
 import { useDebounceCallback } from '@/hooks/use-debounce-callback'
 import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
@@ -58,27 +64,27 @@ export const ListUsersPage: React.FC = () => {
 
         <LinearProgress isLoading={isPending} />
         <div className="rounded-md border">
-          <Table.Root>
-            <Table.Header>
-              <Table.Row>
-                <Table.Head>Nome</Table.Head>
-                <Table.Head>E-mail</Table.Head>
-                <Table.Head>Criado em</Table.Head>
-                <Table.Head>Ações</Table.Head>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              <Table.Empty isEmpty={isBlank(users)} />
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Nome</TableHead>
+                <TableHead>E-mail</TableHead>
+                <TableHead>Criado em</TableHead>
+                <TableHead>Ações</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableEmpty isEmpty={isBlank(users)} />
               {users.map((user) => (
-                <Table.Row key={user.id}>
-                  <Table.Cell className="font-medium">{user.name}</Table.Cell>
-                  <Table.Cell>{user.email}</Table.Cell>
-                  <Table.Cell>{formatDate(user.createdAt)}</Table.Cell>
-                  <Table.Cell className="flex gap-4" />
-                </Table.Row>
+                <TableRow key={user.id}>
+                  <TableCell className="font-medium">{user.name}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>{formatDate(user.createdAt)}</TableCell>
+                  <TableCell className="flex gap-4" />
+                </TableRow>
               ))}
-            </Table.Body>
-          </Table.Root>
+            </TableBody>
+          </Table>
         </div>
         <LinearProgress isLoading={isPending} />
 

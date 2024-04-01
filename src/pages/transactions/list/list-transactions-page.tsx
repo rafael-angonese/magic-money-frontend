@@ -10,6 +10,12 @@ import { Input } from '@/components/ui/input/input'
 import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
 import { Pagination } from '@/components/ui/pagination/pagination'
 import { Table } from '@/components/ui/table/table'
+import { TableBody } from '@/components/ui/table/table-body'
+import { TableCell } from '@/components/ui/table/table-cell'
+import { TableEmpty } from '@/components/ui/table/table-empty'
+import { TableHead } from '@/components/ui/table/table-head'
+import { TableHeader } from '@/components/ui/table/table-header'
+import { TableRow } from '@/components/ui/table/table-row'
 import { DEFAULT_META } from '@/constants/default-meta'
 import { useDebounceCallback } from '@/hooks/use-debounce-callback'
 import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
@@ -58,33 +64,33 @@ const ListTransactionsPage: React.FC = () => {
 
         <LinearProgress isLoading={isPending} />
         <div className="rounded-md border">
-          <Table.Root>
-            <Table.Header>
-              <Table.Row>
-                <Table.Head>Data</Table.Head>
-                <Table.Head>Categoria</Table.Head>
-                <Table.Head>Banco</Table.Head>
-                <Table.Head>Descrição</Table.Head>
-                <Table.Head>Valor</Table.Head>
-                <Table.Head>Ações</Table.Head>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              <Table.Empty isEmpty={isBlank(transactions)} />
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Data</TableHead>
+                <TableHead>Categoria</TableHead>
+                <TableHead>Banco</TableHead>
+                <TableHead>Descrição</TableHead>
+                <TableHead>Valor</TableHead>
+                <TableHead>Ações</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableEmpty isEmpty={isBlank(transactions)} />
               {transactions.map((item) => (
-                <Table.Row key={item.id}>
-                  <Table.Cell className="font-medium">
+                <TableRow key={item.id}>
+                  <TableCell className="font-medium">
                     {formatDate(item.date)}
-                  </Table.Cell>
-                  <Table.Cell>{item?.category?.name}</Table.Cell>
-                  <Table.Cell>{item?.bankAccount?.name}</Table.Cell>
-                  <Table.Cell>{item.description}</Table.Cell>
-                  <Table.Cell>{formatCurrency(item.amount)}</Table.Cell>
-                  <Table.Cell className="flex gap-4" />
-                </Table.Row>
+                  </TableCell>
+                  <TableCell>{item?.category?.name}</TableCell>
+                  <TableCell>{item?.bankAccount?.name}</TableCell>
+                  <TableCell>{item.description}</TableCell>
+                  <TableCell>{formatCurrency(item.amount)}</TableCell>
+                  <TableCell className="flex gap-4" />
+                </TableRow>
               ))}
-            </Table.Body>
-          </Table.Root>
+            </TableBody>
+          </Table>
         </div>
         <LinearProgress isLoading={isPending} />
 
