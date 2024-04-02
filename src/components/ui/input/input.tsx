@@ -5,7 +5,7 @@ import { cnBase } from 'tailwind-variants'
 
 export interface InputProps extends MuiInputProps {}
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
+export const Input = forwardRef<HTMLDivElement, InputProps>(
   ({ className, ...props }, ref) => {
     return <MuiInput className={cnBase(className)} ref={ref} {...props} />
   },

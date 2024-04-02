@@ -12,6 +12,7 @@ import { FormMessage } from '@/components/ui/form-message/form-message'
 import { GridItem } from '@/components/ui/grid/grid-item'
 import { GridRow } from '@/components/ui/grid/grid-row'
 import { Input } from '@/components/ui/input/input'
+import { InputDate } from '@/components/ui/input-date/input-date'
 import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
 import { Modal } from '@/components/ui/modal/modal'
 import { ModalClose } from '@/components/ui/modal-close/modal-close'
@@ -20,6 +21,7 @@ import { formLabels } from '@/pages/transactions/list/form/form-config/form-labe
 import { useCreateTransaction } from '@/pages/transactions/list/form/use-create-transaction'
 import { useTransactionForm } from '@/pages/transactions/list/form/use-transaction-form'
 import { TransactionType } from '@/types/transaction'
+import formatDate from '@/utils/format-date'
 
 import { FormValues } from './form-config/form-values'
 
@@ -54,7 +56,9 @@ export const FormActions: React.FC = () => {
   const onSubmit = async (data: FormValues) => {
     try {
       await mutateAsync({
-        date: data.date,
+        date: formatDate(data.date, {
+          dateStyle: 'short',
+        }),
         description: data.description,
         amount: data.amount,
         type: type!,
@@ -107,13 +111,14 @@ export const FormActions: React.FC = () => {
                       render={({ field }) => (
                         <FormControl>
                           <FormLabel required>{formLabels.date}</FormLabel>
-
-                          <Input
+                          <InputDate
                             {...field}
-                            type="date"
-                            placeholder="Digite a descrição"
+                            value={field.value}
+                            onChange={(value) => {
+                              console.log(value)
+                              field.onChange(value)
+                            }}
                           />
-
                           <FormMessage>{errors?.date?.message}</FormMessage>
                         </FormControl>
                       )}
