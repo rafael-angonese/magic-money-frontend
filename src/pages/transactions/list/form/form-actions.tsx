@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Controller, FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
+import { InputSelectCategory } from '@/components/select-inputs/input-select-category/input-select-category'
 import { Button } from '@/components/ui/button/button'
 import { DialogContent } from '@/components/ui/dialog-content/dialog-content'
 import { DialogTitle } from '@/components/ui/dialog-title/dialog-title'
@@ -13,6 +14,7 @@ import { GridItem } from '@/components/ui/grid/grid-item'
 import { GridRow } from '@/components/ui/grid/grid-row'
 import { Input } from '@/components/ui/input/input'
 import { InputDate } from '@/components/ui/input-date/input-date'
+import { InputNumber } from '@/components/ui/input-number/input-number'
 import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
 import { Modal } from '@/components/ui/modal/modal'
 import { ModalClose } from '@/components/ui/modal-close/modal-close'
@@ -144,9 +146,52 @@ export const FormActions: React.FC = () => {
                       )}
                     />
                   </GridItem>
+
+                  <GridItem>
+                    <Controller
+                      control={methods.control}
+                      name="amount"
+                      render={({ field }) => (
+                        <FormControl>
+                          <FormLabel required>{formLabels.amount}</FormLabel>
+                          <InputNumber
+                            value={field.value}
+                            onValueChange={(values) =>
+                              field.onChange(values.floatValue)
+                            }
+                            placeholder="Digite a descrição"
+                          />
+                          <FormMessage>{errors?.amount?.message}</FormMessage>
+                        </FormControl>
+                      )}
+                    />
+                  </GridItem>
+
+                  <GridItem>
+                    <Controller
+                      control={methods.control}
+                      name="categoryId"
+                      render={({ field }) => (
+                        <FormControl>
+                          <FormLabel required>
+                            {formLabels.categoryId}
+                          </FormLabel>
+                          <InputSelectCategory
+                            value={field.value}
+                            onChange={(_, newValue) => {
+                              field.onChange(newValue)
+                            }}
+                          />
+                          <FormMessage>
+                            {errors?.categoryId?.message}
+                          </FormMessage>
+                        </FormControl>
+                      )}
+                    />
+                  </GridItem>
                 </GridRow>
               </div>
-              <div className="flex justify-end gap-2">
+              <div className="mt-4 flex justify-end gap-2">
                 <Button
                   variant="outlined"
                   disabled={isPending}
