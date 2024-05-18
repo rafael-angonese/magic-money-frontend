@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Controller, FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
+import { InputSelectBankAccount } from '@/components/select-inputs/input-select-bank-account/input-select-bank-account'
 import { InputSelectCategory } from '@/components/select-inputs/input-select-category/input-select-category'
 import { Button } from '@/components/ui/button/button'
 import { DialogContent } from '@/components/ui/dialog-content/dialog-content'
@@ -184,6 +185,29 @@ export const FormActions: React.FC = () => {
                           />
                           <FormMessage>
                             {errors?.categoryId?.message}
+                          </FormMessage>
+                        </FormControl>
+                      )}
+                    />
+                  </GridItem>
+
+                  <GridItem>
+                    <Controller
+                      control={methods.control}
+                      name="bankAccountId"
+                      render={({ field }) => (
+                        <FormControl>
+                          <FormLabel required>
+                            {formLabels.bankAccountId}
+                          </FormLabel>
+                          <InputSelectBankAccount
+                            value={field.value}
+                            onChange={(_, newValue) => {
+                              field.onChange(newValue)
+                            }}
+                          />
+                          <FormMessage>
+                            {errors?.bankAccountId?.message}
                           </FormMessage>
                         </FormControl>
                       )}
