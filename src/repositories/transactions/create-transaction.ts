@@ -4,7 +4,7 @@ import { api } from '@/lib/api'
 import { Transaction, TransactionType } from '@/types/transaction'
 
 export interface CreateTransactionsRequest {
-  date: string
+  date: Date | string
   description: string
   amount: number
   type: TransactionType

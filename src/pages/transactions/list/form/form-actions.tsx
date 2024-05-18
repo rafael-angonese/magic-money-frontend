@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 import { Controller, FormProvider } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
 
 import { InputSelectBankAccount } from '@/components/select-inputs/input-select-bank-account/input-select-bank-account'
 import { InputSelectCategory } from '@/components/select-inputs/input-select-category/input-select-category'
@@ -24,7 +23,6 @@ import { formLabels } from '@/pages/transactions/list/form/form-config/form-labe
 import { useCreateTransaction } from '@/pages/transactions/list/form/use-create-transaction'
 import { useTransactionForm } from '@/pages/transactions/list/form/use-transaction-form'
 import { TransactionType } from '@/types/transaction'
-import formatDate from '@/utils/format-date'
 
 import { FormValues } from './form-config/form-values'
 
@@ -32,12 +30,12 @@ export const FormActions: React.FC = () => {
   const [isShowForm, setIsShowForm] = useState(false)
   const [type, setType] = useState<TransactionType | null>(null)
 
-  const navigate = useNavigate()
   const methods = useTransactionForm()
   const { mutateAsync, isPending } = useCreateTransaction()
 
   const {
     handleSubmit,
+    reset,
     formState: { errors },
   } = methods
 
@@ -59,16 +57,15 @@ export const FormActions: React.FC = () => {
   const onSubmit = async (data: FormValues) => {
     try {
       await mutateAsync({
-        date: formatDate(data.date, {
-          dateStyle: 'short',
-        }),
+        date: data.date,
         description: data.description,
         amount: data.amount,
         type: type!,
         categoryId: data.categoryId.id,
         bankAccountId: data.bankAccountId.id,
       })
-      navigate('/products')
+      reset()
+      setIsShowForm(false)
     } catch (error) {
       // TODO handling http error
     }
@@ -118,7 +115,6 @@ export const FormActions: React.FC = () => {
                             {...field}
                             value={field.value}
                             onChange={(value) => {
-                              console.log(value)
                               field.onChange(value)
                             }}
                           />

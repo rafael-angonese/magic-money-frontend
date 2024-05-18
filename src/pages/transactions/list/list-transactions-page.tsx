@@ -80,7 +80,11 @@ const ListTransactionsPage: React.FC = () => {
               {transactions.map((item) => (
                 <TableRow key={item.id}>
                   <TableCell className="font-medium">
-                    {formatDate(item.date)}
+                    {formatDate(item.date, {
+                      year: 'numeric',
+                      month: 'numeric',
+                      day: 'numeric',
+                    })}
                   </TableCell>
                   <TableCell>{item?.category?.name}</TableCell>
                   <TableCell>{item?.bankAccount?.name}</TableCell>

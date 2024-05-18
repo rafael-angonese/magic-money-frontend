@@ -35,7 +35,7 @@ export const InputDate = forwardRef<HTMLDivElement, InputDateProps>(
       const maskedValue = maskDate(value)
       setDateString(maskedValue)
 
-      const parts = dateString.split('/')
+      const parts = maskedValue.split('/')
       if (parts.length === 3) {
         const day = parseInt(parts[0], 10)
         const month = parseInt(parts[1], 10) - 1
