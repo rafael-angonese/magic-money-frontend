@@ -7,6 +7,8 @@ import { InputSelectCategory } from '@/components/select-inputs/input-select-cat
 import { Button } from '@/components/ui/button/button'
 import { DialogContent } from '@/components/ui/dialog-content/dialog-content'
 import { DialogTitle } from '@/components/ui/dialog-title/dialog-title'
+import Dropzone from '@/components/ui/dropzone/dropzone'
+import DropzoneFilePreview from '@/components/ui/dropzone-file-preview/dropzone-file-preview'
 import { FormControl } from '@/components/ui/form-control/form-control'
 import { FormLabel } from '@/components/ui/form-label/form-label'
 import { FormMessage } from '@/components/ui/form-message/form-message'
@@ -23,6 +25,7 @@ import { formLabels } from '@/pages/transactions/list/form/form-config/form-labe
 import { useCreateTransaction } from '@/pages/transactions/list/form/use-create-transaction'
 import { useTransactionForm } from '@/pages/transactions/list/form/use-transaction-form'
 import { TransactionType } from '@/types/transaction'
+import isPresent from '@/utils/is-present'
 
 import { FormValues } from './form-config/form-values'
 
@@ -34,10 +37,14 @@ export const FormActions: React.FC = () => {
   const { mutateAsync, isPending } = useCreateTransaction()
 
   const {
+    watch,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = methods
+
+  const files = watch('files')
 
   const onNewCreditClick = () => {
     setIsShowForm(true)
@@ -105,12 +112,12 @@ export const FormActions: React.FC = () => {
                 <LinearProgress isLoading={isPending} />
                 <GridRow>
                   <GridItem>
-                    <Controller
-                      control={methods.control}
-                      name="date"
-                      render={({ field }) => (
-                        <FormControl>
-                          <FormLabel required>{formLabels.date}</FormLabel>
+                    <FormControl>
+                      <FormLabel required>{formLabels.date}</FormLabel>
+                      <Controller
+                        control={methods.control}
+                        name="date"
+                        render={({ field }) => (
                           <InputDate
                             {...field}
                             value={field.value}
@@ -118,39 +125,33 @@ export const FormActions: React.FC = () => {
                               field.onChange(value)
                             }}
                           />
-                          <FormMessage>{errors?.date?.message}</FormMessage>
-                        </FormControl>
-                      )}
-                    />
+                        )}
+                      />
+                      <FormMessage>{errors?.date?.message}</FormMessage>
+                    </FormControl>
                   </GridItem>
 
                   <GridItem>
-                    <Controller
-                      control={methods.control}
-                      name="description"
-                      render={({ field }) => (
-                        <FormControl>
-                          <FormLabel required>
-                            {formLabels.description}
-                          </FormLabel>
-
+                    <FormControl>
+                      <FormLabel required>{formLabels.description}</FormLabel>
+                      <Controller
+                        control={methods.control}
+                        name="description"
+                        render={({ field }) => (
                           <Input {...field} placeholder="Digite a descrição" />
-
-                          <FormMessage>
-                            {errors?.description?.message}
-                          </FormMessage>
-                        </FormControl>
-                      )}
-                    />
+                        )}
+                      />
+                      <FormMessage>{errors?.description?.message}</FormMessage>
+                    </FormControl>
                   </GridItem>
 
                   <GridItem>
-                    <Controller
-                      control={methods.control}
-                      name="amount"
-                      render={({ field }) => (
-                        <FormControl>
-                          <FormLabel required>{formLabels.amount}</FormLabel>
+                    <FormControl>
+                      <FormLabel required>{formLabels.amount}</FormLabel>
+                      <Controller
+                        control={methods.control}
+                        name="amount"
+                        render={({ field }) => (
                           <InputNumber
                             value={field.value}
                             onValueChange={(values) =>
@@ -158,56 +159,101 @@ export const FormActions: React.FC = () => {
                             }
                             placeholder="Digite a descrição"
                           />
-                          <FormMessage>{errors?.amount?.message}</FormMessage>
-                        </FormControl>
-                      )}
-                    />
+                        )}
+                      />
+                      <FormMessage>{errors?.amount?.message}</FormMessage>
+                    </FormControl>
                   </GridItem>
 
                   <GridItem>
-                    <Controller
-                      control={methods.control}
-                      name="categoryId"
-                      render={({ field }) => (
-                        <FormControl>
-                          <FormLabel required>
-                            {formLabels.categoryId}
-                          </FormLabel>
+                    <FormControl>
+                      <FormLabel required>{formLabels.categoryId}</FormLabel>
+                      <Controller
+                        control={methods.control}
+                        name="categoryId"
+                        render={({ field }) => (
                           <InputSelectCategory
                             value={field.value}
                             onChange={(_, newValue) => {
                               field.onChange(newValue)
                             }}
                           />
-                          <FormMessage>
-                            {errors?.categoryId?.message}
-                          </FormMessage>
-                        </FormControl>
-                      )}
-                    />
+                        )}
+                      />
+                      <FormMessage>{errors?.categoryId?.message}</FormMessage>
+                    </FormControl>
                   </GridItem>
 
                   <GridItem>
-                    <Controller
-                      control={methods.control}
-                      name="bankAccountId"
-                      render={({ field }) => (
-                        <FormControl>
-                          <FormLabel required>
-                            {formLabels.bankAccountId}
-                          </FormLabel>
+                    <FormControl>
+                      <FormLabel required>{formLabels.bankAccountId}</FormLabel>
+                      <Controller
+                        control={methods.control}
+                        name="bankAccountId"
+                        render={({ field }) => (
                           <InputSelectBankAccount
                             value={field.value}
                             onChange={(_, newValue) => {
                               field.onChange(newValue)
                             }}
                           />
-                          <FormMessage>
-                            {errors?.bankAccountId?.message}
-                          </FormMessage>
-                        </FormControl>
-                      )}
-                    />
+                        )}
+                      />
+                      <FormMessage>
+                        {errors?.bankAccountId?.message}
+                      </FormMessage>
+                    </FormControl>
+                  </GridItem>
+                </GridRow>
+
+                <GridRow>
+                  <GridItem xs={12} sm={12} md={12} lg={12} xl={12}>
+                    <FormControl>
+                      <FormLabel required>{formLabels.files}</FormLabel>
+                      <Controller
+                        control={methods.control}
+                        name="files"
+                        render={({ field }) => (
+                          <Dropzone
+                            multiple
+                            accept={{
+                              'application/pdf': [],
+                              'image/*': ['.png', '.jpeg', '.jpg'],
+                            }}
+                            onUpload={(files) => {
+                              field.onChange(files)
+                            }}
+                          />
+                        )}
+                      />
+                      <FormMessage>{errors?.files?.message}</FormMessage>
+                    </FormControl>
+
+                    <div>
+                      <ul>
+                        {files && isPresent(files) && (
+                          <>
+                            <span>Novos Anexos:</span>
+                            {files.map((attachment) => {
+                              return (
+                                <DropzoneFilePreview
+                                  key={attachment.name}
+                                  onRemoveClick={() => {
+                                    const newAttachments = files.filter(
+                                      (attach) =>
+                                        attach.name !== attachment.name,
+                                    )
+                                    setValue('files', newAttachments)
+                                  }}
+                                >
+                                  {attachment.name}
+                                </DropzoneFilePreview>
+                              )
+                            })}
+                          </>
+                        )}
+                      </ul>
+                    </div>
                   </GridItem>
                 </GridRow>
               </div>

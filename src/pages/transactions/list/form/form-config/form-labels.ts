@@ -5,4 +5,5 @@ export const formLabels = {
   type: 'Tipo',
   categoryId: 'Categoria',
   bankAccountId: 'Conta bancaria',
+  files: 'Anexos',
 }
