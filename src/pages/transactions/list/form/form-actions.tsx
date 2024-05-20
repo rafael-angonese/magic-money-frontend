@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import axios from 'axios'
 import { Controller, FormProvider } from 'react-hook-form'
 
 import { InputSelectBankAccount } from '@/components/select-inputs/input-select-bank-account/input-select-bank-account'
@@ -24,7 +25,10 @@ import { ModalDialog } from '@/components/ui/modal-dialog/modal-dialog'
 import { formLabels } from '@/pages/transactions/list/form/form-config/form-labels'
 import { useCreateTransaction } from '@/pages/transactions/list/form/use-create-transaction'
 import { useTransactionForm } from '@/pages/transactions/list/form/use-transaction-form'
+import { getPresignedUrl } from '@/repositories/files/get-presigned-url'
+import { TransactionFile } from '@/repositories/transactions/create-transaction'
 import { TransactionType } from '@/types/transaction'
+import handlingRequestError from '@/utils/handling-request-error'
 import isPresent from '@/utils/is-present'
 
 import { FormValues } from './form-config/form-values'
@@ -34,7 +38,7 @@ export const FormActions: React.FC = () => {
   const [type, setType] = useState<TransactionType | null>(null)
 
   const methods = useTransactionForm()
-  const { mutateAsync, isPending } = useCreateTransaction()
+  const { mutateAsync: createTransaction, isPending } = useCreateTransaction()
 
   const {
     watch,
@@ -63,18 +67,50 @@ export const FormActions: React.FC = () => {
 
   const onSubmit = async (data: FormValues) => {
     try {
-      await mutateAsync({
+      const files: TransactionFile[] = []
+      if (data.files && isPresent(data.files)) {
+        for await (const file of data.files) {
+          const extension = file.name.split('.').pop()
+
+          const response = await getPresignedUrl({ fileExtension: extension! })
+
+          const { presignedUrl, fileKey } = response.data.data
+
+          files.push({
+            name: fileKey,
+            originalName: file.name,
+            contentType: file.type,
+            size: file.size,
+          })
+
+          await axios.put(presignedUrl, file, {
+            headers: {
+              'Content-Type': file.type,
+            },
+            // onUploadProgress: (progressEvent) => {
+            //   const percentCompleted = Math.round(
+            //     (progressEvent.loaded * 100) / progressEvent.total,
+            //   )
+            //   setUploadProgress(percentCompleted)
+            //   console.log(`Upload Progress: ${percentCompleted}%`)
+            // },
+          })
+        }
+      }
+
+      await createTransaction({
         date: data.date,
         description: data.description,
         amount: data.amount,
         type: type!,
         categoryId: data.categoryId.id,
         bankAccountId: data.bankAccountId.id,
+        files,
       })
       reset()
       setIsShowForm(false)
     } catch (error) {
-      // TODO handling http error
+      handlingRequestError(error)
     }
   }
 
