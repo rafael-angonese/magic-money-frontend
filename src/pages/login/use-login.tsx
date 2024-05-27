@@ -9,6 +9,7 @@ import { FormValues } from '@/pages/login/form-config/form-values'
 import { initialFormState } from '@/pages/login/form-config/initial-form-state'
 import { authRepository } from '@/repositories/auth/auth-repository'
 import { useAuthStore } from '@/store/use-auth-store'
+import handlingRequestError from '@/utils/handling-request-error'
 
 export const useLogin = () => {
   const { state } = useLocation()
@@ -37,6 +38,7 @@ export const useLogin = () => {
       })
       navigate(state?.path || '/home')
     } catch (error) {
+      handlingRequestError(error)
     } finally {
       setIsLoading(false)
     }
