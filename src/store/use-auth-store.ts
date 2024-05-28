@@ -2,6 +2,9 @@ import { create } from 'zustand'
 
 import { StorageKeys } from '@/constants/storage-keys'
 import { api } from '@/lib/api'
+import { getUserMe } from '@/repositories/users/me-user'
+import { User } from '@/types/user'
+import handlingRequestError from '@/utils/handling-request-error'
 import Storage from '@/utils/storage'
 
 interface SignInProps {
@@ -14,10 +17,11 @@ export interface AuthStore {
   isAuthenticated: boolean
   token: string | null
   refreshToken: string | null
+  user: User | null
   setToken: (value: string) => void
   setRefreshToken: (value: string) => void
   signIn: (values: SignInProps) => void
-  checkAuth: () => void
+  checkAuth: () => Promise<void>
   logout: () => void
   reset: () => void
 }
@@ -27,6 +31,7 @@ const INITIAL_STATE = {
   isAuthenticated: false,
   token: null,
   refreshToken: null,
+  user: null,
 }
 
 const RESET_INITIAL_STATE = {
@@ -56,18 +61,27 @@ export const useAuthStore = create<AuthStore>((set) => ({
       ...RESET_INITIAL_STATE,
     })
   },
-  checkAuth: () => {
+  checkAuth: async () => {
     const refreshToken = Storage.getItem(StorageKeys.TOKEN)
     const token = Storage.getItem(StorageKeys.TOKEN)
     if (token && refreshToken) {
       api.defaults.headers.common.Authorization = `Bearer ${token}`
 
-      set({
-        token,
-        refreshToken,
-        isAuthenticated: true,
-        isLoadingCheck: false,
-      })
+      try {
+        const { data } = await getUserMe()
+
+        set({
+          user: data.data,
+          token,
+          refreshToken,
+          isAuthenticated: true,
+          isLoadingCheck: false,
+        })
+        return
+      } catch (error) {
+        handlingRequestError(error)
+      }
+
       return
     }
     set({ ...RESET_INITIAL_STATE })
