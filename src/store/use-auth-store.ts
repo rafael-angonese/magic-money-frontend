@@ -5,7 +5,6 @@ import { api } from '@/lib/api'
 import { getUserMe, GetUserMeResponse } from '@/repositories/users/me-user'
 import handlingRequestError from '@/utils/handling-request-error'
 import Storage from '@/utils/storage'
-import { Account } from '@/types/account'
 
 interface SignInProps {
   refreshToken: string

@@ -2,11 +2,11 @@ import { useQuery } from '@tanstack/react-query'
 
 import { queryKeys } from '@/constants/react-query-keys'
 import { useDebounce } from '@/hooks/use-debounce'
+import { useCategoryFiltersStore } from '@/pages/categories/list/hooks/use-category-filters-store'
 import { getCategories } from '@/repositories/categories/get-categories'
-import { useCategoryFilters } from '@/store/categories/use-category-filters'
 
 export const useListCategories = () => {
-  const { qs, page } = useCategoryFilters()
+  const { qs, page } = useCategoryFiltersStore()
 
   const debouncedQs = useDebounce(qs)
 
