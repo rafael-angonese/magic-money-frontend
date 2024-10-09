@@ -1,15 +1,11 @@
 import { AxiosRequestConfig } from 'axios'
 
 import { api } from '@/lib/api'
-import { BankAccount } from '@/types/bank-acount'
+import { BankAccount } from '@/types/bank-account'
 
 export interface UpdateBankAccountRequest {
   name: string
   balance: number
-}
-
-export interface UpdateBankAccountResponse {
-  data: BankAccount
 }
 
 export const updateBankAccount = (
@@ -17,9 +13,5 @@ export const updateBankAccount = (
   data: UpdateBankAccountRequest,
   config?: AxiosRequestConfig,
 ) => {
-  return api.put<UpdateBankAccountResponse>(
-    `/bank-accounts/${id}`,
-    data,
-    config,
-  )
+  return api.put<BankAccount>(`/bank-accounts/${id}`, data, config)
 }

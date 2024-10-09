@@ -1,5 +1,5 @@
 import z from '@/lib/zod'
-import { BankAccount } from '@/types/bank-acount'
+import { BankAccount } from '@/types/bank-account'
 import { Category, CategoryType } from '@/types/category'
 
 import { formLabels } from './form-labels'

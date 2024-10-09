@@ -9,7 +9,7 @@ import {
 import { queryKeys } from '@/constants/react-query-keys'
 import { useDebounce } from '@/hooks/use-debounce'
 import { getBankAccounts } from '@/repositories/bank-accounts/get-bank-accounts'
-import { BankAccount } from '@/types/bank-acount'
+import { BankAccount } from '@/types/bank-account'
 import handlingRequestError from '@/utils/handling-request-error'
 
 export interface InputSelectBankAccountProps<

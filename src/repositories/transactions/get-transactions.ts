@@ -2,7 +2,7 @@ import { AxiosRequestConfig } from 'axios'
 
 import { DEFAULT_PER_PAGE } from '@/constants/default-per-page'
 import { api } from '@/lib/api'
-import { BankAccount } from '@/types/bank-acount'
+import { BankAccount } from '@/types/bank-account'
 import { Category } from '@/types/category'
 import { Meta } from '@/types/meta'
 import { Transaction } from '@/types/transaction'

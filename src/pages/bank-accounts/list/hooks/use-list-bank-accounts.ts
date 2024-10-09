@@ -1,12 +1,13 @@
-import { useQuery } from '@tanstack/react-query'
+import { keepPreviousData, useQuery } from '@tanstack/react-query'
 
 import { queryKeys } from '@/constants/react-query-keys'
 import { useDebounce } from '@/hooks/use-debounce'
+import { useBankAccountFiltersStore } from '@/pages/bank-accounts/list/hooks/use-bank-account-filters-store'
 import { getBankAccounts } from '@/repositories/bank-accounts/get-bank-accounts'
-import { useBankAccountFilters } from '@/store/bank-accounts/use-bank-account-filters'
+import handlingRequestError from '@/utils/handling-request-error'
 
 export const useListBankAccounts = () => {
-  const { qs, page } = useBankAccountFilters()
+  const { qs, page } = useBankAccountFiltersStore()
 
   const debouncedQs = useDebounce(qs)
 
@@ -17,6 +18,11 @@ export const useListBankAccounts = () => {
         page,
         qs: debouncedQs,
       }),
+    placeholderData: keepPreviousData,
+    throwOnError(error) {
+      handlingRequestError(error)
+      return false
+    },
   })
 
   return query

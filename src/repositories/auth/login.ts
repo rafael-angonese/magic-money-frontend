@@ -13,5 +13,5 @@ export interface LoginResponse {
 }
 
 export const login = (data: LoginRequest, config?: AxiosRequestConfig) => {
-  return api.post<LoginResponse>('/auth', data, config)
+  return api.post<LoginResponse>('/auth/login', data, config)
 }

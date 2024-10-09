@@ -1,23 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-import { useIsFetching } from '@tanstack/react-query'
 import { FormProvider } from 'react-hook-form'
-import { useParams } from 'react-router-dom'
 
 import { Heading } from '@/components/ui/heading/heading'
 import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
 import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
-import { FormBankAccount } from '@/pages/bank-accounts/edit/form-bank-account'
+import { useBankAccountForm } from '@/pages/bank-accounts/components/form/use-bank-account-form'
+import { useGetBankAccount } from '@/pages/bank-accounts/hooks/use-get-bank-account'
 
-import { useEditBankAccount } from './use-edit-bank-account'
+import { Form } from './form'
 
 export const EditBankAccountPage: React.FC = () => {
-  const { methods } = useEditBankAccount()
-  const { id } = useParams()
+  const methods = useBankAccountForm()
 
-  const isFetching = useIsFetching({ queryKey: ['bank-account', id] })
+  const { isLoading, data } = useGetBankAccount()
 
-  if (isFetching) {
+  const { reset } = methods
+
+  const bankAccount = data?.data || null
+
+  useEffect(() => {
+    if (!bankAccount) return
+    reset({
+      name: bankAccount.name,
+      balance: bankAccount.balance,
+    })
+  }, [bankAccount, reset])
+
+  if (isLoading) {
     return (
       <div>
         <LinearProgress isLoading />
@@ -33,7 +43,7 @@ export const EditBankAccountPage: React.FC = () => {
         </div>
 
         <FormProvider {...methods}>
-          <FormBankAccount />
+          <Form />
         </FormProvider>
       </PageContentLayout>
     </>

@@ -1,20 +1,17 @@
 import { AxiosRequestConfig } from 'axios'
 
 import { api } from '@/lib/api'
-import { BankAccount } from '@/types/bank-acount'
+import { BankAccount } from '@/types/bank-account'
 
 export interface CreateBankAccountRequest {
   name: string
   balance: number
-}
-
-export interface CreateBankAccountResponse {
-  data: BankAccount
+  accountId: string | number
 }
 
 export const createBankAccount = (
   data: CreateBankAccountRequest,
   config?: AxiosRequestConfig,
 ) => {
-  return api.post<CreateBankAccountResponse>('/bank-accounts', data, config)
+  return api.post<BankAccount>('/bank-accounts', data, config)
 }

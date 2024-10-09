@@ -1,12 +1,8 @@
 import { AxiosRequestConfig } from 'axios'
 
 import { api } from '@/lib/api'
-import { BankAccount } from '@/types/bank-acount'
-
-export interface GetBankAccountByIdResponse {
-  data: BankAccount
-}
+import { BankAccount } from '@/types/bank-account'
 
 export const getBankAccountById = (id: string, config?: AxiosRequestConfig) => {
-  return api.get<GetBankAccountByIdResponse>(`/bank-accounts/${id}`, config)
+  return api.get<BankAccount>(`/bank-accounts/${id}`, config)
 }
