@@ -2,11 +2,11 @@ import { useQuery } from '@tanstack/react-query'
 
 import { queryKeys } from '@/constants/react-query-keys'
 import { useDebounce } from '@/hooks/use-debounce'
+import { useUserFiltersStore } from '@/pages/users/list/hooks/use-user-filters-stores'
 import { getUsers } from '@/repositories/users/get-users'
-import { useUserFilters } from '@/store/users/use-user-filters'
 
 export const useListUsers = () => {
-  const { qs, page } = useUserFilters()
+  const { qs, page } = useUserFiltersStore()
 
   const debouncedQs = useDebounce(qs)
 

@@ -7,7 +7,7 @@ export interface UserFiltersState {
   setQs: (value: string) => void
 }
 
-export const useUserFilters = create<UserFiltersState>()((set) => ({
+export const useUserFiltersStore = create<UserFiltersState>()((set) => ({
   page: 1,
   qs: '',
   setPage: (value) => {
