@@ -3,6 +3,7 @@ import React from 'react'
 import { LinearProgress } from '@/components/ui/linear-progress/linear-progress'
 import { PageContentLayout } from '@/layouts/page-content-layout/page-content-layout'
 import { useListTransactions } from '@/pages/transactions/list/hooks/use-list-transactions'
+import { NewTransaction } from '@/pages/transactions/list/new/new-transaction'
 
 import { Filters } from './filters/filters'
 import { Header } from './header/header'
@@ -13,14 +14,18 @@ const ListTransactionsPage: React.FC = () => {
   const { isPending } = useListTransactions()
 
   return (
-    <PageContentLayout>
-      <Header />
-      <Filters />
-      <LinearProgress isLoading={isPending} />
-      <List />
-      <LinearProgress isLoading={isPending} />
-      <Pagination />
-    </PageContentLayout>
+    <>
+      <PageContentLayout>
+        <Header />
+        <Filters />
+        <LinearProgress isLoading={isPending} />
+        <List />
+        <LinearProgress isLoading={isPending} />
+        <Pagination />
+      </PageContentLayout>
+
+      <NewTransaction />
+    </>
   )
 }
 
