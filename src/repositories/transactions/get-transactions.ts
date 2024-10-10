@@ -14,7 +14,7 @@ export interface GetTransactionsRequest {
   perPage?: number
 }
 
-interface ListTransaction extends Transaction {
+export interface ListTransaction extends Transaction {
   category: Pick<Category, 'id' | 'name'>
   bankAccount: Pick<BankAccount, 'id' | 'name'>
 }

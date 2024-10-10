@@ -7,7 +7,7 @@ export interface TransactionFiltersState {
   setQs: (value: string) => void
 }
 
-export const useTransactionFilters = create<TransactionFiltersState>()(
+export const useTransactionFiltersStore = create<TransactionFiltersState>()(
   (set) => ({
     page: 1,
     qs: '',
