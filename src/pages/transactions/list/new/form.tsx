@@ -9,11 +9,9 @@ import { FormValues } from '@/pages/transactions/components/form/form-config/for
 import { FormFields } from '@/pages/transactions/components/form/form-fields'
 import { useNewTransactionStore } from '@/pages/transactions/list/new/use-new-transaction-store'
 import { createTransaction } from '@/repositories/transactions/create-transaction'
-import { useAuthStore } from '@/store/use-auth-store'
 import handlingRequestError from '@/utils/handling-request-error'
 
 export const Form: React.FC = () => {
-  const { user } = useAuthStore()
   const { transactionType, setIsModalOpen, setTransactionType } =
     useNewTransactionStore()
   const methods = useFormContext<FormValues>()
@@ -35,7 +33,6 @@ export const Form: React.FC = () => {
         type: transactionType!,
         categoryId: data.categoryId.id,
         sourceBankAccountId: data.bankAccountId.id,
-        accountId: user!.account.id,
         files: data.files,
       })
 

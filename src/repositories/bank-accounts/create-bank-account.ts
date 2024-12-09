@@ -6,7 +6,6 @@ import { BankAccount } from '@/types/bank-account'
 export interface CreateBankAccountRequest {
   name: string
   balance: number
-  accountId: string | number
 }
 
 export const createBankAccount = (

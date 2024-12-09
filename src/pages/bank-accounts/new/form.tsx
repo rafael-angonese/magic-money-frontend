@@ -6,14 +6,12 @@ import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button/button'
 import { Loader } from '@/components/ui/loader/loader'
 import { createBankAccount } from '@/repositories/bank-accounts/create-bank-account'
-import { useAuthStore } from '@/store/use-auth-store'
 import handlingRequestError from '@/utils/handling-request-error'
 
 import { FormValues } from '../components/form/form-config/form-values'
 import { FormFields } from '../components/form/form-fields'
 
 export const Form: React.FC = () => {
-  const { user } = useAuthStore()
   const navigate = useNavigate()
 
   const methods = useFormContext<FormValues>()
@@ -28,7 +26,6 @@ export const Form: React.FC = () => {
       await createBankAccount({
         name: values.name,
         balance: values.balance,
-        accountId: user!.account.id,
       })
 
       navigate('/bank-accounts')
