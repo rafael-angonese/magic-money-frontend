@@ -9,7 +9,7 @@ export interface CreateTransactionsRequest {
   type: TransactionType
   categoryId: string | number
   sourceBankAccountId: string | number
-  files?: File[]
+  documentIds?: number[]
 }
 
 export const createTransaction = (
@@ -25,9 +25,9 @@ export const createTransaction = (
   formData.append('categoryId', String(data.categoryId))
   formData.append('sourceBankAccountId', String(data.sourceBankAccountId))
 
-  if (data.files) {
-    data.files.forEach((file, index) =>
-      formData.append(`files[${index}]`, file),
+  if (data.documentIds) {
+    data.documentIds.forEach((documentId, index) =>
+      formData.append(`documentIds[${index}]`, documentId.toString()),
     )
   }
 

@@ -8,7 +8,7 @@ export enum DocumentType {
 }
 
 export interface Document {
-  id: string
+  id: number
   date: string
   documentType: DocumentType
   createdAt: string

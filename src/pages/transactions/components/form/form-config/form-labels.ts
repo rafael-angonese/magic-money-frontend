@@ -4,6 +4,6 @@ export const formLabels = {
   amount: 'Valor',
   type: 'Tipo',
   categoryId: 'Categoria',
-  bankAccountId: 'Conta bancaria',
-  files: 'Anexos',
+  sourceBankAccountId: 'Conta bancaria',
+  documentIds: 'Anexos',
 }

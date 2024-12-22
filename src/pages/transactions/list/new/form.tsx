@@ -32,8 +32,8 @@ export const Form: React.FC = () => {
         amount: data.amount,
         type: transactionType!,
         categoryId: data.categoryId.id,
-        sourceBankAccountId: data.bankAccountId.id,
-        files: data.files,
+        sourceBankAccountId: data.sourceBankAccountId.id,
+        documentIds: data.documentIds,
       })
 
       queryClient.invalidateQueries({

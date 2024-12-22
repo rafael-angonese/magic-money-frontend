@@ -1,15 +1,22 @@
 import z from '@/lib/zod'
+import { CategoryType } from '@/types/category'
 
 import { formLabels } from './form-labels'
 
 const category = z.object({
-  id: z.number(),
+  id: z.string().or(z.number()),
   name: z.string().min(1),
+  type: z.nativeEnum(CategoryType),
+  createdAt: z.string(),
+  updatedAt: z.string(),
 })
 
 const bankAccount = z.object({
-  id: z.number().min(1),
+  id: z.string().or(z.number()),
   name: z.string().min(1),
+  balance: z.number(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
 })
 
 export const formValidation = z.object({
@@ -17,6 +24,6 @@ export const formValidation = z.object({
   description: z.string().min(1).describe(formLabels.description),
   amount: z.number().describe(formLabels.amount),
   categoryId: category.describe(formLabels.categoryId),
-  bankAccountId: bankAccount.describe(formLabels.bankAccountId),
-  files: z.array(z.instanceof(File)).describe(formLabels.files),
+  sourceBankAccountId: bankAccount.describe(formLabels.sourceBankAccountId),
+  documentIds: z.array(z.number()).describe(formLabels.documentIds),
 })
