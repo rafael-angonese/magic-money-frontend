@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react'
+import { forwardRef, useEffect, useState } from 'react'
 
 import { cnBase } from 'tailwind-variants'
 
@@ -28,6 +28,18 @@ export const InputDate = forwardRef<HTMLDivElement, InputDateProps>(
           })
         : '',
     )
+
+    useEffect(() => {
+      setDateString(
+        value
+          ? formatDate(value, {
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+            })
+          : '',
+      )
+    }, [value])
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target

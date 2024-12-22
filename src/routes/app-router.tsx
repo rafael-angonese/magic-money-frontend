@@ -8,6 +8,9 @@ import { EditBankAccountPage } from '@/pages/bank-accounts/edit/edit-bank-accoun
 import { ListBankAccountsPage } from '@/pages/bank-accounts/list/list-bank-accounts-page'
 import { NewBankAccountPage } from '@/pages/bank-accounts/new/new-bank-account-page'
 import { ListCategoriesPage } from '@/pages/categories/list/list-categories-page'
+import { EditDocumentPage } from '@/pages/documents/edit/edit-document-page'
+import { ListDocumentsPage } from '@/pages/documents/list/list-documents-page'
+import { NewDocumentPage } from '@/pages/documents/new/new-document-page'
 import HomePage from '@/pages/home/home-page'
 import LoginPage from '@/pages/login/login-page'
 import ListTransactionsPage from '@/pages/transactions/list/list-transactions-page'
@@ -42,6 +45,13 @@ const AppRouter: React.FC = () => {
               <Route path="/categories" element={<ListCategoriesPage />} />
 
               <Route path="/users" element={<ListUsersPage />} />
+
+              <Route path="/documents" element={<ListDocumentsPage />} />
+              <Route path="/documents/new" element={<NewDocumentPage />} />
+              <Route
+                path="/documents/edit/:id"
+                element={<EditDocumentPage />}
+              />
             </Route>
           </Route>
         </Routes>

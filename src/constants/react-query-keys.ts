@@ -3,6 +3,7 @@ export const queryKeys = {
   bankAccounts: 'bank-accounts',
   categories: 'categories',
   transactions: 'transactions',
+  documents: 'documents',
 }
 
 export const mutationKeys = {

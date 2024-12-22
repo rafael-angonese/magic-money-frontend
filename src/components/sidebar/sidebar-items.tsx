@@ -16,6 +16,10 @@ export const SidebarItems: React.FC = () => {
           <ArrowLeftRight className="h-4 w-4" />
           Transações
         </NavLink>
+        <NavLink to="/documents">
+          <Wind className="h-4 w-4" />
+          Documentos
+        </NavLink>
         <NavLink to="/users">
           <Users className="h-4 w-4" />
           Usuários
