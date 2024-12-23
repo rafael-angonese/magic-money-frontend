@@ -1,15 +1,15 @@
 import axios, { AxiosError } from 'axios'
 // import { toast } from 'react-toastify'
 
-const DEFAULT_REQUEST_ERROR_MESSAGE =
-  'Não foi possível comunicar com o servidor.'
+// const DEFAULT_REQUEST_ERROR_MESSAGE =
+//   'Não foi possível comunicar com o servidor.'
 
-const DEFAULT_INTERNAL_ERROR_MESSAGE =
-  'Ocorreu um erro interno em nossos servidores, por favor tente novamente!'
+// const DEFAULT_INTERNAL_ERROR_MESSAGE =
+//   'Ocorreu um erro interno em nossos servidores, por favor tente novamente!'
 
 const handlingRequestError = (
   error: AxiosError | Error | unknown,
-  labels?: Record<string, string>,
+  // labels?: Record<string, string>,
 ) => {
   // Error 😨 🚀
 

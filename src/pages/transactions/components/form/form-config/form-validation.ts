@@ -4,7 +4,7 @@ import { CategoryType } from '@/types/category'
 import { formLabels } from './form-labels'
 
 const category = z.object({
-  id: z.string().or(z.number()),
+  id: z.number(),
   name: z.string().min(1),
   type: z.nativeEnum(CategoryType),
   createdAt: z.string(),
@@ -12,7 +12,7 @@ const category = z.object({
 })
 
 const bankAccount = z.object({
-  id: z.string().or(z.number()),
+  id: z.number(),
   name: z.string().min(1),
   balance: z.number(),
   createdAt: z.string(),

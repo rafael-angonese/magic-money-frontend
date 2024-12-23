@@ -9,9 +9,9 @@ import { FormLabel } from '@/components/ui/form-label/form-label'
 import { FormMessage } from '@/components/ui/form-message/form-message'
 import { GridItem } from '@/components/ui/grid/grid-item'
 import { GridRow } from '@/components/ui/grid/grid-row'
+import { Input } from '@/components/ui/input/input'
 import { InputDate } from '@/components/ui/input-date/input-date'
 import { InputNumber } from '@/components/ui/input-number/input-number'
-import { Input } from '@/components/ui/input/input'
 import { Documents } from '@/pages/transactions/components/form/documents'
 import { formLabels } from '@/pages/transactions/components/form/form-config/form-labels'
 
@@ -21,7 +21,6 @@ export const FormFields: React.FC = () => {
   const methods = useFormContext<FormValues>()
 
   const {
-    setValue,
     formState: { errors },
   } = methods
 

@@ -38,7 +38,7 @@ const RESET_INITIAL_STATE = {
   isLoadingCheck: false,
 }
 
-export const useAuthStore = create<AuthStore>((set, get) => ({
+export const useAuthStore = create<AuthStore>((set) => ({
   ...INITIAL_STATE,
   setToken: (token: string) => set({ token }),
   setRefreshToken: (refreshToken: string) => set({ refreshToken }),

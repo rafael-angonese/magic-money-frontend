@@ -1,5 +1,5 @@
 export interface BankAccount {
-  id: string
+  id: number
   name: string
   balance: number
   createdAt: string
