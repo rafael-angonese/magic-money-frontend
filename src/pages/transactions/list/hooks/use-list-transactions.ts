@@ -15,7 +15,8 @@ export const useListTransactions = () => {
       queryKeys.transactions,
       { page, qs: debouncedQs, initialDateAt, finalDateAt },
     ],
-    queryFn: () => getTransactions({ page, qs: debouncedQs, initialDateAt, finalDateAt }),
+    queryFn: () =>
+      getTransactions({ page, qs: debouncedQs, initialDateAt, finalDateAt }),
   })
 
   return query

@@ -12,8 +12,8 @@ export interface GetTransactionsRequest {
   qs?: string
   page?: number
   perPage?: number
-  initialDateAt?: Date
-  finalDateAt?: Date
+  initialDateAt?: Date | null
+  finalDateAt?: Date | null
 }
 
 export interface ListTransaction extends Transaction {
