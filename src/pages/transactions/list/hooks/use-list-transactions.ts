@@ -6,13 +6,16 @@ import { useTransactionFiltersStore } from '@/pages/transactions/list/hooks/use-
 import { getTransactions } from '@/repositories/transactions/get-transactions'
 
 export const useListTransactions = () => {
-  const { qs, page } = useTransactionFiltersStore()
+  const { qs, page, initialDateAt, finalDateAt } = useTransactionFiltersStore()
 
   const debouncedQs = useDebounce(qs)
 
   const query = useQuery({
-    queryKey: [queryKeys.transactions, { page, qs: debouncedQs }],
-    queryFn: () => getTransactions({ page, qs: debouncedQs }),
+    queryKey: [
+      queryKeys.transactions,
+      { page, qs: debouncedQs, initialDateAt, finalDateAt },
+    ],
+    queryFn: () => getTransactions({ page, qs: debouncedQs, initialDateAt, finalDateAt }),
   })
 
   return query

@@ -12,6 +12,8 @@ export interface GetTransactionsRequest {
   qs?: string
   page?: number
   perPage?: number
+  initialDateAt?: Date
+  finalDateAt?: Date
 }
 
 export interface ListTransaction extends Transaction {
@@ -25,7 +27,7 @@ export interface GetTransactionsResponse {
 }
 
 export const getTransactions = (
-  { page, perPage, qs }: GetTransactionsRequest,
+  { page, perPage, qs, initialDateAt, finalDateAt }: GetTransactionsRequest,
   config?: AxiosRequestConfig,
 ) => {
   const params = {
@@ -35,6 +37,12 @@ export const getTransactions = (
     }),
     ...(qs && {
       qs,
+    }),
+    ...(initialDateAt && {
+      initialDateAt: initialDateAt.toISOString(),
+    }),
+    ...(finalDateAt && {
+      finalDateAt: finalDateAt.toISOString(),
     }),
   }
 

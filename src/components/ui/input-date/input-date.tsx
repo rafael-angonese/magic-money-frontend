@@ -10,7 +10,7 @@ const DDMMYYYY =
   /^(0[1-9]|[12][0-9]|3[01])[-/](0[1-9]|1[012])[-/](18|19|20)\d\d$/i
 
 interface InputDateProps extends Omit<InputProps, 'value' | 'onChange'> {
-  value?: Date | string
+  value?: Date | string | null
   onChange: (date: Date | null) => void
 }
 
