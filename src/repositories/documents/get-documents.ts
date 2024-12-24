@@ -10,6 +10,8 @@ export interface GetDocumentsRequest {
   qs?: string
   page?: number
   perPage?: number
+  initialDateAt?: Date | null
+  finalDateAt?: Date | null
 }
 
 export interface GetDocumentsResponse {
@@ -18,7 +20,7 @@ export interface GetDocumentsResponse {
 }
 
 export const getDocuments = (
-  { page, perPage, qs }: GetDocumentsRequest,
+  { page, perPage, qs, initialDateAt, finalDateAt }: GetDocumentsRequest,
   config?: AxiosRequestConfig,
 ) => {
   const params = {
@@ -28,6 +30,12 @@ export const getDocuments = (
     }),
     ...(qs && {
       qs,
+    }),
+    ...(initialDateAt && {
+      initialDateAt: initialDateAt.toISOString(),
+    }),
+    ...(finalDateAt && {
+      finalDateAt: finalDateAt.toISOString(),
     }),
   }
 

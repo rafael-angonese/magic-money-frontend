@@ -7,16 +7,21 @@ import { getDocuments } from '@/repositories/documents/get-documents'
 import handlingRequestError from '@/utils/handling-request-error'
 
 export const useListDocuments = () => {
-  const { qs, page } = useDocumentsFiltersStore()
+  const { qs, page, initialDateAt, finalDateAt } = useDocumentsFiltersStore()
 
   const debouncedQs = useDebounce(qs)
 
   const query = useQuery({
-    queryKey: [queryKeys.documents, { page, qs: debouncedQs }],
+    queryKey: [
+      queryKeys.documents,
+      { page, qs: debouncedQs, initialDateAt, finalDateAt },
+    ],
     queryFn: () =>
       getDocuments({
         page,
         qs: debouncedQs,
+        initialDateAt,
+        finalDateAt,
       }),
     placeholderData: keepPreviousData,
     throwOnError(error) {
