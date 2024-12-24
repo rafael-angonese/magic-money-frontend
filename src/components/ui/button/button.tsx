@@ -156,6 +156,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       shadow,
       className,
       asChild = false,
+      type = 'button',
       ...props
     },
     ref,
@@ -174,6 +175,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           className,
         })}
         disabled={!!disabled}
+        type={type}
         ref={ref}
         {...props}
       />
