@@ -18,7 +18,8 @@ export interface GetTransactionsRequest {
 
 export interface ListTransaction extends Transaction {
   category: Pick<Category, 'id' | 'name'>
-  bankAccount: Pick<BankAccount, 'id' | 'name'>
+  sourceBankAccount: Pick<BankAccount, 'id' | 'name'>
+  destinationBankAccount: Pick<BankAccount, 'id' | 'name'>
 }
 
 export interface GetTransactionsResponse {
