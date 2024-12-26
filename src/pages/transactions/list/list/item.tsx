@@ -12,8 +12,8 @@ const table = tv({
   base: 'cursor-pointer',
   variants: {
     type: {
-      CREDIT: 'text-red-400/90 hover:!text-red-400',
-      DEBIT: 'text-green-400/90 hover:!text-green-400',
+      CREDIT: 'text-green-400/90 hover:!text-green-400',
+      DEBIT: 'text-red-400/90 hover:!text-red-400',
     },
   },
 })
