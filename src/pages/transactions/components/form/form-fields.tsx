@@ -125,6 +125,7 @@ export const FormFields: React.FC = () => {
           <GridItem xs={12} sm={12} md={12} lg={12} xl={12}>
             <FormLabel>{formLabels.documentIds}</FormLabel>
             <Documents />
+            <FormMessage>{errors?.documentIds?.message}</FormMessage>
           </GridItem>
         </GridRow>
       </div>

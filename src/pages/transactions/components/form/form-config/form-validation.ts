@@ -25,5 +25,5 @@ export const formValidation = z.object({
   amount: z.number().describe(formLabels.amount),
   categoryId: category.describe(formLabels.categoryId),
   sourceBankAccountId: bankAccount.describe(formLabels.sourceBankAccountId),
-  documentIds: z.array(z.number()).describe(formLabels.documentIds),
+  documentIds: z.array(z.number()).optional().describe(formLabels.documentIds),
 })
