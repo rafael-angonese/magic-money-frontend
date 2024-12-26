@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { FormProvider } from 'react-hook-form'
+import { tv } from 'tailwind-variants'
 
 import { DialogContent } from '@/components/ui/dialog-content/dialog-content'
 import { DialogTitle } from '@/components/ui/dialog-title/dialog-title'
@@ -13,11 +14,32 @@ import { TransactionType } from '@/types/transaction'
 
 import { Form } from './form'
 
+const modalVariants = tv({
+  slots: {
+    dialog: 'border !rounded',
+    title: '',
+  },
+  variants: {
+    color: {
+      CREDIT: {
+        dialog: '!border-green-500',
+        title: '!text-green-500',
+      },
+      DEBIT: {
+        dialog: '!border-red-500',
+        title: '!text-red-500',
+      },
+    },
+  },
+})
+
 export interface NewTransactionProps {}
 
 export const NewTransaction: React.FC<NewTransactionProps> = () => {
   const { transactionType, isModalOpen, setIsModalOpen, setTransactionType } =
     useNewTransactionStore()
+
+  const { dialog, title } = modalVariants()
 
   const methods = useTransactionForm()
 
@@ -34,10 +56,10 @@ export const NewTransaction: React.FC<NewTransactionProps> = () => {
         open={isModalOpen}
         onClose={onCloseClick}
       >
-        <ModalDialog>
+        <ModalDialog className={dialog({ color: transactionType! })}>
           <ModalClose />
 
-          <DialogTitle>
+          <DialogTitle className={title({ color: transactionType! })}>
             Novo{' '}
             {transactionType && transactionType === TransactionType.DEBIT
               ? 'pagamento'
